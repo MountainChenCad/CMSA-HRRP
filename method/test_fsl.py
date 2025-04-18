@@ -2,6 +2,7 @@ import os
 import sys
 import argparse
 import yaml
+import torch.nn as nn
 import logging
 from tqdm import tqdm
 import numpy as np
