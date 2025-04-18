@@ -21,6 +21,8 @@ data:
     - '幻影2000'         # Simulated (Example)
     - '全球鹰'      # Simulated (Example)
   novel_classes:
+    - 'F35'          # Simulated
+    - 'IDF'         # Simulated
     - '捕食者'         # Simulated (Example)
     - '幻影2000'         # Simulated (Example)
     - '全球鹰'      # Simulated (Example)

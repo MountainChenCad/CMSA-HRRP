@@ -1,15 +1,17 @@
-# CMSA-HRRP: Cross-Modal Semantic Alignment for Few-Shot HRRP Recognition
+# CMSA-HRRP (Adapter Version): Cross-Modal Semantic Alignment for Few-Shot HRRP Recognition via Pseudo-Images
 
-This repository contains the code implementation for the CMSA-HRRP framework, designed for Few-Shot Learning (FSL) on High-Resolution Range Profile (HRRP) radar targets. The core idea is to leverage the semantic knowledge from pre-trained Vision-Language Models (VLMs), like RemoteCLIP, to enhance HRRP recognition when labeled data is scarce. This is achieved by aligning HRRP features into the VLM's semantic space and using semantically-enhanced prototypes for classification.
+This repository contains the code implementation for a version of the CMSA-HRRP framework designed for Few-Shot Learning (FSL) on High-Resolution Range Profile (HRRP) radar targets. **This specific version implements the approach where 1D HRRP signals are adapted into 2D pseudo-images, which are then processed by a pre-trained Vision-Language Model's (VLM) visual encoder (e.g., RemoteCLIP's ViT).** The goal is to align these resulting visual features with the VLM's text/semantic embeddings to leverage its learned cross-modal knowledge for enhanced HRRP recognition when labeled data is scarce.
 
 ## Features
 
-*   Implements the CMSA-HRRP framework for HRRP FSL.
-*   Supports using pre-trained VLMs (e.g., RemoteCLIP via `open_clip`) as a source of semantic knowledge.
-*   Includes "Semantic Evolution" script to generate high-quality text descriptions and encode them into features.
-*   Provides separate training scripts for the alignment phase and evaluation scripts for FSL tasks.
-*   Configurable via a central YAML file (`hrrp_fsl_config.yaml`).
+*   Implements an HRRP FSL framework using a 1D-to-2D Adapter + VLM Visual Encoder.
+*   Includes a trainable `HRPPtoPseudoImage` adapter module (using MLP+Reshape by default).
+*   Leverages frozen pre-trained VLM visual and text encoders (e.g., RemoteCLIP via `open_clip`).
+*   Includes "Semantic Evolution" script to generate high-quality text descriptions and encode them into target semantic features.
+*   Provides separate training scripts for the adapter (`train_adapter.py`) and evaluation scripts for FSL tasks (`test_fsl.py`).
+*   Configurable via a central YAML file (`configs/hrrp_fsl_config.yaml`).
 *   Supports simulated and potentially real HRRP datasets in `.mat` format.
+*   (Optional) Supports semantic fusion of visual features and text features for prototype enhancement.
 
 ## Requirements
 
@@ -17,13 +19,13 @@ This repository contains the code implementation for the CMSA-HRRP framework, de
 *   PyTorch (tested with 1.10+, CUDA recommended)
 *   Other dependencies listed in `requirements.txt`.
 *   (Optional) An API key for an LLM provider (e.g., OpenAI) if using GPT for Semantic Evolution, or a locally hosted LLM.
-*   (Optional) `scikit-learn` for Logistic Regression baseline or clustering utilities.
+*   (Optional) `scikit-learn` for Logistic Regression baseline.
 
 ## Installation
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://your-repo-url/CMSA-HRRP.git
+    git clone https://your-repo-url/CMSA-HRRP.git # Replace with your repo URL
     cd CMSA-HRRP
     ```
 
@@ -38,100 +40,95 @@ This repository contains the code implementation for the CMSA-HRRP framework, de
     pip install -r requirements.txt
     ```
 
-4.  **Download VLM Weights (if necessary):**
-    The `open_clip` library typically handles downloading pre-trained weights (like 'openai' weights for ViT-B/32). If you are using locally stored weights for RemoteCLIP or other models, ensure the path in `hrrp_fsl_config.yaml` or relevant scripts is correct.
+4.  **Download VLM Weights:**
+    *   Download the pre-trained weights (`.pt` file) for the desired RemoteCLIP variant (e.g., `RemoteCLIP-ViT-B-32.pt`).
+    *   Place the downloaded file in the directory specified by `paths.checkpoints` + `/foundation_models/` in the config file (default: `./checkpoints/foundation_models/`). The script `scripts/generate_semantics.py` and `method/train_adapter.py` will dynamically construct the path based on the `model.foundation_model.variant` in the config.
 
 ## Dataset Preparation
 
 1.  **HRRP Data:**
-    *   Place your simulated HRRP `.mat` files in the directory specified by `data.simulated_path` in `hrrp_fsl_config.yaml` (default: `./datasets/simulated_hrrp/`).
-    *   Place your measured HRRP `.mat` files in the directory specified by `data.measured_path` (default: `./datasets/measured_hrrp/`).
-    *   **File Naming Convention:** Files must be named starting with the target type, followed by an underscore (`_`), e.g., `F22_scan001_angle30.mat`, `T72_run5_config2.mat`. The part before the first underscore is used as the class label.
-    *   **`.mat` File Structure:**
-        *   Simulated files should contain a variable named `CoHH` (expected shape `(L, 1)` or `(1, L)` or `(L,)`).
-        *   Measured files should contain a variable named `data` (expected shape `(L, 1)` or `(1, L)` or `(L,)`).
-        *   Lengths can differ; they will be padded/truncated to `data.target_length`.
+    *   Place simulated HRRP `.mat` files in `./datasets/simulated_hrrp/` (or path from config).
+    *   Place measured HRRP `.mat` files in `./datasets/measured_hrrp/` (or path from config).
+    *   **File Naming:** `TargetType_*.mat` (e.g., `F22_scan001.mat`).
+    *   **`.mat` Structure:** Simulated: variable `CoHH`; Measured: variable `data`. Lengths will be adjusted to `data.target_length`.
 
 2.  **Class Splits:**
-    *   Edit `hrrp_fsl_config.yaml` to define which target types belong to `data.base_classes` (used for training alignment) and `data.novel_classes` (used for FSL evaluation). Ensure these names exactly match the prefixes in your `.mat` filenames.
+    *   Edit `configs/hrrp_fsl_config.yaml` to define `data.base_classes` and `data.novel_classes` using exact filename prefixes.
 
 ## Configuration
 
-Modify `hrrp_fsl_config.yaml` to set up your experiment:
+Modify `configs/hrrp_fsl_config.yaml` (ensure path is correct):
 
-*   **`data`**: Paths to datasets, class splits, target HRRP length, normalization method.
-*   **`fsl`**: N-way, K-shot, query count, and number of test episodes.
-*   **`model`**: Dimensions for the HRRP encoder, alignment/fusion modules, and specification of the foundation VLM (name, variant, text encoder dim). Ensure `text_encoder_dim` matches the chosen VLM variant.
-*   **`training.alignment`**: Hyperparameters for training `f_H` and `h_A`.
-*   **`semantics`**: Path where semantic features will be saved/loaded from, and parameters related to their generation (LLM model, text type).
-*   **`paths`**: Base directories for saving checkpoints and logs.
+*   **`data`**: Paths, class splits, `target_length`, `normalization`.
+*   **`fsl`**: N-way, K-shot, `q_query`, `test_episodes`.
+*   **`model`**:
+    *   `hrrp_encoder`: **(No longer directly used in main pipeline, but config structure might remain)**.
+    *   `adapter_1d_to_2d` **(Add this section if customizing adapter):** Define parameters for `HRPPtoPseudoImage` if needed (e.g., `intermediate_channels`, `activation`). Defaults are in the code.
+    *   `alignment_module`: **(No longer directly used)**.
+    *   `fusion_module`: `hidden_dim`, `kappa` (set `kappa > 0` to enable fusion).
+    *   `foundation_model`: `name` ('RemoteCLIP'), `variant` ('ViT-B-32', 'ViT-L-14', 'RN50'), `text_encoder_dim` (ensure this matches the chosen variant's CLIP output dimension).
+*   **`training.alignment`**: **(Now used for Adapter Training)** Hyperparameters like `epochs`, `batch_size`, `lr`, `optimizer`, `loss_type` ('cosine' recommended for CLIP alignment).
+*   **`semantics`**: `feature_path` (output/input), `generation` settings.
+*   **`paths`**: Base directories for `checkpoints` and `logs`. Note that adapter checkpoints are now saved under `<checkpoints>/hrrp_adapter/`.
 
 ## Usage
 
-The typical workflow involves three main steps:
-
 **Step 1: Generate Semantic Features**
 
-This step uses the VLM's text encoder (and potentially an LLM) to create semantic feature vectors for all target classes defined in the config file.
+Create semantic feature vectors using the VLM's text encoder.
 
 ```bash
-python scripts/generate_semantics.py --config hrrp_fsl_config.yaml
+python scripts/generate_semantics.py --config configs/hrrp_fsl_config.yaml
 ```
+*   Loads class names, generates/retrieves descriptions based on `semantics.generation.text_type`.
+*   **Requires implemented LLM call in `get_description_from_llm` if using 'gpt' etc.**
+*   Loads VLM text encoder (weights path constructed dynamically).
+*   Encodes text and saves features to `semantics.feature_path`.
 
-*   This script will:
-    *   Load class names from the config.
-    *   (If `text_type` requires LLM) Call the LLM API (or local model) via the placeholder `get_description_from_llm` function in the script – **you need to implement this LLM call**.
-    *   Load the specified VLM's text encoder (`model.foundation_model` section in config).
-    *   Encode the descriptions (or names/definitions based on `semantics.generation.text_type`).
-    *   Save the resulting features to the path specified in `semantics.feature_path`.
-*   Make sure the `semantics.feature_path` in the config points to where you want the `.pth` file saved.
+**Step 2: Train HRRP 1D-to-2D Adapter**
 
-**Step 2: Train Alignment Module**
-
-This step trains the HRRP Encoder (`f_H`), the Alignment Module (`h_A`), and the Fusion Module (`h_F`) using the base classes (`data.base_classes`). The goal is to align HRRP features with the pre-computed semantic features.
+Train the `HRPPtoPseudoImage` adapter module using the base classes. The goal is to make the VLM visual encoder's output for the pseudo-image match the VLM text encoder's output for the class description.
 
 ```bash
-python method/train_alignment.py --config hrrp_fsl_config.yaml
+# Rename train_alignment.py to train_adapter.py if you prefer
+python method/train_alignment.py --config configs/hrrp_fsl_config.yaml # Or train_adapter.py
 ```
-
-*   This script will:
-    *   Load the base HRRP dataset.
-    *   Load the pre-computed semantic features (from Step 1).
-    *   Initialize `f_H`, `h_A`, `h_F`.
-    *   Train the models using the alignment loss (e.g., Cosine Embedding Loss or L1/MSE between `z'_H` and `z_T`) and reconstruction loss (L1 between `h_F` output and `z_T`).
-    *   Save checkpoints periodically and the final model to the directory configured in `paths.checkpoints` (specifically under `alignment_module/`).
+*   Loads base HRRP data and semantic features.
+*   Loads **frozen** VLM visual (`f_V`) and text (`f_T`) encoders.
+*   Initializes the `HRPPtoPseudoImage` adapter (`h_1D_to_2D`).
+*   Trains **only the adapter** by minimizing the cosine distance between `normalize(f_V(h_1D_to_2D(x_H)))` and `normalize(z_T)`.
+*   Saves adapter checkpoints to `<checkpoints>/hrrp_adapter/`.
 
 **Step 3: Evaluate Few-Shot Performance**
 
-This step evaluates the trained models on FSL tasks constructed from the novel classes (`data.novel_classes`).
+Evaluate the trained adapter and frozen VLM visual encoder on FSL tasks using novel classes.
 
 ```bash
 # Default run using kappa from config
-python method/test_fsl.py --config hrrp_fsl_config.yaml
+python method/test_fsl.py --config configs/hrrp_fsl_config.yaml
 
-# Run without semantic enhancement (kappa=0)
-python method/test_fsl.py --config hrrp_fsl_config.yaml --kappa 0
-
-# Run the NoAlign baseline (bypasses h_A)
-python method/test_fsl.py --config hrrp_fsl_config.yaml --no_align # kappa can also be set
+# Run without semantic fusion (kappa=0)
+python method/test_fsl.py --config configs/hrrp_fsl_config.yaml --kappa 0
 
 # Test specific settings (e.g., 5-way 5-shot)
-python method/test_fsl.py --config hrrp_fsl_config.yaml --n_way 5 --k_shot 5
+python method/test_fsl.py --config configs/hrrp_fsl_config.yaml --n_way 5 --k_shot 5
 
-# Use a specific checkpoint instead of 'latest.pth'
-python method/test_fsl.py --config hrrp_fsl_config.yaml --checkpoint ./checkpoints/alignment_module/epoch_50.pth
+# Use a specific adapter checkpoint
+python method/test_fsl.py --config configs/hrrp_fsl_config.yaml --checkpoint ./checkpoints/hrrp_adapter/best.pth
 ```
+*   Loads novel HRRP data and semantic features.
+*   Loads the **trained `HRPPtoPseudoImage` adapter** weights.
+*   Loads the **frozen VLM visual encoder (`f_V`)**.
+*   (Optional) Loads the `FusionModule` (`h_F`) weights if `kappa > 0`.
+*   Samples FSL episodes.
+*   For each episode:
+    *   Generates pseudo-images using the adapter: `x_pseudo = h_1D_to_2D(x_H)`.
+    *   Extracts visual features using the VLM: `z_V = normalize(f_V(x_pseudo))`.
+    *   Calculates prototypes based on `z_V` (optionally fused with `z_T` using `h_F` if `kappa > 0`).
+    *   Classifies query `z_V` features.
+*   Reports average accuracy and confidence interval. Logs saved to `<logs>/fsl_testing_adapter/<setting_name>/`.
 
-*   This script will:
-    *   Load the novel HRRP dataset.
-    *   Load the pre-computed semantic features for novel classes.
-    *   Load the trained weights for `f_H`, `h_A`, `h_F` from the specified checkpoint (defaults to `latest.pth` from Step 2).
-    *   Sample FSL episodes according to the config or command-line arguments.
-    *   Calculate prototypes (using specified `kappa` for fusion).
-    *   Classify query samples and report the average accuracy and 95% confidence interval.
-    *   Logs are saved under the directory configured in `paths.logs` (specifically under `fsl_testing/<setting_name>/`).
-
-## Project Structure
+## Project Structure (Updated)
 
 ```
 ├── configs/
@@ -139,24 +136,26 @@ python method/test_fsl.py --config hrrp_fsl_config.yaml --checkpoint ./checkpoin
 ├── data/
 │   ├── hrrp_dataset.py       # HRRP Dataset loader
 │   └── samplers.py           # FSL episode sampler
-├── datasets/                 # Default location for data (create these)
-│   ├── simulated_hrrp/       # Place simulated .mat files here
-│   └── measured_hrrp/        # Place measured .mat files here
-├── logs/                     # Stores logs from training and testing
+├── datasets/                 # Default location for data
+│   ├── simulated_hrrp/
+│   └── measured_hrrp/
+├── logs/
+│   ├── adapter_training/     # Logs for adapter training
+│   └── fsl_testing_adapter/  # Logs for FSL evaluation (adapter approach)
 ├── method/
-│   ├── alignment.py          # Alignment and Fusion module definitions
-│   ├── train_alignment.py    # Script for training alignment
-│   ├── train_fsl.py          # Placeholder for separate meta-training (optional)
-│   └── test_fsl.py           # Script for FSL evaluation
+│   ├── alignment.py          # Contains FusionModule (h_F) definition
+│   ├── train_alignment.py    # Script for training the adapter (consider renaming)
+│   ├── train_fsl.py          # Placeholder (optional)
+│   └── test_fsl.py           # Script for FSL evaluation (adapter approach)
 ├── model/
-│   └── hrrp_encoder.py       # HRRP Encoder definition (e.g., 1D CNN)
+│   └── hrrp_adapter_1d_to_2d.py # Defines HRPPtoPseudoImage adapter (h_1D_to_2D)
 ├── semantic_features/        # Default location for saved semantic features
-│   └── hrrp_semantics_....pth
-├── checkpoints/              # Stores trained model weights
-│   └── alignment_module/
+├── checkpoints/
+│   ├── hrrp_adapter/         # Stores trained adapter weights (e.g., latest.pth, best.pth)
+│   └── foundation_models/    # Place downloaded VLM .pt files here
 ├── scripts/
 │   └── generate_semantics.py # Script to create semantic features
-├── utils.py                  # Utility functions (metrics, seeding, etc.)
+├── utils.py                  # Utility functions
 ├── logger.py                 # Logging setup
 ├── requirements.txt          # Python dependencies
 └── README.md                 # This file
@@ -164,19 +163,6 @@ python method/test_fsl.py --config hrrp_fsl_config.yaml --checkpoint ./checkpoin
 
 ## Citation
 
-If you find this code useful for your research, please consider citing:
-
-```bibtex
-@misc{cmsa_hrrp_code,
-  author       = {Your Name/Group},
-  title        = {CMSA-HRRP: Cross-Modal Semantic Alignment for Few-Shot HRRP Recognition - Code Implementation},
-  year         = {2025},
-  publisher    = {GitHub},
-  journal      = {GitHub repository},
-  howpublished = {\url{https://repo-url/CMSA-HRRP}}
-}
-```
+(Keep citation section as before)
 
 ## License
-
-(Specify your license here, e.g., MIT, Apache 2.0)

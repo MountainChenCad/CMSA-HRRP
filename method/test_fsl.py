@@ -2,13 +2,14 @@ import os
 import sys
 import argparse
 import yaml
-import torch.nn as nn
 import logging
 from tqdm import tqdm
 import numpy as np
 
 import torch
+import torch.nn.functional as F # Added
 from torch.utils.data import DataLoader
+import open_clip # Assuming RemoteCLIP
 
 # Ensure project root is in path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -16,17 +17,21 @@ sys.path.insert(0, BASE_DIR)
 
 from data.hrrp_dataset import HRRPDataset
 from data.samplers import CategoriesSampler
-from model.hrrp_encoder import HRRPEncoder # Assuming this exists
-from method.alignment import AlignmentModule, FusionModule
+# from model.hrrp_encoder import HRRPEncoder # No longer needed
+from model.hrrp_adapter_1d_to_2d import HRPPtoPseudoImage # Import the adapter
+# from method.alignment import AlignmentModule # No longer needed
+from method.alignment import FusionModule # Keep FusionModule definition
 from logger import loggers
-from utils import set_seed, Cosine_classifier, count_95acc, count_kacc
+from utils import set_seed, Cosine_classifier, count_95acc, normalize # Need normalize
 
-logging.basicConfig(level=logging.INFO)
+# Configure root logger basic settings
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - [%(levelname)s] - %(message)s")
+# Create a specific logger instance for this module
 logger = logging.getLogger(__name__)
 
 def load_config(config_path):
     """Loads YAML config file."""
-    with open(config_path, 'r') as f:
+    with open(config_path, 'r', encoding='utf-8') as f: # Added encoding
         try:
             config = yaml.safe_load(f)
         except yaml.YAMLError as exc:
@@ -35,237 +40,330 @@ def load_config(config_path):
     return config
 
 def main(config, args_override):
-    """Main Few-Shot Learning evaluation function."""
+    """Main Few-Shot Learning evaluation function using Adapter + VLM Visual Encoder."""
 
     # --- Setup ---
-    # Use command-line args for FSL settings, overriding config if provided
-    n_way = args_override.n_way if args_override.n_way else config['fsl']['n_way']
-    k_shot = args_override.k_shot if args_override.k_shot else config['fsl']['k_shot']
-    q_query = args_override.q_query if args_override.q_query else config['fsl']['q_query']
-    test_episodes = args_override.test_episodes if args_override.test_episodes else config['fsl']['test_episodes']
+    n_way = args_override.n_way if args_override.n_way is not None else config['fsl']['n_way']
+    k_shot = args_override.k_shot if args_override.k_shot is not None else config['fsl']['k_shot']
+    q_query = args_override.q_query if args_override.q_query is not None else config['fsl']['q_query']
+    test_episodes = args_override.test_episodes if args_override.test_episodes is not None else config['fsl']['test_episodes']
     kappa = args_override.kappa if args_override.kappa is not None else config['model']['fusion_module']['kappa']
-    checkpoint_path = args_override.checkpoint if args_override.checkpoint else os.path.join(config['paths']['checkpoints'], 'alignment_module', 'latest.pth')
+    # Load adapter checkpoint, not alignment module checkpoint
+    adapter_checkpoint_path = args_override.checkpoint if args_override.checkpoint else os.path.join(config['paths']['checkpoints'], 'hrrp_adapter', 'latest.pth') # Changed path
 
-    # Determine if alignment is used based on flag
-    use_alignment = not args_override.no_align
+    # Determine if fusion is used
+    use_fusion = kappa > 0
 
     # Setup Log directory based on test settings
-    setting_name = f"{n_way}way_{k_shot}shot_k{kappa:.2f}"
-    if not use_alignment:
-        setting_name += "_NoAlign"
-    log_dir = os.path.join(config['paths']['logs'], 'fsl_testing', setting_name)
+    setting_name = f"Adapter_{n_way}way_{k_shot}shot_k{kappa:.2f}" # Reflect new approach
+    log_dir = os.path.join(config['paths'].get('logs', './logs'), 'fsl_testing_adapter', setting_name) # New log subdir
     os.makedirs(log_dir, exist_ok=True)
 
-    log = loggers(os.path.join(log_dir, 'test_fsl'))
-    log.info(f"Loaded base configuration: {config}")
-    log.info(f"Testing with Overrides: N-Way={n_way}, K-Shot={k_shot}, Q-Query={q_query}, Episodes={test_episodes}, Kappa={kappa}, UseAlign={use_alignment}, Ckpt={checkpoint_path}")
+    log_file_path = os.path.join(log_dir, 'test_fsl_adapter.log')
+    loggers(log_file_path) # Configure root logger
+    logger.info(f"Logger configured. Logging to: {log_file_path}")
 
-    set_seed(config['seed'])
+    logger.info(f"Loaded base configuration: {config}")
+    logger.info(f"Testing with Overrides: N-Way={n_way}, K-Shot={k_shot}, Q-Query={q_query}, Episodes={test_episodes}, Kappa={kappa}, Ckpt={adapter_checkpoint_path}")
+
+    set_seed(config.get('seed', 42))
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    log.info(f"Using device: {device}")
+    logger.info(f"Using device: {device}")
 
     # --- Data Loading (Novel Set) ---
-    log.info("Loading novel dataset...")
-    novel_dataset = HRRPDataset(
-        root_dirs=[config['data']['simulated_path'], config['data']['measured_path']],
-        split='novel',
-        classes=config['data']['novel_classes'],
-        target_length=config['data']['target_length'],
-        normalization=config['data']['normalization'],
-        phase_info='magnitude' # Match training
-    )
+    logger.info("Loading novel dataset...")
+    try:
+        novel_dataset = HRRPDataset(
+            root_dirs=[config['data']['simulated_path'], config['data']['measured_path']],
+            split='novel',
+            classes=config['data']['novel_classes'],
+            target_length=config['data']['target_length'],
+            normalization=config['data']['normalization'],
+            phase_info='magnitude' # Must match adapter input expectation
+        )
+    except Exception as e:
+        logger.error(f"Failed to initialize Novel HRRPDataset: {e}")
+        sys.exit(1)
+
     if len(novel_dataset.target_classes) < n_way:
-         log.error(f"Not enough novel classes ({len(novel_dataset.target_classes)}) for {n_way}-way setting.")
+         logger.error(f"Not enough novel classes ({len(novel_dataset.target_classes)}) for {n_way}-way setting.")
          sys.exit(1)
-    if len(novel_dataset) < n_way * (k_shot + q_query):
-         log.warning(f"Novel dataset size ({len(novel_dataset)}) might be small for sampling {n_way}-way {k_shot+q_query}-samples per class.")
+    min_samples_per_class = float('inf')
+    for cls_name in novel_dataset.target_classes:
+        cls_indices = [i for i, label in enumerate(novel_dataset.labels) if novel_dataset.idx_to_class[label] == cls_name]
+        min_samples_per_class = min(min_samples_per_class, len(cls_indices))
+    required_samples_per_class = k_shot + q_query
+    if min_samples_per_class < required_samples_per_class:
+        logger.error(f"Not enough samples per novel class. Required: {required_samples_per_class}, Minimum found: {min_samples_per_class}.")
+        sys.exit(1)
 
     novel_sampler = CategoriesSampler(
-        novel_dataset.labels, # Use labels directly
+        novel_dataset.labels,
         n_batch=test_episodes,
         n_cls=n_way,
-        n_per=k_shot + q_query
+        n_per=required_samples_per_class
     )
+    num_workers_override = config.get('num_workers', 0)
+    logger.info(f"Using num_workers = {num_workers_override}")
     novel_loader = DataLoader(
         novel_dataset,
         batch_sampler=novel_sampler,
-        num_workers=config['num_workers'],
+        num_workers=num_workers_override,
         pin_memory=True
     )
-    log.info(f"Novel dataset loaded with {len(novel_dataset)} samples across {len(novel_dataset.target_classes)} classes.")
-    log.info(f"Sampling {test_episodes} episodes: {n_way}-way, {k_shot}-shot, {q_query}-query.")
+    logger.info(f"Novel dataset loaded with {len(novel_dataset)} samples across {len(novel_dataset.target_classes)} classes.")
+    logger.info(f"Sampling {test_episodes} episodes: {n_way}-way, {k_shot}-shot, {q_query}-query.")
 
     # --- Load Semantic Features (Novel Classes) ---
-    log.info(f"Loading semantic features from: {config['semantics']['feature_path']}")
+    logger.info(f"Loading semantic features from: {config['semantics']['feature_path']}")
     try:
         semantic_data = torch.load(config['semantics']['feature_path'], map_location='cpu')
-        # Filter for novel classes only
         semantic_features = {k: v.float().to(device)
                              for k, v in semantic_data['semantic_feature'].items()
                              if k in config['data']['novel_classes']}
         if len(semantic_features) != len(config['data']['novel_classes']):
-             log.warning("Mismatch between loaded semantic features and configured novel classes.")
-        log.info(f"Loaded semantic features for {len(semantic_features)} novel classes.")
-    except FileNotFoundError:
-        log.error(f"Semantic features file not found at {config['semantics']['feature_path']}")
-        sys.exit(1)
-    except KeyError:
-         log.error(f"Key 'semantic_feature' not found in {config['semantics']['feature_path']}")
+             logger.warning(f"Mismatch between loaded semantic features ({len(semantic_features)}) and configured novel classes ({len(config['data']['novel_classes'])}).")
+        logger.info(f"Loaded semantic features for {len(semantic_features)} novel classes.")
+    except Exception as e:
+         logger.error(f"Error loading semantic features: {e}")
          sys.exit(1)
 
-    # --- Model Initialization and Loading Weights ---
-    hrrp_encoder = HRRPEncoder(output_dim=config['model']['hrrp_encoder']['output_dim']).to(device)
-    alignment_module = AlignmentModule(
-        hrrp_feat_dim=config['model']['hrrp_encoder']['output_dim'],
-        semantic_dim=config['model']['foundation_model']['text_encoder_dim'],
-        hidden_dim=config['model']['alignment_module']['hidden_dim']
-    ).to(device)
-    fusion_module = FusionModule(
-        aligned_hrrp_dim=config['model']['foundation_model']['text_encoder_dim'],
-        semantic_dim=config['model']['foundation_model']['text_encoder_dim'],
-        hidden_dim=config['model']['fusion_module']['hidden_dim'],
-        output_dim=config['model']['foundation_model']['text_encoder_dim'] # Match target space
-    ).to(device)
-
-    # --- Placeholder for NoAlign scenario ---
-    # If not using alignment, potentially need a simple linear layer to match dimensions
-    # This layer would ideally be trained similarly to h_A but maybe with a different target or loss
-    # For simplicity in this baseline, we might just use raw features if dimensions match, or skip fusion.
-    linear_proj_noalign = None
-    if not use_alignment:
-        hrrp_dim = config['model']['hrrp_encoder']['output_dim']
-        semantic_dim = config['model']['foundation_model']['text_encoder_dim']
-        if hrrp_dim != semantic_dim and kappa > 0: # Only needed if fusing and dims mismatch
-            log.warning(f"[NoAlign] HRRP dim ({hrrp_dim}) != Semantic dim ({semantic_dim}). Adding Linear projection.")
-            linear_proj_noalign = nn.Linear(hrrp_dim, semantic_dim).to(device)
-            # Note: This linear layer is UNTRAINED in this simple baseline setup.
-            # A proper NoAlign baseline might require training this projection layer.
-        elif hrrp_dim != semantic_dim and kappa == 0:
-             log.warning(f"[NoAlign, kappa=0] HRRP dim ({hrrp_dim}) != Semantic dim ({semantic_dim}). Cannot directly compare prototypes.")
-             # This scenario likely needs adjustment - maybe classify in hrrp_dim space?
-             # For now, we proceed assuming kappa=0 means classify using mean z_H.
-
-    log.info(f"Loading checkpoint from: {checkpoint_path}")
+    # --- Load VLM (Visual Encoder) ---
+    fm_config = config['model']['foundation_model']
+    logger.info(f"Loading VLM Visual Encoder: {fm_config['name']} ({fm_config['variant']})")
     try:
-        checkpoint = torch.load(checkpoint_path, map_location=device)
-        hrrp_encoder.load_state_dict(checkpoint['hrrp_encoder_state_dict'])
-        if use_alignment:
-            alignment_module.load_state_dict(checkpoint['alignment_module_state_dict'])
-        if kappa > 0: # Only load fusion module if needed
-            fusion_module.load_state_dict(checkpoint['fusion_module_state_dict'])
-        log.info(f"Weights loaded successfully from epoch {checkpoint.get('epoch', 'N/A')}.")
+        if fm_config['name'] == 'RemoteCLIP':
+            fm_variant = fm_config['variant']
+            base_checkpoint_dir = config['paths'].get('checkpoints', './checkpoints')
+            weights_filename = f"RemoteCLIP-{fm_variant}.pt"
+            local_weights_path = os.path.join(base_checkpoint_dir, 'foundation_models', weights_filename)
+            if not os.path.exists(local_weights_path):
+                 logger.error(f"VLM weights file not found: {local_weights_path}")
+                 sys.exit(1)
+            logger.info(f"Loading VLM weights from: {local_weights_path}")
+
+            vlm_model, _, vlm_preprocess = open_clip.create_model_and_transforms(fm_variant, pretrained=local_weights_path)
+            visual_encoder = vlm_model.visual.to(device).eval() # f_V
+            for param in visual_encoder.parameters():
+                param.requires_grad = False
+            logger.info("VLM Visual Encoder loaded and frozen.")
+            expected_img_size = visual_encoder.image_size if hasattr(visual_encoder, 'image_size') else \
+                               (visual_encoder.img_size if hasattr(visual_encoder, 'img_size') else 224)
+            if isinstance(expected_img_size, (tuple, list)): expected_img_size = expected_img_size[0]
+        else:
+            logger.error(f"Unsupported foundation model: {fm_config['name']}")
+            sys.exit(1)
+    except Exception as e:
+        logger.error(f"Failed to load VLM: {e}")
+        sys.exit(1)
+
+    # --- Adapter Initialization and Loading Weights ---
+    try:
+        hrrp_adapter = HRPPtoPseudoImage(
+            hrrp_length=config['data']['target_length'],
+            input_channels=1, # Assuming magnitude
+            output_channels=3,
+            output_size=expected_img_size,
+            # Add other adapter params from config if defined
+        ).to(device)
+
+        logger.info(f"Loading adapter checkpoint from: {adapter_checkpoint_path}")
+        adapter_checkpoint = torch.load(adapter_checkpoint_path, map_location=device)
+        hrrp_adapter.load_state_dict(adapter_checkpoint['adapter_state_dict'])
+        logger.info(f"Adapter weights loaded successfully from epoch {adapter_checkpoint.get('epoch', 'N/A')}.")
+        hrrp_adapter.eval()
+
     except FileNotFoundError:
-        log.error(f"Checkpoint file not found at {checkpoint_path}. Cannot run evaluation.")
+        logger.error(f"Adapter checkpoint file not found at {adapter_checkpoint_path}.")
         sys.exit(1)
     except KeyError as e:
-        log.error(f"Missing key in checkpoint file {checkpoint_path}: {e}. Check training script.")
+        logger.error(f"Missing key 'adapter_state_dict' in checkpoint file {adapter_checkpoint_path}: {e}.")
         sys.exit(1)
+    except Exception as e:
+         logger.error(f"Error initializing or loading adapter: {e}")
+         sys.exit(1)
 
-    hrrp_encoder.eval()
-    alignment_module.eval()
-    fusion_module.eval()
-    if linear_proj_noalign:
-        linear_proj_noalign.eval()
+    # --- Fusion Module Initialization and Loading (Optional) ---
+    fusion_module = None
+    if use_fusion:
+        try:
+            # Input dim is visual_dim + semantic_dim, Output dim is visual_dim
+            visual_dim = fm_config['text_encoder_dim'] # CLIP features are usually same dim
+            semantic_dim = fm_config['text_encoder_dim']
+            fusion_module = FusionModule(
+                aligned_hrrp_dim=visual_dim, # Input 1 is now visual feature
+                semantic_dim=semantic_dim,   # Input 2 is semantic feature
+                hidden_dim=config['model']['fusion_module']['hidden_dim'],
+                output_dim=visual_dim        # Output should be in visual space
+            ).to(device)
+
+            # Load weights if they exist (e.g., from adapter checkpoint or separate file)
+            if 'fusion_module_state_dict' in adapter_checkpoint: # Check if saved with adapter
+                fusion_module.load_state_dict(adapter_checkpoint['fusion_module_state_dict'])
+                logger.info("Fusion module weights loaded from adapter checkpoint.")
+            else:
+                 # Try loading from alignment checkpoint as fallback (old structure)
+                 try:
+                     old_ckpt_path = os.path.join(config['paths']['checkpoints'], 'alignment_module', 'latest.pth')
+                     old_ckpt = torch.load(old_ckpt_path, map_location=device)
+                     if 'fusion_module_state_dict' in old_ckpt:
+                         fusion_module.load_state_dict(old_ckpt['fusion_module_state_dict'])
+                         logger.info("Fusion module weights loaded from older alignment checkpoint.")
+                     else:
+                          logger.warning("Fusion module state dict not found in any checkpoint, but kappa > 0. Using initial weights.")
+                 except FileNotFoundError:
+                     logger.warning("Fusion module state dict not found and older alignment checkpoint missing. Using initial weights.")
+
+            fusion_module.eval()
+        except Exception as e:
+            logger.error(f"Error initializing or loading fusion module: {e}. Setting kappa=0.")
+            kappa = 0 # Disable fusion if module fails
+            use_fusion = False
 
 
     # --- Evaluation Loop ---
-    log.info("Starting few-shot evaluation...")
+    logger.info("Starting few-shot evaluation with Adapter...")
     all_accuracies = []
-    # Generate labels for query set within an episode
     query_labels_proto = torch.arange(n_way).repeat_interleave(q_query).long().to(device)
 
-    pbar = tqdm(range(test_episodes), desc="Evaluating Episodes")
-    for episode_idx in pbar:
-        # DataLoader provides indices for one episode
-        try:
-            support_indices, query_indices = novel_loader.__iter__().__next__() # Get one batch of indices
-        except StopIteration:
-            log.warning("DataLoader exhausted before reaching target episodes.")
-            break
-        except Exception as e:
-            log.error(f"Error getting batch from DataLoader: {e}")
-            continue
+    pbar = tqdm(novel_loader, total=test_episodes, desc="Evaluating Episodes")
+    for episode_idx, batch_data in enumerate(pbar):
+        if episode_idx >= test_episodes: break
 
-        # Get actual data using indices
         try:
-            all_indices = torch.cat([support_indices, query_indices])
-            hrrp_data_all = []
-            labels_all = []
-            for idx in all_indices:
-                sample, label = novel_dataset[idx.item()]
-                hrrp_data_all.append(sample)
-                labels_all.append(label) # Store original labels to map to episode labels later
+            # Data loading from batch_data (yields data, labels)
+            hrrp_data_all, labels_all_original_tensor = batch_data
+            hrrp_data_all = hrrp_data_all.to(device)
+            labels_all_original = labels_all_original_tensor.tolist()
 
-            hrrp_data_all = torch.stack(hrrp_data_all).to(device)
-            # Map original labels to 0..N-1 within the episode
-            unique_labels_in_episode = sorted(list(set(labels_all[:n_way*k_shot]))) # Get the N classes in the support set
+            # Map labels
+            support_original_labels = labels_all_original[:n_way * k_shot]
+            unique_labels_in_episode = sorted(list(set(support_original_labels)))
+            if len(unique_labels_in_episode) < n_way:
+                 logger.warning(f"Episode {episode_idx}: Expected {n_way} classes, found {len(unique_labels_in_episode)}. Skipping.")
+                 continue
             label_map = {orig_label: episode_label for episode_label, orig_label in enumerate(unique_labels_in_episode)}
-            episode_labels_all = torch.tensor([label_map[l] for l in labels_all]).to(device)
+            episode_labels_all = torch.tensor([label_map[l] for l in labels_all_original]).to(device)
 
         except Exception as e:
-            log.error(f"Error processing batch data for episode {episode_idx}: {e}")
+            logger.error(f"Error processing batch data for episode {episode_idx}: {e}")
             continue
 
-
-        # Extract and Align Features
+        # --- Feature Extraction using Adapter + Visual Encoder ---
         with torch.no_grad():
-            hrrp_features_all = hrrp_encoder(hrrp_data_all) # z_H
+            try:
+                pseudo_images_all = hrrp_adapter(hrrp_data_all) # (B, C, H, W)
+                # Optional resize if needed
+                if pseudo_images_all.shape[-2:] != (expected_img_size, expected_img_size):
+                     pseudo_images_all = F.interpolate(pseudo_images_all, size=(expected_img_size, expected_img_size), mode='bilinear', align_corners=False)
 
-            if use_alignment:
-                aligned_features_all = alignment_module(hrrp_features_all) # z'_H
-            elif linear_proj_noalign: # NoAlign case with projection
-                 aligned_features_all = linear_proj_noalign(hrrp_features_all) # Use projection output
-            else: # NoAlign case, use raw features (potentially mismatching dims if kappa>0)
-                 aligned_features_all = hrrp_features_all
+                visual_features_all = visual_encoder(pseudo_images_all) # z_V = f_V(h_1D_to_2D(x_H))
+                if isinstance(visual_features_all, tuple): visual_features_all = visual_features_all[0]
+                if visual_features_all.dim() == 3 and visual_features_all.shape[1] > 1:
+                     visual_features_all = visual_features_all[:, 0] # Take CLS token for ViT
 
+                visual_features_all = normalize(visual_features_all) # Normalize visual features
 
-        # Split support and query
-        support_features = aligned_features_all[:n_way * k_shot]
-        query_features = aligned_features_all[n_way * k_shot:]
-        support_labels = episode_labels_all[:n_way * k_shot]
-        # query_labels should match query_labels_proto
+                if visual_features_all.dim() != 2:
+                     logger.error(f"Visual features have unexpected shape: {visual_features_all.shape}. Expected 2D. Skipping.")
+                     continue
 
-        # Calculate Prototypes
+            except Exception as e:
+                 logger.error(f"Error during feature extraction (adapter/VLM) for episode {episode_idx}: {e}")
+                 continue
+
+        # Split support and query (now using VISUAL features z_V)
+        support_features = visual_features_all[:n_way * k_shot]
+        query_features = visual_features_all[n_way * k_shot:]
+        support_labels_episode = episode_labels_all[:n_way * k_shot]
+
+        # --- Calculate Prototypes (using VISUAL features) ---
         prototypes = []
+        prototype_calculation_failed = False
         with torch.no_grad():
             for c in range(n_way):
-                # Features for current class
-                class_support_features = support_features[support_labels == c]
-                # Original class name corresponding to episode class 'c'
+                class_mask = (support_labels_episode == c)
+                if not torch.any(class_mask):
+                     logger.warning(f"Episode {episode_idx}: No support samples for class {c}. Skipping.")
+                     prototype_calculation_failed = True; break
+                class_support_features = support_features[class_mask] # (K_shot, visual_dim)
+
                 original_label = unique_labels_in_episode[c]
                 class_name = novel_dataset.idx_to_class[original_label]
 
-                # Mean aligned feature (u_c)
-                mean_aligned_feature = class_support_features.mean(dim=0)
+                # Mean VISUAL feature (u_c)
+                mean_visual_feature = class_support_features.mean(dim=0).squeeze() # (visual_dim,)
+                if mean_visual_feature.dim() != 1:
+                     logger.error(f"Ep {episode_idx}, Cls {c}: Mean visual feature not 1D ({mean_visual_feature.shape}). Skip.")
+                     prototype_calculation_failed = True; break
 
-                if kappa > 0 and class_name in semantic_features:
-                    # Semantic Enhancement
-                    class_semantic_feature = semantic_features[class_name].squeeze(0) # Ensure (dim,)
+                if use_fusion and fusion_module is not None: # Check if fusion is enabled AND module exists
+                    if class_name in semantic_features:
+                        class_semantic_feature = semantic_features[class_name].squeeze() # (semantic_dim,)
+                        if class_semantic_feature.dim() != 1:
+                             logger.error(f"Ep {episode_idx}, Cls {c}: Semantic feature not 1D ({class_semantic_feature.shape}). Using kappa=0 fallback.")
+                             final_prototype = mean_visual_feature
+                        else:
+                             # Ensure dimensions match for fusion module input (visual_dim, semantic_dim)
+                             if class_support_features.shape[-1] != visual_dim or \
+                                class_semantic_feature.shape[-1] != semantic_dim:
+                                 logger.error(f"Ep {episode_idx}, Cls {c}: Dim mismatch for fusion. Support={class_support_features.shape[-1]} vs {visual_dim}, Sem={class_semantic_feature.shape[-1]} vs {semantic_dim}. Using kappa=0 fallback.")
+                                 final_prototype = mean_visual_feature
+                             else:
+                                 repeated_semantics = class_semantic_feature.unsqueeze(0).repeat(class_support_features.size(0), 1)
+                                 # Fusion Module now takes visual features and semantic features
+                                 reconstructed = fusion_module(class_support_features, repeated_semantics) # Output: (K_shot, visual_dim)
+                                 mean_reconstructed = reconstructed.mean(dim=0).squeeze() # (visual_dim,)
 
-                    # Repeat semantic feature for each support sample of the class
-                    repeated_semantics = class_semantic_feature.unsqueeze(0).repeat(class_support_features.size(0), 1)
-
-                    # Compute reconstructed features per sample
-                    # Note: FusionModule expects (Batch, Dim)
-                    reconstructed = fusion_module(class_support_features, repeated_semantics)
-
-                    # Mean reconstructed prototype (r_c)
-                    mean_reconstructed_prototype = reconstructed.mean(dim=0)
-
-                    # Final prototype (p_c)
-                    final_prototype = kappa * mean_reconstructed_prototype + (1 - kappa) * mean_aligned_feature
+                                 if mean_reconstructed.dim() != 1:
+                                     logger.error(f"Ep {episode_idx}, Cls {c}: Mean reconstructed not 1D ({mean_reconstructed.shape}). Using kappa=0 fallback.")
+                                     final_prototype = mean_visual_feature
+                                 else:
+                                     # Combine mean visual feature and reconstructed feature
+                                     try:
+                                         if mean_visual_feature.shape[0] != visual_dim or mean_reconstructed.shape[0] != visual_dim:
+                                              logger.error(f"Ep {episode_idx}, Cls {c}: Dim mismatch in final fusion. Mean={mean_visual_feature.shape[0]}, Recon={mean_reconstructed.shape[0]}, Expected={visual_dim}. Using kappa=0 fallback.")
+                                              final_prototype = mean_visual_feature
+                                         else:
+                                             final_prototype = float(kappa) * mean_reconstructed + (1.0 - float(kappa)) * mean_visual_feature
+                                     except RuntimeError as e:
+                                         logger.error(f"RUNTIME ERROR during prototype fusion for class {c}: {e}")
+                                         final_prototype = mean_visual_feature # Fallback
+                    else:
+                        logger.warning(f"Ep {episode_idx}: Semantic feature for '{class_name}' missing. Using kappa=0.")
+                        final_prototype = mean_visual_feature
                 else:
-                    # Use only mean aligned feature (kappa=0 or semantic feature missing)
-                    if kappa > 0 and class_name not in semantic_features:
-                         log.warning(f"Semantic feature for class '{class_name}' not found. Using kappa=0 for this class.")
-                    final_prototype = mean_aligned_feature
+                     # Fusion not used (kappa=0 or module failed)
+                     final_prototype = mean_visual_feature
+
+                # Ensure final prototype is 1D
+                if final_prototype.dim() != 1:
+                     logger.warning(f"Ep {episode_idx}, Cls {c}: Final proto not 1D ({final_prototype.shape}). Squeezing.")
+                     final_prototype = final_prototype.squeeze()
+                     if final_prototype.dim() != 1:
+                         logger.error(f"Ep {episode_idx}, Cls {c}: Cannot make final proto 1D ({final_prototype.shape}). Skipping.")
+                         prototype_calculation_failed = True; break
 
                 prototypes.append(final_prototype)
 
-            prototypes = torch.stack(prototypes) # Shape: (n_way, feature_dim)
+        if prototype_calculation_failed: continue
 
-        # Classify Query Set
+        # --- Stack Prototypes and Classify ---
+        try:
+            prototypes = torch.stack(prototypes) # Shape: (n_way, visual_dim)
+            if prototypes.dim() != 2 or prototypes.size(0) != n_way or prototypes.size(1) != visual_dim:
+                 logger.error(f"Stacked prototypes shape error: {prototypes.shape}. Expected ({n_way}, {visual_dim}). Skipping.")
+                 continue
+        except Exception as e:
+            logger.error(f"Error stacking prototypes: {e}. Shapes: {[p.shape for p in prototypes]}. Skipping.")
+            continue
+
+        # Classify Query Set (using VISUAL features)
         with torch.no_grad():
+            if query_features.shape[-1] != visual_dim:
+                 logger.error(f"Query features dim ({query_features.shape[-1]}) != prototype dim ({visual_dim}). Skipping.")
+                 continue
+
             logits, predictions = Cosine_classifier(prototypes, query_features)
             accuracy = (predictions == query_labels_proto).float().mean().item()
             all_accuracies.append(accuracy)
@@ -275,32 +373,36 @@ def main(config, args_override):
 
     # --- Final Results ---
     if not all_accuracies:
-         log.error("No episodes were successfully evaluated.")
+         logger.error("No episodes were successfully evaluated.")
          return
 
     mean_acc, conf_interval = count_95acc(np.array(all_accuracies))
-    log.info(f"--- Final Results ({setting_name}) ---")
-    log.info(f"Average Accuracy: {mean_acc * 100:.2f}%")
-    log.info(f"95% Confidence Interval: {conf_interval * 100:.2f}%")
-    log.info(f"Result: {mean_acc * 100:.2f} ± {conf_interval * 100:.2f}")
+    logger.info(f"--- Final Results ({setting_name}) ---")
+    logger.info(f"Evaluated {len(all_accuracies)} episodes.")
+    logger.info(f"Average Accuracy: {mean_acc * 100:.2f}%")
+    logger.info(f"95% Confidence Interval: {conf_interval * 100:.2f}%")
+    logger.info(f"Result: {mean_acc * 100:.2f} ± {conf_interval * 100:.2f}")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Evaluate Few-Shot HRRP Recognition")
-    parser.add_argument('--config', type=str, default='hrrp_fsl_config.yaml', help='Path to the configuration file')
-    parser.add_argument('--checkpoint', type=str, default=None, help='Path to the trained model checkpoint (overrides config)')
+    parser = argparse.ArgumentParser(description="Evaluate Few-Shot HRRP Recognition (Adapter + VLM Visual)")
+    parser.add_argument('--config', type=str, default='configs/hrrp_fsl_config.yaml', help='Path to the configuration file')
+    parser.add_argument('--checkpoint', type=str, default=None, help='Path to the trained ADAPTER checkpoint (overrides config)') # Changed help text
     parser.add_argument('--n_way', type=int, default=None, help='N-way (overrides config)')
     parser.add_argument('--k_shot', type=int, default=None, help='K-shot (overrides config)')
     parser.add_argument('--q_query', type=int, default=None, help='Query samples per class (overrides config)')
     parser.add_argument('--test_episodes', type=int, default=None, help='Number of test episodes (overrides config)')
-    parser.add_argument('--kappa', type=float, default=None, help='Prototype fusion factor kappa (overrides config)')
-    parser.add_argument('--no_align', action='store_true', help='Run the NoAlign baseline (bypass alignment module)')
+    parser.add_argument('--kappa', type=float, default=None, help='Prototype fusion factor kappa (overrides config, >0 enables fusion)')
+    # --no_align is no longer relevant for this approach
+    # parser.add_argument('--no_align', action='store_true', help='Run the NoAlign baseline (bypass alignment module)')
 
     args = parser.parse_args()
 
     if not os.path.exists(args.config):
-        logger.error(f"Configuration file not found at {args.config}")
+        logging.error(f"Configuration file not found at {args.config}")
         sys.exit(1)
 
     configuration = load_config(args.config)
+    # Remove --no_align logic if it was passed but irrelevant now
+    args.no_align = False
     main(configuration, args)
