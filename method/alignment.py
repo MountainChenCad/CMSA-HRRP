@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-import torch.nn.functional as F
+
 import logging
 
 logger = logging.getLogger(__name__)
@@ -24,21 +24,20 @@ class AlignmentModule(nn.Module):
     def forward(self, hrrp_features: torch.Tensor) -> torch.Tensor:
         return self.mlp(hrrp_features)
 
-class FusionModule(nn.Module):
+class SemAlignModule(nn.Module): # Renamed from FusionModule
     """
-    Fuses aligned HRRP features and semantic features to reconstruct a prototype.
-    Similar to SemAlign in SemFew.
-    Input: Concatenated [z'_H, z_T] (BatchSize, aligned_hrrp_dim + semantic_dim)
-    Output: Reconstructed prototype feature (BatchSize, aligned_hrrp_dim or semantic_dim)
-            Let's output semantic_dim to align with the target in training.
+    Reconstructs a target prototype (visual center) from visual and semantic features.
+    Matches 'h' in SemFew description.
+    Input: Concatenated [z_V, z_T] (BatchSize, visual_dim + semantic_dim)
+    Output: Reconstructed visual center feature (BatchSize, visual_dim)
     """
-    def __init__(self, aligned_hrrp_dim: int, semantic_dim: int, hidden_dim: int = 4096, output_dim: int = None, drop: float = 0.2):
+    def __init__(self, visual_dim: int, semantic_dim: int, hidden_dim: int = 4096, output_dim: int = None, drop: float = 0.2):
         super().__init__()
         if output_dim is None:
-            output_dim = semantic_dim # Default to outputting in semantic space dimension
+            output_dim = visual_dim # Output dimension should match the target visual center C_y
 
         self.model = nn.Sequential(
-            nn.Linear(aligned_hrrp_dim + semantic_dim, hidden_dim),
+            nn.Linear(visual_dim + semantic_dim, hidden_dim),
             nn.ReLU(),
             nn.Dropout(drop),
             nn.Linear(hidden_dim, hidden_dim),
@@ -48,23 +47,26 @@ class FusionModule(nn.Module):
         self.fc = nn.Linear(hidden_dim, output_dim)
         self.drop = nn.Dropout(drop)
 
-        logger.info(f"Initialized FusionModule (h_F): Input={aligned_hrrp_dim + semantic_dim}, Hidden={hidden_dim}, Output={output_dim}")
+        logger.info(f"Initialized SemAlignModule (h): Input={visual_dim + semantic_dim}, Hidden={hidden_dim}, Output={output_dim}")
 
-    def forward(self, aligned_hrrp: torch.Tensor, semantic: torch.Tensor) -> torch.Tensor:
+    def forward(self, visual_feature: torch.Tensor, semantic: torch.Tensor) -> torch.Tensor:
         # Ensure inputs are 2D (BatchSize, Dim)
-        if aligned_hrrp.ndim > 2:
-            aligned_hrrp = aligned_hrrp.view(aligned_hrrp.size(0), -1)
+        if visual_feature.ndim > 2:
+            visual_feature = visual_feature.view(visual_feature.size(0), -1)
         if semantic.ndim > 2:
             semantic = semantic.view(semantic.size(0), -1)
 
-        # Ensure semantic features are repeated if necessary (e.g., matching batch size)
-        if aligned_hrrp.size(0) > semantic.size(0) and semantic.size(0) == 1:
-             semantic = semantic.repeat(aligned_hrrp.size(0), 1)
-        elif aligned_hrrp.size(0) != semantic.size(0):
-             raise ValueError(f"Batch size mismatch in FusionModule: aligned_hrrp {aligned_hrrp.size(0)}, semantic {semantic.size(0)}")
+        # Ensure semantic features are repeated if necessary
+        if visual_feature.size(0) > semantic.size(0) and semantic.size(0) == 1:
+             semantic = semantic.repeat(visual_feature.size(0), 1)
+        elif visual_feature.size(0) != semantic.size(0):
+             raise ValueError(f"Batch size mismatch in SemAlignModule: visual {visual_feature.size(0)}, semantic {semantic.size(0)}")
 
+        # Check dimension consistency before concatenation
+        # Assuming visual_dim and semantic_dim were passed correctly during init
+        # Add explicit checks if needed based on config
 
-        input_concat = torch.cat((aligned_hrrp, semantic), dim=-1)
+        input_concat = torch.cat((visual_feature, semantic), dim=-1)
         fusion = self.model(input_concat)
         fusion = self.drop(fusion)
         reconstructed_prototype = self.fc(fusion)
