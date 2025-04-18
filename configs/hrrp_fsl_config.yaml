@@ -8,26 +8,27 @@ data:
   # 示例: 假设仿真数据中有 BTR, T72, ZSU234; 实测中有 CAR, VAN, TRUCK
   # 确保名称与 .mat 文件名前缀一致
   base_classes:
-    - 'BTR'         # Simulated
-    - 'T72'         # Simulated
-    - 'ZSU234'      # Simulated
-    - 'BMP2'        # Simulated
-    - 'BRDM2'       # Simulated
-    - 'T62'         # Simulated
-    - 'ZIL131'      # Simulated
-    - 'D7'          # Simulated
-    - '2S1'         # Simulated
-    # - 'CAR'         # Measured (Example, add if base)
-    # - 'VAN'         # Measured (Example, add if base)
+    - 'EA-18G'         # Simulated
+    - 'EP-3E'         # Simulated
+    - 'F2'      # Simulated
+    - 'F15'        # Simulated
+    - 'F16'       # Simulated
+    - 'F18'         # Simulated
+    - 'F22'      # Simulated
+    - 'F35'          # Simulated
+    - 'IDF'         # Simulated
+    - '捕食者'         # Simulated (Example)
+    - '幻影2000'         # Simulated (Example)
+    - '全球鹰'      # Simulated (Example)
   novel_classes:
-    - 'F22'         # Simulated (Example)
-    # - 'F16'         # Simulated (Example)
-    # - 'HY2000'      # Simulated (Example)
-    - 'CAR'         # Measured
-    - 'VAN'         # Measured
-    - 'TRUCK'       # Measured
+    - '捕食者'         # Simulated (Example)
+    - '幻影2000'         # Simulated (Example)
+    - '全球鹰'      # Simulated (Example)
+#    - 'an26'         # Measured
+#    - 'yar42'         # Measured
+#    - 'citation'       # Measured
   target_length: 1000 # HRRP处理后的目标长度 (实测数据会被填充)
-  normalization: 'log_max' # 归一化方法: 'max', 'log_max', 'none'
+  normalization: 'max' # 归一化方法: 'max', 'log_max', 'none'
 
 # --- Few-Shot Learning Configuration ---
 fsl:

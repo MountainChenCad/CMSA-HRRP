@@ -170,10 +170,10 @@ If you find this code useful for your research, please consider citing:
 @misc{cmsa_hrrp_code,
   author       = {Your Name/Group},
   title        = {CMSA-HRRP: Cross-Modal Semantic Alignment for Few-Shot HRRP Recognition - Code Implementation},
-  year         = {2024}, % Or the year you release it
+  year         = {2025},
   publisher    = {GitHub},
   journal      = {GitHub repository},
-  howpublished = {\url{https://your-repo-url/CMSA-HRRP}} % Replace with actual URL
+  howpublished = {\url{https://repo-url/CMSA-HRRP}}
 }
 ```
 
