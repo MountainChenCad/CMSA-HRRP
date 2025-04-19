@@ -1,0 +1,65 @@
+**Prompt for Generating Detailed HRRP Target Descriptions**
+
+**Your Role:** You are an expert aerospace engineer and radar signal processing specialist tasked with creating detailed textual descriptions of specific aircraft targets, focusing on features relevant for High-Resolution Range Profile (HRRP) radar automatic target recognition (ATR).
+
+**Objective:** Generate a unique, detailed paragraph for each aircraft listed below. These descriptions should highlight the salient physical and structural characteristics that manifest as distinctive features in their 1D HRRP signatures. The goal is to provide rich semantic information that can help differentiate these targets in a few-shot learning scenario where only limited radar data is available.
+
+**Context:** HRRP is a 1D radar signature representing the distribution of radar reflectivity (scattering centers) along the radar's line-of-sight projected onto the target. Different parts of the aircraft (engines, wings, nose, tail, intakes, external stores, specific edges, corners) contribute differently to this profile depending on their shape, size, material, and orientation relative to the radar. We need descriptions that capture these radar-relevant distinguishing features.
+
+**Input:** A list of aircraft target names/designations.
+
+**Output Requirements:**
+
+1.  **Format:** For each target, provide a single, well-structured paragraph.
+2.  **Content Focus:**
+    *   **Identify the Target:** Start by clearly stating the aircraft name/designation.
+    *   **HRRP Relevance:** Emphasize characteristics that are likely to produce strong or unique scattering centers in an HRRP signature.
+    *   **Key Scatterers:** Mention specific components known to be dominant radar scatterers (e.g., engine inlets/exhausts, compressor blades if visible, corner reflectors formed by wing/fuselage or tail/fuselage junctions, flat surfaces perpendicular to the radar line-of-sight).
+    *   **Geometric Features:** Describe unique geometric aspects (e.g., delta wings, swept wings, canards, leading-edge extensions (LEX), V-tails, T-tails, specific radome shapes, fuselage blending) and how they might contribute to the HRRP (e.g., edge diffraction, traveling wave returns, multiple distinct peaks).
+    *   **Engine Configuration:** Note the number and type (turbofan, turboprop, pusher/tractor) and placement (wing-mounted, fuselage-mounted, internal) as engines are often major contributors.
+    *   **Stealth Features (If Applicable):** For stealth aircraft (F-22, F-35), describe how features like edge alignment, faceting, S-duct inlets, internal weapon bays, and radar-absorbent materials are designed to reduce Radar Cross Section (RCS) and how this might manifest in HRRP (e.g., fewer dominant peaks, lower overall amplitude, specific angular sensitivity).
+    *   **External Features:** Mention significant external features like jamming pods (EA-18G), sensor pods (Predator, Global Hawk), or external fuel tanks/weapons if characteristic.
+    *   **Size/Scale (Relative):** Briefly mentioning relative size (e.g., compact fighter, large transport, large wingspan UAV) can provide context.
+    *   **Discriminative Language:** Where possible, implicitly or explicitly contrast the target's features with other similar aircraft to highlight uniqueness (e.g., "unlike single-tail fighters...", "larger wing area compared to its predecessor...").
+3.  **Detail Level:** Be specific and use appropriate (or descriptive layman's equivalent) radar/aerospace terminology. Avoid overly generic descriptions.
+4.  **Perspective:** Write from the perspective of analyzing the *radar signature*, not just the visual appearance.
+
+**Key Concepts to Consider/Incorporate:**
+
+*   Radar Cross Section (RCS)
+*   Scattering Centers (Dominant, Secondary)
+*   Specular Reflection (mirror-like)
+*   Diffraction (especially edge diffraction from wings, tails)
+*   Corner Reflectors (formed by perpendicular surfaces)
+*   Engine Inlet/Exhaust Returns (cavity effects, turbine blades)
+*   Wing Configuration (Delta, Swept, High/Low Aspect Ratio)
+*   Tail Configuration (Single, Twin, V-Tail, T-Tail, Horizontal Stabilizers)
+*   Fuselage Shape (Blended wing-body, chined, bulbous nose)
+*   Stealth Design Principles (Edge Alignment, Faceting, RAM)
+*   External Stores/Pods
+
+**Example Snippet (Illustrative Style):**
+
+"...The F/A-18's HRRP signature is often characterized by strong returns from the engine inlets located below the leading-edge extensions (LEX), forming distinct scattering centers. The twin, canted vertical stabilizers create prominent dual returns, especially at oblique aspect angles, differentiating it from single-tail fighters. Corner reflections between the wings and fuselage, along with edge diffraction from the moderately swept wings and horizontal stabilizers, contribute further complexity to the profile..."
+
+**Target List:**
+
+Generate descriptions for the following aircraft:
+
+1.  EP-3E Aries II
+2.  F/A-18 Hornet (or Super Hornet, specify if possible)
+3.  F-22 Raptor
+4.  F-35 Lightning II
+5.  AIDC F-CK-1 Ching-Kuo (IDF)
+6.  RQ-4 Global Hawk (QQY)
+7.  MQ-1 Predator (BSZ)
+8.  EA-18G Growler
+9.  Mitsubishi F-2
+10. F-15 Eagle
+11. F-16 Fighting Falcon
+12. Dassault Mirage 2000 (HY2000)
+13. Antonov An-26 (an26)
+14. Yakovlev Yak-42 (yar42)
+15. Cessna Citation (citation - mention it's a family, perhaps focus on common traits like T-tail/rear engines)
+
+**Final Instruction:** Please provide the detailed paragraph for each target, ensuring focus on HRRP-relevant features and discriminative characteristics.

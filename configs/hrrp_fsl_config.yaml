@@ -1,93 +1,94 @@
-# Configuration for Few-Shot HRRP Recognition (CMSA-HRRP)
+# Configuration for Few-Shot HRRP Recognition (CMSA-HRRP - Adapter Version)
 
 # --- Data Configuration ---
 data:
   simulated_path: './datasets/simulated_hrrp' # 仿真数据根目录
   measured_path: './datasets/measured_hrrp'   # 实测数据根目录
-  # 定义基类和新类 (请根据你的实际12+3类目标填写)
-  # 示例: 假设仿真数据中有 BTR, T72, ZSU234; 实测中有 CAR, VAN, TRUCK
-  # 确保名称与 .mat 文件名前缀一致
-  base_classes:
-    - 'EA-18G'         # Simulated
-    - 'EP-3E'         # Simulated
-    - 'F2'      # Simulated
-    - 'F15'        # Simulated
-    - 'F16'       # Simulated
-    - 'F18'         # Simulated
-    - 'F22'      # Simulated
-#    - 'F35'          # Simulated
-#    - 'IDF'         # Simulated
-#    - '捕食者'         # Simulated (Example)
-#    - '幻影2000'         # Simulated (Example)
-#    - '全球鹰'      # Simulated (Example)
-    - 'an26'         # Measured
-    - 'yar42'         # Measured
-    - 'citation'       # Measured
-  novel_classes:
-    - 'F35'          # Simulated
-    - 'IDF'         # Simulated
-    - '捕食者'         # Simulated (Example)
-    - '幻影2000'         # Simulated (Example)
-    - '全球鹰'      # Simulated (Example)
-#    - 'an26'         # Measured
-#    - 'yar42'         # Measured
-#    - 'citation'       # Measured
-  target_length: 1000 # HRRP处理后的目标长度 (实测数据会被填充)
-  normalization: 'max' # 归一化方法: 'max', 'log_max', 'none'
+  # Base and Novel classes (Ensure names match keys in semantic_descriptions.yaml -> class_mapping)
+  base_classes: # 7 classes
+    - 'EA-18G'
+    - 'EP-3E'
+    - 'F2'
+    - 'F15'
+    - 'F16'
+    - 'F18'
+    - 'F22'
+  novel_classes: # 8 classes (3+5)
+    - 'F35'
+    - 'IDF'
+    - '捕食者'
+    - '幻影2000'
+    - '全球鹰'
+#    - 'an26'
+#    - 'yar42'
+#    - 'citation'
+  target_length: 1000 # HRRP处理后的目标长度
+  normalization: 'log_max' # 归一化方法: 'max', 'log_max', 'none'
 
 # --- Few-Shot Learning Configuration ---
 fsl:
   n_way: 5          # N-way classification
-  k_shot: 10         # K-shot learning (support samples per class)
+  k_shot: 5         # K-shot learning (support samples per class) - Adjust as needed (e.g., 1 or 5)
   q_query: 15       # Query samples per class in each episode
-  test_episodes: 100 # Number of episodes for testing
+  test_episodes: 600 # Number of episodes for testing
+  classifier_temperature: 10.0 # Temperature for cosine classifier
 
 # --- Model Configuration ---
 model:
-  hrrp_encoder:
-    output_dim: 512   # f_H 输出维度 (需要与 h_A 输入匹配)
-    # Add other encoder specific params if needed (e.g., layers, kernel_size)
-  alignment_module:
-    hidden_dim: 1024  # h_A 隐藏层维度
-    # Output dim determined by VLM text encoder
-  fusion_module:      # h_F (Optional, for semantic enhancement)
-    hidden_dim: 4096  # Example, similar to SemFew's SemAlign hidden dim
-    # Input dim = aligned_hrrp_dim + semantic_dim
-    # Output dim = aligned_hrrp_dim
-    kappa: 0        # Prototype fusion factor (0: no SemEnh, 1: only recon)
+  # hrrp_encoder: # Configuration for the baseline 1D CNN
+  #   output_dim: 512
+  #   layers: [64, 128, 256, 512]
+  #   kernel_size: 7
+  adapter_1d_to_2d: # Configuration for the CMSA-HRRP adapter
+    intermediate_dim: 2048 # MLP intermediate dimension
+    # Other adapter params like activation could be added if HRPPtoPseudoImage is modified
+  fusion_module:      # h_F (Used by both CMSA-HRRP and baseline 1D-CNN+Semantics)
+    hidden_dim: 4096  # Example hidden dimension
+    kappa: 0.5        # Default prototype fusion factor for testing (0: visual only, >0: enable fusion)
+                      # test_fsl.py can override this or sweep values
   foundation_model:
-    name: 'RemoteCLIP' # 'RemoteCLIP' or 'SARATRX_Adapted' etc.
-    variant: 'ViT-B-32' # e.g., 'ViT-B-32', 'RN50' for RemoteCLIP
-    text_encoder_dim: 512 # VLM text encoder output dim (MUST match alignment output)
+    name: 'RemoteCLIP' # Currently only RemoteCLIP supported
+    variant: 'ViT-B-32' # IMPORTANT: Change this for different scale models ('RN50', 'ViT-B-32', 'ViT-L-14')
+    # IMPORTANT: Ensure these dimensions MATCH the chosen variant!
+    # RN50: 1024, ViT-B-32: 512, ViT-L-14: 768
+    visual_encoder_dim: 512 # VLM visual encoder output dim (e.g., f_V output)
+    text_encoder_dim: 512   # VLM text encoder output dim (e.g., f_T output, z_T dim)
 
-# --- Training Configuration (for Alignment Module) ---
+# --- Training Configuration ---
 training:
-  alignment:
-    epochs: 10
-    batch_size: 128
-    lr: 0.0001
-    optimizer: 'Adam'
-    loss_type: 'cosine' # 'cosine' or 'l1' or 'mse'
-    # Add scheduler params if needed
-  fsl_meta_training: # (Optional, if h_F needs meta-training)
-    epochs: 50
-    lr: 0.001
-    # ... other meta-learning specific params
+  # Settings used for Adapter training (train_adapter.py),
+  # SemAlign training (train_semalign_stage3.py),
+  # and Baseline CNN training (train_baseline_cnn.py),
+  # and Baseline Fusion training (train_fusion_1dcnn.py)
+  # Adjust epochs/lr per stage if needed by loading specific sub-configs or adding more sections
+  epochs: 50         # General epoch count, adjust per training script if needed
+  batch_size: 128
+  lr: 0.0001
+  optimizer: 'Adam'
+  loss_type: 'cosine' # Primarily for adapter alignment, others might use different losses (e.g., L1 for SemAlign, CE for baseline CNN)
+  dropout_semalign: 0.2 # Dropout specific to SemAlign module training
 
 # --- Semantics Configuration ---
 semantics:
-  # Path to pre-generated semantic features file
-  feature_path: './semantic_features/hrrp_semantics_remoteclip_vitb32_gpt.pth'
-  # Parameters used during generation (for reference/tracking)
+  description_file: 'configs/semantic_descriptions.yaml' # Path to the semantic descriptions and mapping
+  # generation settings control WHICH description to use and track the source LLM
   generation:
-    llm: 'GPT-3.5-turbo'
-    text_type: 'gpt' # Corresponds to file naming convention
+    llm: 'Manual' # Source LLM ('GPT-4.1', 'Claude-3.7', 'DeepSeek-R1', 'Gemini-2.5-pro', 'Manual') - used if text_type='llm_generated' or for logging
+    text_type: 'detailed' # 'name', 'detailed' (uses manual_detailed from yaml), 'llm_generated' (uses llm key from yaml)
+  # feature_path: './semantic_features/...' # REMOVED - Path is now constructed dynamically
 
 # --- Paths Configuration ---
 paths:
+  # Base directories - specific files/subdirs constructed dynamically
+  datasets_base: './datasets' # Contains simulated_path and measured_path subdirs
   checkpoints: './checkpoints'
   logs: './logs'
-  # Add specific subdirs if needed, e.g., checkpoints/alignment_module
+  semantic_features_dir: './semantic_features' # Directory to save semantic features
+  # base_centers_path: './checkpoints/...' # REMOVED - Path is now constructed dynamically
+  # baseline paths (add if needed, or construct dynamically too)
+  # baseline_cnn_checkpoint: './checkpoints/hrrp_encoder_baseline'
+  # baseline_fusion_checkpoint: './checkpoints/fusion_module_1dcnn'
+  # baseline_centers_path: './checkpoints/base_centers_1dcnn.pth'
 
 # --- Other Hyperparameters ---
 num_workers: 4
