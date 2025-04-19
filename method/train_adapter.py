@@ -134,7 +134,8 @@ def main(config_path: str):
         input_channels=1, # Hardcoded for magnitude
         output_channels=3, # Standard for visual models
         output_size=expected_img_size,
-        intermediate_dim=adapter_config.get('intermediate_dim', 2048) # Use config value
+        intermediate_dim=adapter_config.get('intermediate_dim', 2048), # Use config value
+        activation=adapter_config.get('activation', 'relu') # Use config value or default
     ).to(device)
     log.info(f"Initialized HRRP Adapter: {hrrp_adapter}")
 

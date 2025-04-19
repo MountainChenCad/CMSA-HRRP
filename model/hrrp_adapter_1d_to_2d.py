@@ -17,25 +17,22 @@ class HRPPtoPseudoImage(nn.Module):
         input_channels (int): Number of input channels (1 for magnitude).
         output_channels (int): Target number of channels for the pseudo-image (e.g., 3).
         output_size (int): Target spatial dimension (H=W) for the pseudo-image (e.g., 224).
-        intermediate_dim (int): Dimension of the intermediate MLP layer. # <--- 新增参数说明
-        activation (str): Activation function for MLP ('relu', 'leaky_relu', 'tanh'). # <--- (可选) 可以添加激活函数参数
+        intermediate_dim (int): Dimension of the intermediate MLP layer.
+        activation (str): Activation function for MLP ('relu', 'leaky_relu').
     """
     def __init__(self,
                  hrrp_length: int = 1000,
                  input_channels: int = 1,
                  output_channels: int = 3,
                  output_size: int = 224,
-                 intermediate_dim: int = 2048, # <--- 添加参数并设置默认值
-                 activation: str = 'relu'): # <--- (可选) 添加激活函数参数
+                 intermediate_dim: int = 2048,
+                 activation: str = 'relu'):
         super().__init__()
 
         if activation.lower() == 'relu':
             act_fn = nn.ReLU()
         elif activation.lower() == 'leaky_relu':
             act_fn = nn.LeakyReLU(0.2)
-        # Tanh is applied at the end, maybe not needed in intermediate layer?
-        # elif activation.lower() == 'tanh':
-        #      act_fn = nn.Tanh()
         else:
             logger.warning(f"Unsupported activation '{activation}' for intermediate layer. Using ReLU.")
             act_fn = nn.ReLU()
@@ -43,9 +40,9 @@ class HRPPtoPseudoImage(nn.Module):
         target_elements = output_channels * output_size * output_size
         self.adapter = nn.Sequential(
             nn.Flatten(), # Flatten input (B, C, L) -> (B, C*L)
-            nn.Linear(input_channels * hrrp_length, intermediate_dim), # <--- 使用参数 intermediate_dim
-            act_fn, # <--- 使用选择的激活函数
-            nn.Linear(intermediate_dim, target_elements), # <--- 使用参数 intermediate_dim
+            nn.Linear(input_channels * hrrp_length, intermediate_dim),
+            act_fn,
+            nn.Linear(intermediate_dim, target_elements),
             nn.Tanh(), # Use Tanh to keep values in a controlled range (-1, 1)
             nn.Unflatten(1, (output_channels, output_size, output_size)) # Reshape to (B, C, H, W)
         )
@@ -61,7 +58,7 @@ class HRPPtoPseudoImage(nn.Module):
         """
         return self.adapter(x)
 
-# Example Usage (Remains the same)
+# Example Usage
 if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO)
     B = 4
@@ -82,4 +79,4 @@ if __name__ == '__main__':
     # Test with specified intermediate dim
     adapter_custom = HRPPtoPseudoImage(hrrp_length=L, input_channels=C_in, output_channels=C_out, output_size=H_out, intermediate_dim=INTERMEDIATE)
     output_custom = adapter_custom(dummy_input)
-    print(f"Output shape (intermediate={INTERMEDIATE}): {output_custom.shape}") # Expected (B, C_out, H_out, W_out)
+    print(f"Output shape (intermediate={INTERMEDIATE}): {output_custom.shape}")

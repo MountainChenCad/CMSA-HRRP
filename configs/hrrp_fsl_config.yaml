@@ -61,7 +61,7 @@ training:
   # and Baseline CNN training (train_baseline_cnn.py),
   # and Baseline Fusion training (train_fusion_1dcnn.py)
   # Adjust epochs/lr per stage if needed by loading specific sub-configs or adding more sections
-  epochs: 50         # General epoch count, adjust per training script if needed
+  epochs: 10         # General epoch count, adjust per training script if needed
   batch_size: 128
   lr: 0.0001
   optimizer: 'Adam'

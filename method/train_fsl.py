@@ -21,7 +21,7 @@ def main(args):
     (e.g., optimizing h_F based on few-shot classification loss on base tasks)
     is implemented.
     """
-    log = loggers('train_fsl_meta') # Example logger name
+    log = loggers('logs/train_fsl_meta/meta_log.txt') # Example logger name
     log.info("train_fsl.py - Meta-training for Fusion Module (h_F)")
     log.info(f"Received arguments: {args}")
 
@@ -46,13 +46,14 @@ def main(args):
     # --- End TODO ---
 
     log.warning("Separate meta-training for the Fusion Module (train_fsl.py) is currently NOT IMPLEMENTED.")
-    log.warning("The Fusion Module (h_F) is trained alongside the Alignment Module in 'train_alignment.py'.")
+    log.warning("The Fusion Module (h_F) for CMSA-HRRP is trained in 'train_semalign_stage3.py'.")
+    log.warning("The Fusion Module (h_F) for 1DCNN+Semantics is trained in 'train_fusion_1dcnn.py'.")
     log.warning("If separate meta-training is required, implement the logic outlined in the TODO section.")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Meta-train Fusion Module (Optional)")
-    parser.add_argument('--config', type=str, default='hrrp_fsl_config.yaml', help='Path to the configuration file')
+    parser.add_argument('--config', type=str, default='configs/hrrp_fsl_config.yaml', help='Path to the configuration file')
     # Add any other specific arguments needed for meta-training h_F
     args = parser.parse_args()
     main(args)

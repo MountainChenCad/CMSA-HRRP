@@ -234,12 +234,17 @@ def main(config_path: str, args_override: argparse.Namespace):
                     # Determine prototype (p_c)
                     if current_kappa == 0 or r_c is None:
                         p_c = u_c # Use 1D CNN visual-only prototype
+                        # Ensure u_c is normalized if it wasn't already (it was from normalized features)
+                        # p_c = normalize(p_c) # Not needed, u_c is mean of normalized
                     else:
                         # Fuse Prototypes: p_c = k * r_c + (1 - k) * u_c
+                        # u_c and r_c are already means of normalized features
                         p_c = current_kappa * r_c + (1 - current_kappa) * u_c
-                        p_c = normalize(p_c) # Normalize fused prototype
+                        # DO NOT NORMALIZE p_c here. Let Cosine_classifier handle it.
+                        # p_c = normalize(p_c) # <--- REMOVED THIS LINE
 
                     # Classification using normalized query features (z_h_query_norm)
+                    # Cosine_classifier normalizes p_c and z_h_query_norm internally
                     logits, predictions = Cosine_classifier(p_c, z_h_query_norm, temperature=classifier_temp)
 
                     # Calculate Accuracy

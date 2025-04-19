@@ -8,14 +8,14 @@ from typing import Dict, List, Any
 
 import torch
 import open_clip
-import torch.nn.functional as F
+import torch.nn.functional as F # Added for F.normalize
 
 # Ensure project root is in path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
 
 from logger import loggers
-from utils import load_config, get_dynamic_paths # Import helpers
+from utils import load_config, get_dynamic_paths, normalize # Import helpers
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - [%(levelname)s] - %(message)s", datefmt='%Y-%m-%d %H:%M:%S')
 logger = logging.getLogger(__name__)
@@ -147,8 +147,7 @@ def main(config_path: str):
             with torch.no_grad(), torch.cuda.amp.autocast(enabled=torch.cuda.is_available()):
                 text_feat = text_encoder.encode_text(text_tokens)
                 # Normalize features
-                text_feat = F.normalize(text_feat) # Use normalize util
-                # text_feat /= text_feat.norm(dim=-1, keepdim=True) # old way
+                text_feat = normalize(text_feat) # Use normalize util
 
             # Use the original config class name as the key in the output dict
             semantic_features[class_name] = text_feat.squeeze(0).detach().cpu()

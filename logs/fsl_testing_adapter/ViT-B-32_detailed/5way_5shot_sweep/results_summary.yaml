@@ -1,0 +1,128 @@
+best_result:
+  ci95: !!python/object/apply:numpy.core.multiarray.scalar
+  - &id001 !!python/object/apply:numpy.dtype
+    args:
+    - f8
+    - false
+    - true
+    state: !!python/tuple
+    - 3
+    - <
+    - null
+    - null
+    - null
+    - -1
+    - -1
+    - 0
+  - !!binary |
+    GWg4TJxMZz8=
+  kappa: 1.0
+  mean_acc: !!python/object/apply:numpy.core.multiarray.scalar
+  - *id001
+  - !!binary |
+    16NwcUrFyT8=
+config_path: configs/hrrp_fsl_config.yaml
+fsl_setting: 5w5s
+num_episodes: 600
+results_per_kappa:
+  0.0:
+    ci95: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      Yi8NUwyWaj8=
+    mean: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      GEt+aem4yT8=
+  0.1:
+    ci95: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      tnYYza9Eaj8=
+    mean: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      hetRSIOcyT8=
+  0.2:
+    ci95: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      nZOwhdZ8aj8=
+    mean: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      RERE6AuTyT8=
+  0.30000000000000004:
+    ci95: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      v1H2KYx4aj8=
+    mean: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      hetR8GyfyT8=
+  0.4:
+    ci95: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      VcKyyf9Daj8=
+    mean: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      IiIiWiegyT8=
+  0.5:
+    ci95: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      XR7XhCtwaj8=
+    mean: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      7+7u3OawyT8=
+  0.6000000000000001:
+    ci95: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      cJt0oTr3aT8=
+    mean: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      FK5Hf1GSyT8=
+  0.7000000000000001:
+    ci95: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      H67E2y0Xaj8=
+    mean: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      pHA9WiegyT8=
+  0.8:
+    ci95: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      CSgH6WtIaT8=
+    mean: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      iYiIGhazyT8=
+  0.9:
+    ci95: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      vaAQP/lhaD8=
+    mean: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      cT0Ky0KtyT8=
+  1.0:
+    ci95: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      GWg4TJxMZz8=
+    mean: !!python/object/apply:numpy.core.multiarray.scalar
+    - *id001
+    - !!binary |
+      16NwcUrFyT8=
+text_type: detailed
+vlm_variant: ViT-B-32

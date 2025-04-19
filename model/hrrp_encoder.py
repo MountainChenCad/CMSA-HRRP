@@ -35,7 +35,8 @@ class HRRPEncoder(nn.Module):
 
         conv_blocks = []
         in_channels = input_channels
-        for out_channels in layers:
+        current_length = -1 # Track length if needed for flatten, but adaptive is preferred
+        for i, out_channels in enumerate(layers):
             block = [
                 nn.Conv1d(in_channels, out_channels, kernel_size=kernel_size, stride=stride, padding=padding, bias=not use_batchnorm)
             ]
@@ -45,6 +46,10 @@ class HRRPEncoder(nn.Module):
             block.append(nn.MaxPool1d(kernel_size=pool_kernel, stride=pool_stride, padding=pool_kernel // 2))
             conv_blocks.append(nn.Sequential(*block))
             in_channels = out_channels
+            # Rough length calculation (if needed for flatten)
+            # if current_length != -1:
+            #     conv_out_len = (current_length + 2 * padding - kernel_size) // stride + 1
+            #     current_length = (conv_out_len + 2 * (pool_kernel // 2) - pool_kernel) // pool_stride + 1
 
         self.encoder = nn.Sequential(*conv_blocks)
 
@@ -56,16 +61,15 @@ class HRRPEncoder(nn.Module):
             self.final_pool = nn.AdaptiveMaxPool1d(1)
             self.fc = nn.Linear(in_channels, output_dim)
         elif final_pool == 'flatten':
-            self.final_pool = nn.Identity() # No pooling, just flatten
-            # Need to calculate flattened size - depends on input length and conv/pool layers
-            # This requires knowing the input length L, which might vary.
-            # Using adaptive pooling is generally more robust.
-            # If using flatten, calculate the output size of self.encoder carefully.
-            # For now, let's assume adaptive pooling is preferred.
-            # Example: self.fc = nn.Linear(in_channels * calculated_length, output_dim)
-            logger.warning("Flatten pooling selected. Ensure FC layer input size is correctly calculated or use adaptive pooling.")
-            # Using a dummy FC layer, expect Adaptive Pooling usually
-            self.fc = nn.Linear(in_channels, output_dim) # This likely needs adjustment for flatten
+            self.final_pool = nn.Flatten(1) # Flatten from channel dim
+            # Calculate flattened size dynamically (requires passing input_length or using a dummy forward pass)
+            # This is complex, adaptive pooling is recommended.
+            # Example placeholder (likely incorrect without dynamic calculation):
+            # dummy_input_len = 1000 # Example
+            # calculated_length = self._get_conv_output_length(dummy_input_len, layers, kernel_size, stride, padding, pool_kernel, pool_stride)
+            # self.fc = nn.Linear(in_channels * calculated_length, output_dim)
+            logger.warning("Flatten pooling selected. FC layer input size might be incorrect. Use adaptive pooling for robustness.")
+            self.fc = nn.Linear(in_channels, output_dim) # Placeholder, likely needs adjustment
         else:
              logger.warning(f"Unsupported final_pool '{final_pool}'. Using AdaptiveAvgPool1d.")
              self.final_pool = nn.AdaptiveAvgPool1d(1)
@@ -74,6 +78,15 @@ class HRRPEncoder(nn.Module):
         logger.info(f"Initialized HRRPEncoder: InChannels={input_channels}, Layers={layers}, OutDim={output_dim}, FinalPool={self.final_pool_type}")
         # Initialize weights (optional but good practice)
         self._initialize_weights()
+
+    # Helper to calculate output length (if needed for flatten)
+    def _get_conv_output_length(self, L_in, layers, kernel, stride, padding, pool_k, pool_s):
+         L_out = L_in
+         for _ in layers:
+              L_conv = (L_out + 2 * padding - kernel) // stride + 1
+              L_out = (L_conv + 2 * (pool_k // 2) - pool_k) // pool_s + 1
+         return L_out
+
 
     def _initialize_weights(self):
         for m in self.modules():
@@ -97,9 +110,11 @@ class HRRPEncoder(nn.Module):
         Returns:
             torch.Tensor: Output feature vector, shape (BatchSize, output_dim)
         """
-        x = self.encoder(x)
-        x = self.final_pool(x)
-        x = torch.flatten(x, 1) # Flatten after pooling or directly if final_pool='flatten'
+        x = self.encoder(x) # (B, C_last, L_out)
+        x = self.final_pool(x) # (B, C_last, 1) for adaptive pool, (B, C_last * L_out) for flatten
+        if self.final_pool_type != 'flatten':
+             x = torch.flatten(x, 1) # Flatten after pooling: (B, C_last)
+        # Else: x is already flattened by nn.Flatten(1)
         x = self.fc(x) # Apply final linear layer
         return x
 

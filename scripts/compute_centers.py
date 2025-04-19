@@ -102,7 +102,8 @@ def main(config_path: str):
         adapter = HRPPtoPseudoImage(
             hrrp_length=config['data']['target_length'],
             input_channels=1, output_channels=3, output_size=expected_img_size,
-            intermediate_dim=adapter_config.get('intermediate_dim', 2048)
+            intermediate_dim=adapter_config.get('intermediate_dim', 2048),
+            activation=adapter_config.get('activation', 'relu')
         ).to(device)
         adapter_checkpoint_data = torch.load(adapter_checkpoint_path, map_location=device)
         adapter.load_state_dict(adapter_checkpoint_data['adapter_state_dict'])
