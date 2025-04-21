@@ -1,0 +1,101 @@
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Starting HRRP Adapter training...
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - VLM Variant: ViT-L-14
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Adapter Training Loss Type: cosine
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/hrrp_adapter/ViT-L-14_llm_generated
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Logs will be saved to: ./logs/adapter_training/ViT-L-14_llm_generated
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Using device: cuda
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loading base dataset...
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-L-14_llm_generated_gpt4.pth
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loaded and normalized semantic features for 12 classes.
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM: RemoteCLIP (ViT-L-14)
+2025-04-20 21:15:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-L-14.pt
+2025-04-20 21:15:54 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Visual Encoder loaded and frozen.
+2025-04-20 21:15:54 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - VLM Visual Encoder expects input size: 224x224
+2025-04-20 21:15:55 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Initialized HRRP Adapter: HRPPtoPseudoImage(
+  (adapter): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=1000, out_features=2048, bias=True)
+    (2): ReLU()
+    (3): Linear(in_features=2048, out_features=150528, bias=True)
+    (4): Tanh()
+    (5): Unflatten(dim=1, unflattened_size=(3, 224, 224))
+  )
+)
+2025-04-20 21:15:55 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Using adapter alignment loss: cosine
+2025-04-20 21:15:55 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Starting training loop...
+2025-04-20 21:16:11 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [ERROR] - Error during forward pass: CUDA error: CUBLAS_STATUS_EXECUTION_FAILED when calling `cublasSgemm( handle, opa, opb, m, n, k, &alpha, a, lda, b, ldb, &beta, c, ldc)`. Skipping batch 0.
+Traceback (most recent call last):
+  File "method/train_adapter.py", line 208, in main
+    visual_features = visual_encoder(pseudo_images) # z_V
+  File "/home/mount/miniconda3/envs/CLIP/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1511, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/mount/miniconda3/envs/CLIP/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1520, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/mount/miniconda3/envs/CLIP/lib/python3.8/site-packages/open_clip/transformer.py", line 651, in forward
+    pooled = pooled @ self.proj
+RuntimeError: CUDA error: CUBLAS_STATUS_EXECUTION_FAILED when calling `cublasSgemm( handle, opa, opb, m, n, k, &alpha, a, lda, b, ldb, &beta, c, ldc)`
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Starting HRRP Adapter training...
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - VLM Variant: ViT-L-14
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Adapter Training Loss Type: cosine
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/hrrp_adapter/ViT-L-14_llm_generated
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Logs will be saved to: ./logs/adapter_training/ViT-L-14_llm_generated
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Using device: cuda
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loading base dataset...
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-L-14_llm_generated_gpt4.pth
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loaded and normalized semantic features for 12 classes.
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM: RemoteCLIP (ViT-L-14)
+2025-04-20 21:16:47 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-L-14.pt
+2025-04-20 21:16:50 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Visual Encoder loaded and frozen.
+2025-04-20 21:16:50 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - VLM Visual Encoder expects input size: 224x224
+2025-04-20 21:16:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Initialized HRRP Adapter: HRPPtoPseudoImage(
+  (adapter): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=1000, out_features=2048, bias=True)
+    (2): ReLU()
+    (3): Linear(in_features=2048, out_features=150528, bias=True)
+    (4): Tanh()
+    (5): Unflatten(dim=1, unflattened_size=(3, 224, 224))
+  )
+)
+2025-04-20 21:16:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Using adapter alignment loss: cosine
+2025-04-20 21:16:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Starting training loop...
+2025-04-20 23:43:45 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Starting HRRP Adapter training...
+2025-04-20 23:43:45 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 23:43:45 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - VLM Variant: ViT-L-14
+2025-04-20 23:43:45 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 23:43:45 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Adapter Training Loss Type: cosine
+2025-04-20 23:43:45 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/hrrp_adapter/ViT-L-14_llm_generated
+2025-04-20 23:43:45 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Logs will be saved to: ./logs/adapter_training/ViT-L-14_llm_generated
+2025-04-20 23:43:45 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Using device: cuda
+2025-04-20 23:43:45 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loading base dataset...
+2025-04-20 23:43:46 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-20 23:43:46 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-L-14_llm_generated_gpt4.pth
+2025-04-20 23:43:46 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loaded and normalized semantic features for 12 classes.
+2025-04-20 23:43:46 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM: RemoteCLIP (ViT-L-14)
+2025-04-20 23:43:46 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-L-14.pt
+2025-04-20 23:43:50 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Visual Encoder loaded and frozen.
+2025-04-20 23:43:50 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - VLM Visual Encoder expects input size: 224x224
+2025-04-20 23:43:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Initialized HRRP Adapter: HRPPtoPseudoImage(
+  (adapter): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=1000, out_features=2048, bias=True)
+    (2): ReLU()
+    (3): Linear(in_features=2048, out_features=150528, bias=True)
+    (4): Tanh()
+    (5): Unflatten(dim=1, unflattened_size=(3, 224, 224))
+  )
+)
+2025-04-20 23:43:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Using adapter alignment loss: cosine
+2025-04-20 23:43:51 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Starting training loop...
+2025-04-21 02:33:03 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 1/10] Avg Align Loss: 0.3754
+2025-04-21 02:33:03 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.3754
+2025-04-21 02:33:13 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-L-14_llm_generated/best.pth
+2025-04-21 05:22:30 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 2/10] Avg Align Loss: 0.2102
+2025-04-21 05:22:30 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.2102
+2025-04-21 05:22:41 - __logs_adapter_training_ViT-L-14_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-L-14_llm_generated/best.pth

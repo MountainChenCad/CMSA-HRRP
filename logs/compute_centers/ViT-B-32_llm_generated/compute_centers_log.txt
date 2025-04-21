@@ -1,0 +1,76 @@
+2025-04-20 15:05:16 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Starting base class center computation...
+2025-04-20 15:05:16 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 15:05:16 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 15:05:16 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Text Type (used for adapter training): llm_generated
+2025-04-20 15:05:16 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Centers will be saved to: ./checkpoints/base_centers_mean_ViT-B-32_llm_generated.pth
+2025-04-20 15:05:16 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Logs will be saved to: ./logs/compute_centers/ViT-B-32_llm_generated
+2025-04-20 15:05:16 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Using device: cuda
+2025-04-20 15:05:16 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loading base dataset...
+2025-04-20 15:05:17 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Base dataset loaded with 8407 samples.
+2025-04-20 15:05:17 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loading VLM Visual Encoder: RemoteCLIP (ViT-B-32)
+2025-04-20 15:05:17 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 15:05:18 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - VLM Visual Encoder loaded and frozen.
+2025-04-20 15:05:18 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loading pre-trained adapter from: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/latest.pth
+2025-04-20 15:05:21 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Pre-trained adapter loaded and frozen (from epoch 50).
+2025-04-20 15:05:21 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Extracting visual features (z_V) for all base samples...
+2025-04-20 15:05:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Total features extracted: (8407, 512)
+2025-04-20 15:05:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computing mean center (z_V) for each base class...
+2025-04-20 15:05:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for EA-18G (Index 0), shape: (512,)
+2025-04-20 15:05:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for EP-3E (Index 1), shape: (512,)
+2025-04-20 15:05:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F2 (Index 2), shape: (512,)
+2025-04-20 15:05:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F15 (Index 3), shape: (512,)
+2025-04-20 15:05:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F16 (Index 4), shape: (512,)
+2025-04-20 15:05:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F18 (Index 5), shape: (512,)
+2025-04-20 15:05:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F22 (Index 6), shape: (512,)
+2025-04-20 15:05:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Mean base class centers saved to: ./checkpoints/base_centers_mean_ViT-B-32_llm_generated.pth
+2025-04-20 15:05:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Center computation finished.
+2025-04-20 16:53:19 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Starting base class center computation...
+2025-04-20 16:53:19 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 16:53:19 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 16:53:19 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Text Type (used for adapter training): llm_generated
+2025-04-20 16:53:19 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Centers will be saved to: ./checkpoints/base_centers_mean_ViT-B-32_llm_generated.pth
+2025-04-20 16:53:19 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Logs will be saved to: ./logs/compute_centers/ViT-B-32_llm_generated
+2025-04-20 16:53:19 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Using device: cuda
+2025-04-20 16:53:19 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loading base dataset...
+2025-04-20 16:53:19 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-20 16:53:19 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loading VLM Visual Encoder: RemoteCLIP (ViT-B-32)
+2025-04-20 16:53:19 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 16:53:21 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - VLM Visual Encoder loaded and frozen.
+2025-04-20 16:53:21 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loading pre-trained adapter from: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/latest.pth
+2025-04-20 16:53:23 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Pre-trained adapter loaded and frozen (from epoch 10).
+2025-04-20 16:53:23 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Extracting visual features (z_V) for all base samples...
+2025-04-20 16:53:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Total features extracted: (7206, 512)
+2025-04-20 16:53:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computing mean center (z_V) for each base class...
+2025-04-20 16:53:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for EA-18G (Index 0), shape: (512,)
+2025-04-20 16:53:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for EP-3E (Index 1), shape: (512,)
+2025-04-20 16:53:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F2 (Index 2), shape: (512,)
+2025-04-20 16:53:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F15 (Index 3), shape: (512,)
+2025-04-20 16:53:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F16 (Index 4), shape: (512,)
+2025-04-20 16:53:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F18 (Index 5), shape: (512,)
+2025-04-20 16:53:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Mean base class centers saved to: ./checkpoints/base_centers_mean_ViT-B-32_llm_generated.pth
+2025-04-20 16:53:37 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Center computation finished.
+2025-04-20 20:05:36 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Starting base class center computation...
+2025-04-20 20:05:36 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 20:05:36 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 20:05:36 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Text Type (used for adapter training): llm_generated
+2025-04-20 20:05:36 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Centers will be saved to: ./checkpoints/base_centers_mean_ViT-B-32_llm_generated.pth
+2025-04-20 20:05:36 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Logs will be saved to: ./logs/compute_centers/ViT-B-32_llm_generated
+2025-04-20 20:05:36 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Using device: cuda
+2025-04-20 20:05:36 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loading base dataset...
+2025-04-20 20:05:36 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-20 20:05:36 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loading VLM Visual Encoder: RemoteCLIP (ViT-B-32)
+2025-04-20 20:05:36 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 20:05:38 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - VLM Visual Encoder loaded and frozen.
+2025-04-20 20:05:38 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Loading pre-trained adapter from: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/latest.pth
+2025-04-20 20:05:40 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Pre-trained adapter loaded and frozen (from epoch 10).
+2025-04-20 20:05:40 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Extracting visual features (z_V) for all base samples...
+2025-04-20 20:05:54 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Total features extracted: (7206, 512)
+2025-04-20 20:05:54 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computing mean center (z_V) for each base class...
+2025-04-20 20:05:54 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for EA-18G (Index 0), shape: (512,)
+2025-04-20 20:05:54 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for EP-3E (Index 1), shape: (512,)
+2025-04-20 20:05:54 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F2 (Index 2), shape: (512,)
+2025-04-20 20:05:54 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F15 (Index 3), shape: (512,)
+2025-04-20 20:05:54 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F16 (Index 4), shape: (512,)
+2025-04-20 20:05:54 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Computed center for F18 (Index 5), shape: (512,)
+2025-04-20 20:05:54 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Mean base class centers saved to: ./checkpoints/base_centers_mean_ViT-B-32_llm_generated.pth
+2025-04-20 20:05:54 - __logs_compute_centers_ViT-B-32_llm_generated_compute_centers_log_txt - [INFO] - Center computation finished.

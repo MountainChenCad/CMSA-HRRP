@@ -2,18 +2,18 @@
 
 # --- Data Configuration ---
 data:
-  simulated_path: './datasets/simulated_hrrp' # 仿真数据根目录
-  measured_path: './datasets/measured_hrrp'   # 实测数据根目录
+  simulated_path: './datasets/simulated_hrrp'
+  measured_path: './datasets/measured_hrrp'
   # Base and Novel classes (Ensure names match keys in semantic_descriptions.yaml -> class_mapping)
-  base_classes: # 7 classes
+  base_classes: # 6 classes
     - 'EA-18G'
     - 'EP-3E'
     - 'F2'
     - 'F15'
     - 'F16'
     - 'F18'
+  novel_classes: # 6 classes (3+3)
     - 'F22'
-  novel_classes: # 8 classes (3+5)
     - 'F35'
     - 'IDF'
     - '捕食者'
@@ -22,13 +22,13 @@ data:
 #    - 'an26'
 #    - 'yar42'
 #    - 'citation'
-  target_length: 1000 # HRRP处理后的目标长度
-  normalization: 'log_max' # 归一化方法: 'max', 'log_max', 'none'
+  target_length: 1000 # Processed HRRP length
+  normalization: 'log_max' # 'max', 'log_max', 'none'
 
 # --- Few-Shot Learning Configuration ---
 fsl:
-  n_way: 5          # N-way classification
-  k_shot: 5         # K-shot learning (support samples per class) - Adjust as needed (e.g., 1 or 5)
+  n_way: 3          # N-way classification
+  k_shot: 1         # K-shot learning (support samples per class) - Adjust as needed (e.g., 1 or 5)
   q_query: 15       # Query samples per class in each episode
   test_episodes: 600 # Number of episodes for testing
   classifier_temperature: 10.0 # Temperature for cosine classifier
@@ -48,11 +48,11 @@ model:
                       # test_fsl.py can override this or sweep values
   foundation_model:
     name: 'RemoteCLIP' # Currently only RemoteCLIP supported
-    variant: 'ViT-B-32' # IMPORTANT: Change this for different scale models ('RN50', 'ViT-B-32', 'ViT-L-14')
+    variant: 'RN50' # IMPORTANT: Change this for different scale models ('RN50', 'ViT-B-32', 'ViT-L-14')
     # IMPORTANT: Ensure these dimensions MATCH the chosen variant!
     # RN50: 1024, ViT-B-32: 512, ViT-L-14: 768
-    visual_encoder_dim: 512 # VLM visual encoder output dim (e.g., f_V output)
-    text_encoder_dim: 512   # VLM text encoder output dim (e.g., f_T output, z_T dim)
+    visual_encoder_dim: 1024 # VLM visual encoder output dim (e.g., f_V output)
+    text_encoder_dim: 1024   # VLM text encoder output dim (e.g., f_T output, z_T dim)
 
 # --- Training Configuration ---
 training:
@@ -70,25 +70,26 @@ training:
 
 # --- Semantics Configuration ---
 semantics:
-  description_file: 'configs/semantic_descriptions.yaml' # Path to the semantic descriptions and mapping
+  # Path to the YAML file containing descriptions and mappings
+  description_file: 'configs/semantic_descriptions.yaml'
   # generation settings control WHICH description to use and track the source LLM
   generation:
-    llm: 'Manual' # Source LLM ('GPT-4.1', 'Claude-3.7', 'DeepSeek-R1', 'Gemini-2.5-pro', 'Manual') - used if text_type='llm_generated' or for logging
-    text_type: 'detailed' # 'name', 'detailed' (uses manual_detailed from yaml), 'llm_generated' (uses llm key from yaml)
-  # feature_path: './semantic_features/...' # REMOVED - Path is now constructed dynamically
+    # Source LLM name - MUST match the prefix used in description_file keys (e.g., 'gemini_2.5_pro'_generated)
+    llm: 'gpt4' # Example: 'gemini_2.5_pro', 'gpt_4', 'manual' etc.
+    # Type of text description to use for encoding
+    text_type: 'llm_generated' # Options: 'name', 'detailed' (uses manual_detailed), 'llm_generated'
+  # feature_path: # REMOVED - Path is now constructed dynamically in generate_semantics.py
 
 # --- Paths Configuration ---
 paths:
   # Base directories - specific files/subdirs constructed dynamically
-  datasets_base: './datasets' # Contains simulated_path and measured_path subdirs
+  datasets_base: './datasets' # Contains simulated_path and measured_path subdirs (Corrected key)
   checkpoints: './checkpoints'
   logs: './logs'
-  semantic_features_dir: './semantic_features' # Directory to save semantic features
-  # base_centers_path: './checkpoints/...' # REMOVED - Path is now constructed dynamically
-  # baseline paths (add if needed, or construct dynamically too)
-  # baseline_cnn_checkpoint: './checkpoints/hrrp_encoder_baseline'
-  # baseline_fusion_checkpoint: './checkpoints/fusion_module_1dcnn'
-  # baseline_centers_path: './checkpoints/base_centers_1dcnn.pth'
+  # Directory to save semantic features (used by generate_semantics.py)
+  semantic_features_dir: './semantic_features'
+  # base_centers_path: # REMOVED - Path is now constructed dynamically in compute_centers.py
+  # foundation_model weights are expected in checkpoints/foundation_models/
 
 # --- Other Hyperparameters ---
 num_workers: 4

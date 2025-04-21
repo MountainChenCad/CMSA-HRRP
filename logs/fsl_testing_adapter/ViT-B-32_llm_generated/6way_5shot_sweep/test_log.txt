@@ -1,0 +1,44 @@
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Starting Few-Shot Learning Testing (Adapter Approach)...
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - FSL Setting: 6-way 5-shot, 15-query
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Episodes: 600
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Classifier Temp: 10.0
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Kappa values to test: [0.0, 0.1, 0.2, 0.30000000000000004, 0.4, 0.5, 0.6000000000000001, 0.7000000000000001, 0.8, 0.9, 1.0]
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Using Adapter checkpoint: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/latest.pth
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Using SemAlign checkpoint: ./checkpoints/semalign_module/ViT-B-32_llm_generated/latest.pth
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Logs will be saved to: ./logs/fsl_testing_adapter/ViT-B-32_llm_generated/6way_5shot_sweep
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Using device: cuda
+2025-04-20 19:02:16 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Loading novel dataset...
+2025-04-20 19:02:17 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - 6 novel classes have enough samples (>= 20).
+2025-04-20 19:02:17 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Novel dataset loaded with 7206 samples. Sampler initialized.
+2025-04-20 19:02:17 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_gpt4.pth
+2025-04-20 19:02:18 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Loaded semantic features for 12 classes. Dim: 512
+2025-04-20 19:02:18 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Loading VLM Visual Encoder: RemoteCLIP (ViT-B-32)
+2025-04-20 19:02:18 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 19:02:19 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - VLM Visual Encoder loaded and frozen.
+2025-04-20 19:02:19 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Loading pre-trained adapter from: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/latest.pth
+2025-04-20 19:02:21 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Pre-trained adapter loaded and frozen (from epoch 10).
+2025-04-20 19:02:21 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Loading pre-trained SemAlign module from: ./checkpoints/semalign_module/ViT-B-32_llm_generated/latest.pth
+2025-04-20 19:02:22 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Pre-trained SemAlign module loaded and frozen (from epoch 10).
+2025-04-20 19:02:22 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Starting testing on 600 episodes...
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - --- Testing Complete (600 episodes processed) ---
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - 6-way 5-shot Results:
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -   Visual-Only (Kappa = 0.0): Mean Acc = 68.73% +/- 0.50%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -   Fused Prototypes (Kappa > 0):
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -     Kappa = 0.10: Mean Acc = 68.80% +/- 0.50%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -     Kappa = 0.20: Mean Acc = 68.42% +/- 0.50%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -     Kappa = 0.30: Mean Acc = 67.56% +/- 0.51%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -     Kappa = 0.40: Mean Acc = 65.89% +/- 0.52%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -     Kappa = 0.50: Mean Acc = 62.96% +/- 0.52%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -     Kappa = 0.60: Mean Acc = 58.37% +/- 0.51%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -     Kappa = 0.70: Mean Acc = 51.79% +/- 0.52%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -     Kappa = 0.80: Mean Acc = 43.66% +/- 0.49%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -     Kappa = 0.90: Mean Acc = 36.44% +/- 0.36%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -     Kappa = 1.00: Mean Acc = 29.55% +/- 0.30%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - --- Overall Best Mean Accuracy Across Tested Kappas ---
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -   Best Kappa: 0.10
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -   Mean Accuracy: 68.80%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] -   95% CI: +/- 0.50%
+2025-04-20 19:10:25 - __logs_fsl_testing_adapter_ViT-B-32_llm_generated_6way_5shot_sweep_test_log_txt - [INFO] - Results summary saved to: ./logs/fsl_testing_adapter/ViT-B-32_llm_generated/6way_5shot_sweep/results_summary.yaml

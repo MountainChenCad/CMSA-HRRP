@@ -1,0 +1,59 @@
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Starting HRRP Adapter training...
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - VLM Variant: RN50
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Text Type: llm_generated
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Adapter Training Loss Type: cosine
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/hrrp_adapter/RN50_llm_generated
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Logs will be saved to: ./logs/adapter_training/RN50_llm_generated
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Using device: cuda
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Loading base dataset...
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_RN50_llm_generated_gpt4.pth
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Loaded and normalized semantic features for 12 classes.
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM: RemoteCLIP (RN50)
+2025-04-21 07:19:23 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-RN50.pt
+2025-04-21 07:19:24 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Visual Encoder loaded and frozen.
+2025-04-21 07:19:24 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - VLM Visual Encoder expects input size: 224x224
+2025-04-21 07:19:25 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Initialized HRRP Adapter: HRPPtoPseudoImage(
+  (adapter): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=1000, out_features=2048, bias=True)
+    (2): ReLU()
+    (3): Linear(in_features=2048, out_features=150528, bias=True)
+    (4): Tanh()
+    (5): Unflatten(dim=1, unflattened_size=(3, 224, 224))
+  )
+)
+2025-04-21 07:19:25 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Using adapter alignment loss: cosine
+2025-04-21 07:19:25 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Starting training loop...
+2025-04-21 07:34:34 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 1/10] Avg Align Loss: 0.4274
+2025-04-21 07:34:34 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.4274
+2025-04-21 07:34:46 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/RN50_llm_generated/best.pth
+2025-04-21 08:44:21 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 2/10] Avg Align Loss: 0.2408
+2025-04-21 08:44:21 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.2408
+2025-04-21 08:44:30 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/RN50_llm_generated/best.pth
+2025-04-21 08:59:26 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 3/10] Avg Align Loss: 0.1942
+2025-04-21 08:59:26 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.1942
+2025-04-21 08:59:36 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/RN50_llm_generated/best.pth
+2025-04-21 09:14:37 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 4/10] Avg Align Loss: 0.1696
+2025-04-21 09:14:37 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.1696
+2025-04-21 09:14:44 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/RN50_llm_generated/best.pth
+2025-04-21 09:30:03 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 5/10] Avg Align Loss: 0.1541
+2025-04-21 09:30:03 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.1541
+2025-04-21 09:30:10 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/RN50_llm_generated/best.pth
+2025-04-21 09:45:28 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 6/10] Avg Align Loss: 0.1447
+2025-04-21 09:45:28 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.1447
+2025-04-21 09:45:36 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/RN50_llm_generated/best.pth
+2025-04-21 10:00:54 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 7/10] Avg Align Loss: 0.1358
+2025-04-21 10:00:54 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.1358
+2025-04-21 10:01:01 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/RN50_llm_generated/best.pth
+2025-04-21 10:16:18 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 8/10] Avg Align Loss: 0.1250
+2025-04-21 10:16:18 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.1250
+2025-04-21 10:16:25 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/RN50_llm_generated/best.pth
+2025-04-21 10:31:42 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 9/10] Avg Align Loss: 0.1231
+2025-04-21 10:31:42 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.1231
+2025-04-21 10:31:50 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/RN50_llm_generated/best.pth
+2025-04-21 10:47:08 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 10/10] Avg Align Loss: 0.1179
+2025-04-21 10:47:08 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.1179
+2025-04-21 10:47:14 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/RN50_llm_generated/best.pth
+2025-04-21 10:47:14 - __logs_adapter_training_RN50_llm_generated_train_adapter_log_txt - [INFO] - HRRP Adapter training finished.

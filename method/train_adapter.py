@@ -29,6 +29,7 @@ logger = logging.getLogger(__name__)
 def main(config_path: str):
     """Main training function for HRRP 1D-to-2D Adapter."""
     config = load_config(config_path)
+    # Add adapter_loss_type to dynamic path generation if needed for separate experiments
     dynamic_paths = get_dynamic_paths(config)
 
     # --- Setup ---
@@ -42,6 +43,9 @@ def main(config_path: str):
     log.info(f"Loaded configuration from: {config_path}")
     log.info(f"VLM Variant: {config['model']['foundation_model']['variant']}")
     log.info(f"Text Type: {config['semantics']['generation']['text_type']}")
+    # Log the adapter loss type being used
+    adapter_loss_type = config['training'].get('adapter_loss_type', 'cosine').lower()
+    log.info(f"Adapter Training Loss Type: {adapter_loss_type}")
     log.info(f"Checkpoints will be saved to: {ckpt_dir}")
     log.info(f"Logs will be saved to: {log_dir}")
     writer = SummaryWriter(log_dir)
@@ -113,7 +117,6 @@ def main(config_path: str):
         # Freeze VLM parameters
         for param in visual_encoder.parameters():
             param.requires_grad = False
-        # No need to freeze text encoder here as we only use visual encoder
         log.info("Visual Encoder loaded and frozen.")
 
         # Get expected image size for the visual encoder
@@ -150,19 +153,21 @@ def main(config_path: str):
         log.warning(f"Unsupported optimizer: {opt_name}. Using Adam.")
         optimizer = optim.Adam(params_to_optimize, lr=config['training']['lr'])
 
-    # --- Loss Function ---
-    loss_type = config['training']['loss_type'].lower()
-    if loss_type == 'cosine':
-        # We want to maximize similarity == minimize (1 - similarity)
+    # --- Loss Function (Support for Ablation) ---
+    if adapter_loss_type == 'cosine':
+        # Maximize similarity == minimize (1 - similarity)
         alignment_loss_fn = lambda z_v_norm, z_t_norm: 1.0 - F.cosine_similarity(z_v_norm, z_t_norm).mean()
-    elif loss_type == 'l1':
+    elif adapter_loss_type == 'l1':
+        # Minimize L1 distance between normalized features
         alignment_loss_fn = nn.L1Loss()
-    elif loss_type == 'mse':
+    elif adapter_loss_type == 'mse':
+        # Minimize MSE distance between normalized features
         alignment_loss_fn = nn.MSELoss()
     else:
-        log.warning(f"Unsupported loss_type '{loss_type}'. Using cosine.")
+        log.warning(f"Unsupported adapter_loss_type '{adapter_loss_type}'. Defaulting to cosine.")
+        adapter_loss_type = 'cosine'
         alignment_loss_fn = lambda z_v_norm, z_t_norm: 1.0 - F.cosine_similarity(z_v_norm, z_t_norm).mean()
-    log.info(f"Using alignment loss: {loss_type}")
+    log.info(f"Using adapter alignment loss: {adapter_loss_type}")
 
     # --- LR Scheduler (Optional) ---
     scheduler = None # Add scheduler setup if needed based on config
@@ -184,11 +189,9 @@ def main(config_path: str):
 
             # Get corresponding semantic features
             try:
-                # Use original config class names (mapped by dataset) to get features
                 target_semantics_norm = torch.stack([semantic_features[base_dataset.idx_to_class[l.item()]] for l in labels])
-                # Features should already be normalized
             except KeyError as e:
-                log.warning(f"KeyError accessing semantic feature for label index {e} (class: {base_dataset.idx_to_class.get(e.item(), 'Unknown')}). Skipping batch {step}.")
+                log.warning(f"KeyError accessing semantic feature for label index {e}. Skipping batch {step}.")
                 continue
             except Exception as e:
                  log.error(f"Error getting semantic features: {e}. Skipping batch {step}.", exc_info=True)
@@ -199,50 +202,36 @@ def main(config_path: str):
             try:
                 pseudo_images = hrrp_adapter(hrrp_samples) # (B, 3, H, W)
 
-                # Resize if adapter output doesn't exactly match VLM input (should match with MLP approach)
                 if pseudo_images.shape[-2:] != (expected_img_size, expected_img_size):
-                     log.warning(f"Adapter output size {pseudo_images.shape[-2:]} doesn't match VLM expected size {(expected_img_size, expected_img_size)}. Resizing.")
                      pseudo_images = F.interpolate(pseudo_images, size=(expected_img_size, expected_img_size), mode='bilinear', align_corners=False)
 
-                visual_features = visual_encoder(pseudo_images) # z_V = f_V(h_1D_to_2D(x_H))
+                visual_features = visual_encoder(pseudo_images) # z_V
 
-                # Handle potential tuple output or CLS token extraction for ViTs
-                if isinstance(visual_features, tuple):
-                     visual_features = visual_features[0]
-                # Assuming ViT-like output [B, N_tokens, D] or [B, D] if pooled
-                # If output is [B, N, D], take the first token (CLS)
-                if visual_features.dim() == 3 and visual_features.shape[1] > 1:
-                     visual_features = visual_features[:, 0]
-                elif visual_features.dim() != 2:
-                     # If not 2D or expected 3D, log error and attempt flatten
-                     log.warning(f"Unexpected visual feature dim: {visual_features.shape}. Attempting flatten.")
-                     visual_features = visual_features.view(visual_features.size(0), -1) # Flatten features
+                if isinstance(visual_features, tuple): visual_features = visual_features[0]
+                if visual_features.dim() == 3 and visual_features.shape[1] > 1: visual_features = visual_features[:, 0]
+                elif visual_features.dim() != 2: visual_features = visual_features.view(visual_features.size(0), -1)
 
-                # Check if visual feature dimension matches expected dimension from config
                 expected_vis_dim = config['model']['foundation_model']['visual_encoder_dim']
                 if visual_features.shape[-1] != expected_vis_dim:
-                     log.warning(f"VLM output visual dim {visual_features.shape[-1]} != config dim {expected_vis_dim}. Check VLM variant/config.")
-                     # Attempt linear projection if dimensions mismatch? Or just error out?
-                     # For now, continue but loss calculation might fail.
-                     # Add projection layer? Let's assume they match for now.
+                     log.warning(f"VLM output visual dim {visual_features.shape[-1]} != config dim {expected_vis_dim}.")
+                     # Handle error or projection if necessary
 
                 # Normalize visual features
                 visual_features_norm = normalize(visual_features)
 
             except Exception as e:
-                 log.error(f"Error during forward pass (adapter or visual encoder): {e}. Skipping batch {step}.", exc_info=True)
+                 log.error(f"Error during forward pass: {e}. Skipping batch {step}.", exc_info=True)
                  continue
 
             # Alignment Loss Calculation
             try:
-                 # Ensure dimensions match before loss calculation
                  if visual_features_norm.shape[-1] != target_semantics_norm.shape[-1]:
-                      log.error(f"Dimension mismatch! Visual features: {visual_features_norm.shape}, Semantic features: {target_semantics_norm.shape}. Skipping loss calculation.")
+                      log.error(f"Dimension mismatch! Visual: {visual_features_norm.shape}, Semantic: {target_semantics_norm.shape}. Skipping loss.")
                       continue
 
+                 # Calculate loss based on selected type
                  loss = alignment_loss_fn(visual_features_norm, target_semantics_norm)
 
-                 # Backward pass and optimization (only updates adapter)
                  loss.backward()
                  optimizer.step()
 
@@ -251,15 +240,15 @@ def main(config_path: str):
                  pbar.set_postfix({'Align Loss': f"{loss.item():.4f}"})
 
             except Exception as e:
-                log.error(f"Error during loss calculation or backward pass: {e}. Skipping step {step}", exc_info=True)
-                optimizer.zero_grad() # Ensure grads are cleared if backward failed
+                log.error(f"Error during loss/backward: {e}. Skipping step {step}", exc_info=True)
+                optimizer.zero_grad()
                 continue
 
 
         avg_loss = total_loss / num_batches if num_batches > 0 else 0
 
         log.info(f"[Epoch {epoch+1}/{epochs}] Avg Align Loss: {avg_loss:.4f}")
-        writer.add_scalar('Loss/Alignment', avg_loss, epoch)
+        writer.add_scalar(f'Loss/Alignment_{adapter_loss_type}', avg_loss, epoch) # Include loss type in tag
         if scheduler:
              current_lr = scheduler.get_last_lr()[0]
              writer.add_scalar('LR', current_lr, epoch)
@@ -283,7 +272,7 @@ def main(config_path: str):
             'adapter_state_dict': hrrp_adapter.state_dict(),
             'optimizer_state_dict': optimizer.state_dict(),
             'loss': avg_loss,
-            'config': config # Save config for reference
+            'config': config
         }, latest_ckpt_path)
 
         # Save best checkpoint if current is best

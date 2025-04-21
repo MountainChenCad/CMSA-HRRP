@@ -1,0 +1,373 @@
+2025-04-20 12:34:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting HRRP Adapter training...
+2025-04-20 12:34:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 12:34:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 12:34:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 12:34:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Adapter Training Loss Type: cosine
+2025-04-20 12:34:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated
+2025-04-20 12:34:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Logs will be saved to: ./logs/adapter_training/ViT-B-32_llm_generated
+2025-04-20 12:34:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using device: cuda
+2025-04-20 12:34:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading base dataset...
+2025-04-20 12:34:34 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Base dataset loaded with 8407 samples.
+2025-04-20 12:34:34 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_gemini_25_pro.pth
+2025-04-20 12:34:34 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded and normalized semantic features for 12 classes.
+2025-04-20 12:34:34 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-04-20 12:34:34 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 12:34:35 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Visual Encoder loaded and frozen.
+2025-04-20 12:34:35 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Visual Encoder expects input size: 224x224
+2025-04-20 12:34:36 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Initialized HRRP Adapter: HRPPtoPseudoImage(
+  (adapter): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=1000, out_features=2048, bias=True)
+    (2): ReLU()
+    (3): Linear(in_features=2048, out_features=150528, bias=True)
+    (4): Tanh()
+    (5): Unflatten(dim=1, unflattened_size=(3, 224, 224))
+  )
+)
+2025-04-20 12:34:36 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using adapter alignment loss: cosine
+2025-04-20 12:34:36 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting training loop...
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting HRRP Adapter training...
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Adapter Training Loss Type: cosine
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Logs will be saved to: ./logs/adapter_training/ViT-B-32_llm_generated
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using device: cuda
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading base dataset...
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Base dataset loaded with 8407 samples.
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_gemini_25_pro.pth
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded and normalized semantic features for 12 classes.
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-04-20 12:35:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 12:35:12 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Visual Encoder loaded and frozen.
+2025-04-20 12:35:12 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Visual Encoder expects input size: 224x224
+2025-04-20 12:35:13 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Initialized HRRP Adapter: HRPPtoPseudoImage(
+  (adapter): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=1000, out_features=2048, bias=True)
+    (2): ReLU()
+    (3): Linear(in_features=2048, out_features=150528, bias=True)
+    (4): Tanh()
+    (5): Unflatten(dim=1, unflattened_size=(3, 224, 224))
+  )
+)
+2025-04-20 12:35:13 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using adapter alignment loss: cosine
+2025-04-20 12:35:13 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting training loop...
+2025-04-20 12:35:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting HRRP Adapter training...
+2025-04-20 12:35:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 12:35:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 12:35:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 12:35:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Adapter Training Loss Type: cosine
+2025-04-20 12:35:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated
+2025-04-20 12:35:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Logs will be saved to: ./logs/adapter_training/ViT-B-32_llm_generated
+2025-04-20 12:35:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using device: cuda
+2025-04-20 12:35:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading base dataset...
+2025-04-20 12:35:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Base dataset loaded with 8407 samples.
+2025-04-20 12:35:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_gemini_25_pro.pth
+2025-04-20 12:35:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded and normalized semantic features for 12 classes.
+2025-04-20 12:35:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-04-20 12:35:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 12:35:31 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Visual Encoder loaded and frozen.
+2025-04-20 12:35:31 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Visual Encoder expects input size: 224x224
+2025-04-20 12:35:32 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Initialized HRRP Adapter: HRPPtoPseudoImage(
+  (adapter): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=1000, out_features=2048, bias=True)
+    (2): ReLU()
+    (3): Linear(in_features=2048, out_features=150528, bias=True)
+    (4): Tanh()
+    (5): Unflatten(dim=1, unflattened_size=(3, 224, 224))
+  )
+)
+2025-04-20 12:35:32 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using adapter alignment loss: cosine
+2025-04-20 12:35:32 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting training loop...
+2025-04-20 12:38:23 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 1/50] Avg Align Loss: 0.2970
+2025-04-20 12:38:23 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.2970
+2025-04-20 12:38:32 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 12:41:23 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 2/50] Avg Align Loss: 0.1225
+2025-04-20 12:41:23 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.1225
+2025-04-20 12:41:32 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 12:44:24 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 3/50] Avg Align Loss: 0.0768
+2025-04-20 12:44:24 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0768
+2025-04-20 12:44:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 12:47:24 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 4/50] Avg Align Loss: 0.0531
+2025-04-20 12:47:24 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0531
+2025-04-20 12:47:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 12:50:25 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 5/50] Avg Align Loss: 0.0412
+2025-04-20 12:50:25 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0412
+2025-04-20 12:50:34 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 12:53:26 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 6/50] Avg Align Loss: 0.0330
+2025-04-20 12:53:26 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0330
+2025-04-20 12:53:35 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 12:56:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 7/50] Avg Align Loss: 0.0282
+2025-04-20 12:56:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0282
+2025-04-20 12:56:35 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 12:59:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 8/50] Avg Align Loss: 0.0239
+2025-04-20 12:59:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0239
+2025-04-20 12:59:36 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:02:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 9/50] Avg Align Loss: 0.0211
+2025-04-20 13:02:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0211
+2025-04-20 13:02:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:05:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 10/50] Avg Align Loss: 0.0186
+2025-04-20 13:05:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0186
+2025-04-20 13:05:38 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:08:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 11/50] Avg Align Loss: 0.0171
+2025-04-20 13:08:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0171
+2025-04-20 13:08:40 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:11:32 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 12/50] Avg Align Loss: 0.0153
+2025-04-20 13:11:32 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0153
+2025-04-20 13:11:42 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:14:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 13/50] Avg Align Loss: 0.0140
+2025-04-20 13:14:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0140
+2025-04-20 13:14:44 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:17:35 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 14/50] Avg Align Loss: 0.0130
+2025-04-20 13:17:35 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0130
+2025-04-20 13:17:45 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:20:35 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 15/50] Avg Align Loss: 0.0119
+2025-04-20 13:20:35 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0119
+2025-04-20 13:20:45 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:23:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 16/50] Avg Align Loss: 0.0115
+2025-04-20 13:23:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0115
+2025-04-20 13:23:46 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:26:38 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 17/50] Avg Align Loss: 0.0106
+2025-04-20 13:26:38 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0106
+2025-04-20 13:26:47 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:29:39 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 18/50] Avg Align Loss: 0.0101
+2025-04-20 13:29:39 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0101
+2025-04-20 13:29:49 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:32:41 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 19/50] Avg Align Loss: 0.0098
+2025-04-20 13:32:41 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0098
+2025-04-20 13:32:50 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:35:42 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 20/50] Avg Align Loss: 0.0094
+2025-04-20 13:35:42 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0094
+2025-04-20 13:35:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:38:44 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 21/50] Avg Align Loss: 0.0085
+2025-04-20 13:38:44 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0085
+2025-04-20 13:38:53 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:41:45 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 22/50] Avg Align Loss: 0.0084
+2025-04-20 13:41:45 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0084
+2025-04-20 13:41:54 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:44:46 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 23/50] Avg Align Loss: 0.0081
+2025-04-20 13:44:46 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0081
+2025-04-20 13:44:55 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:47:47 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 24/50] Avg Align Loss: 0.0080
+2025-04-20 13:47:47 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0080
+2025-04-20 13:47:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:50:48 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 25/50] Avg Align Loss: 0.0075
+2025-04-20 13:50:48 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0075
+2025-04-20 13:50:57 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:53:48 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 26/50] Avg Align Loss: 0.0071
+2025-04-20 13:53:48 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0071
+2025-04-20 13:53:58 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:56:50 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 27/50] Avg Align Loss: 0.0068
+2025-04-20 13:56:50 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0068
+2025-04-20 13:56:59 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 13:59:49 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 28/50] Avg Align Loss: 0.0070
+2025-04-20 14:02:45 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 29/50] Avg Align Loss: 0.0064
+2025-04-20 14:02:45 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0064
+2025-04-20 14:02:54 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 14:05:46 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 30/50] Avg Align Loss: 0.0065
+2025-04-20 14:08:41 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 31/50] Avg Align Loss: 0.0061
+2025-04-20 14:08:41 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0061
+2025-04-20 14:08:50 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 14:11:42 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 32/50] Avg Align Loss: 0.0057
+2025-04-20 14:11:42 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0057
+2025-04-20 14:11:50 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 14:14:41 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 33/50] Avg Align Loss: 0.0056
+2025-04-20 14:14:41 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0056
+2025-04-20 14:14:49 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 14:17:41 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 34/50] Avg Align Loss: 0.0058
+2025-04-20 14:20:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 35/50] Avg Align Loss: 0.0054
+2025-04-20 14:20:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0054
+2025-04-20 14:20:45 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 14:23:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 36/50] Avg Align Loss: 0.0052
+2025-04-20 14:23:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0052
+2025-04-20 14:23:46 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 14:26:38 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 37/50] Avg Align Loss: 0.0052
+2025-04-20 14:26:38 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0052
+2025-04-20 14:26:46 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 14:29:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 38/50] Avg Align Loss: 0.0051
+2025-04-20 14:29:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0051
+2025-04-20 14:29:45 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 14:32:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 39/50] Avg Align Loss: 0.0046
+2025-04-20 14:32:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0046
+2025-04-20 14:32:46 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 14:35:38 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 40/50] Avg Align Loss: 0.0048
+2025-04-20 14:38:34 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 41/50] Avg Align Loss: 0.0047
+2025-04-20 14:41:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 42/50] Avg Align Loss: 0.0046
+2025-04-20 14:41:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0046
+2025-04-20 14:41:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 14:44:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 43/50] Avg Align Loss: 0.0046
+2025-04-20 14:47:25 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 44/50] Avg Align Loss: 0.0045
+2025-04-20 14:47:25 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0045
+2025-04-20 14:47:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 14:50:25 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 45/50] Avg Align Loss: 0.0040
+2025-04-20 14:50:25 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0040
+2025-04-20 14:50:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 14:53:26 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 46/50] Avg Align Loss: 0.0043
+2025-04-20 14:56:21 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 47/50] Avg Align Loss: 0.0042
+2025-04-20 14:59:15 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 48/50] Avg Align Loss: 0.0042
+2025-04-20 15:02:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 49/50] Avg Align Loss: 0.0039
+2025-04-20 15:02:10 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0039
+2025-04-20 15:02:18 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:05:09 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 50/50] Avg Align Loss: 0.0040
+2025-04-20 15:05:13 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - HRRP Adapter training finished.
+2025-04-20 16:25:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting HRRP Adapter training...
+2025-04-20 16:25:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 16:25:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 16:25:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 16:25:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Adapter Training Loss Type: cosine
+2025-04-20 16:25:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated
+2025-04-20 16:25:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Logs will be saved to: ./logs/adapter_training/ViT-B-32_llm_generated
+2025-04-20 16:25:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using device: cuda
+2025-04-20 16:25:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading base dataset...
+2025-04-20 16:25:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-20 16:25:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_gemini_25_pro.pth
+2025-04-20 16:25:53 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded and normalized semantic features for 12 classes.
+2025-04-20 16:25:53 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-04-20 16:25:53 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 16:25:54 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Visual Encoder loaded and frozen.
+2025-04-20 16:25:54 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Visual Encoder expects input size: 224x224
+2025-04-20 16:25:55 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Initialized HRRP Adapter: HRPPtoPseudoImage(
+  (adapter): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=1000, out_features=2048, bias=True)
+    (2): ReLU()
+    (3): Linear(in_features=2048, out_features=150528, bias=True)
+    (4): Tanh()
+    (5): Unflatten(dim=1, unflattened_size=(3, 224, 224))
+  )
+)
+2025-04-20 16:25:55 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using adapter alignment loss: cosine
+2025-04-20 16:25:55 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting training loop...
+2025-04-20 16:26:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting HRRP Adapter training...
+2025-04-20 16:26:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 16:26:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 16:26:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 16:26:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Adapter Training Loss Type: cosine
+2025-04-20 16:26:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated
+2025-04-20 16:26:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Logs will be saved to: ./logs/adapter_training/ViT-B-32_llm_generated
+2025-04-20 16:26:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using device: cuda
+2025-04-20 16:26:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading base dataset...
+2025-04-20 16:26:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-20 16:26:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_gpt4.pth
+2025-04-20 16:26:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [ERROR] - Semantic features file not found: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_gpt4.pth. Run generate_semantics.py first.
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting HRRP Adapter training...
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Adapter Training Loss Type: cosine
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Logs will be saved to: ./logs/adapter_training/ViT-B-32_llm_generated
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using device: cuda
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading base dataset...
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_gpt4.pth
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded and normalized semantic features for 12 classes.
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-04-20 16:26:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 16:26:57 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Visual Encoder loaded and frozen.
+2025-04-20 16:26:57 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Visual Encoder expects input size: 224x224
+2025-04-20 16:26:59 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Initialized HRRP Adapter: HRPPtoPseudoImage(
+  (adapter): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=1000, out_features=2048, bias=True)
+    (2): ReLU()
+    (3): Linear(in_features=2048, out_features=150528, bias=True)
+    (4): Tanh()
+    (5): Unflatten(dim=1, unflattened_size=(3, 224, 224))
+  )
+)
+2025-04-20 16:26:59 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using adapter alignment loss: cosine
+2025-04-20 16:26:59 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting training loop...
+2025-04-20 16:29:28 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 1/10] Avg Align Loss: 0.3461
+2025-04-20 16:29:28 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.3461
+2025-04-20 16:29:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:32:06 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 2/10] Avg Align Loss: 0.1282
+2025-04-20 16:32:06 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.1282
+2025-04-20 16:32:14 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:34:44 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 3/10] Avg Align Loss: 0.0614
+2025-04-20 16:34:44 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0614
+2025-04-20 16:34:52 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:37:22 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 4/10] Avg Align Loss: 0.0373
+2025-04-20 16:37:22 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0373
+2025-04-20 16:37:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:40:00 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 5/10] Avg Align Loss: 0.0255
+2025-04-20 16:40:00 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0255
+2025-04-20 16:40:07 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:42:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 6/10] Avg Align Loss: 0.0201
+2025-04-20 16:42:37 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0201
+2025-04-20 16:42:45 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:45:14 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 7/10] Avg Align Loss: 0.0163
+2025-04-20 16:45:14 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0163
+2025-04-20 16:45:22 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:47:51 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 8/10] Avg Align Loss: 0.0140
+2025-04-20 16:47:51 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0140
+2025-04-20 16:48:00 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:50:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 9/10] Avg Align Loss: 0.0116
+2025-04-20 16:50:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0116
+2025-04-20 16:50:38 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:53:08 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 10/10] Avg Align Loss: 0.0108
+2025-04-20 16:53:08 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0108
+2025-04-20 16:53:15 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:53:15 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - HRRP Adapter training finished.
+2025-04-20 19:40:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting HRRP Adapter training...
+2025-04-20 19:40:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 19:40:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 19:40:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 19:40:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Adapter Training Loss Type: cosine
+2025-04-20 19:40:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated
+2025-04-20 19:40:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Logs will be saved to: ./logs/adapter_training/ViT-B-32_llm_generated
+2025-04-20 19:40:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using device: cuda
+2025-04-20 19:40:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading base dataset...
+2025-04-20 19:40:28 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-20 19:40:28 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_gpt4.pth
+2025-04-20 19:40:28 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loaded and normalized semantic features for 12 classes.
+2025-04-20 19:40:28 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-04-20 19:40:28 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 19:40:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Visual Encoder loaded and frozen.
+2025-04-20 19:40:29 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - VLM Visual Encoder expects input size: 224x224
+2025-04-20 19:40:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Initialized HRRP Adapter: HRPPtoPseudoImage(
+  (adapter): Sequential(
+    (0): Flatten(start_dim=1, end_dim=-1)
+    (1): Linear(in_features=1000, out_features=2048, bias=True)
+    (2): ReLU()
+    (3): Linear(in_features=2048, out_features=150528, bias=True)
+    (4): Tanh()
+    (5): Unflatten(dim=1, unflattened_size=(3, 224, 224))
+  )
+)
+2025-04-20 19:40:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Using adapter alignment loss: cosine
+2025-04-20 19:40:30 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Starting training loop...
+2025-04-20 19:42:55 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 1/10] Avg Align Loss: 0.3461
+2025-04-20 19:42:55 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.3461
+2025-04-20 19:43:04 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 19:45:25 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 2/10] Avg Align Loss: 0.1282
+2025-04-20 19:45:25 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.1282
+2025-04-20 19:45:35 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 19:47:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 3/10] Avg Align Loss: 0.0614
+2025-04-20 19:47:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0614
+2025-04-20 19:48:05 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 19:50:26 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 4/10] Avg Align Loss: 0.0373
+2025-04-20 19:50:26 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0373
+2025-04-20 19:50:34 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 19:52:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 5/10] Avg Align Loss: 0.0255
+2025-04-20 19:52:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0255
+2025-04-20 19:53:05 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 19:55:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 6/10] Avg Align Loss: 0.0201
+2025-04-20 19:55:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0201
+2025-04-20 19:55:35 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 19:57:57 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 7/10] Avg Align Loss: 0.0163
+2025-04-20 19:57:57 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0163
+2025-04-20 19:58:06 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:00:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 8/10] Avg Align Loss: 0.0140
+2025-04-20 20:00:27 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0140
+2025-04-20 20:00:35 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:02:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 9/10] Avg Align Loss: 0.0116
+2025-04-20 20:02:56 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0116
+2025-04-20 20:03:03 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:05:25 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - [Epoch 10/10] Avg Align Loss: 0.0108
+2025-04-20 20:05:25 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - New best loss: 0.0108
+2025-04-20 20:05:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - Best model checkpoint saved to ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:05:33 - __logs_adapter_training_ViT-B-32_llm_generated_train_adapter_log_txt - [INFO] - HRRP Adapter training finished.

@@ -1,0 +1,63 @@
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Starting SemAlign Module training (Stage 3)...
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - VLM Variant: RN50
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Text Type: llm_generated
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/semalign_module/RN50_llm_generated
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Logs will be saved to: ./logs/semalign_training_stage3/RN50_llm_generated
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Using device: cuda
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Loading base dataset...
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_RN50_llm_generated_gpt4.pth
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Loaded semantic features for 12 classes. Dim: 1024
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Loading pre-computed base centers (z_V) from: ./checkpoints/base_centers_mean_RN50_llm_generated.pth
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Loaded base centers for 6 classes. Dim: 1024
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Loading VLM Visual Encoder: RemoteCLIP (RN50)
+2025-04-21 10:50:04 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-RN50.pt
+2025-04-21 10:50:05 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - VLM Visual Encoder loaded and frozen.
+2025-04-21 10:50:05 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Loading pre-trained adapter from: ./checkpoints/hrrp_adapter/RN50_llm_generated/latest.pth
+2025-04-21 10:50:07 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Pre-trained adapter loaded and frozen (from epoch 10).
+2025-04-21 10:50:07 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Initialized SemAlign Module: SemAlignModule(
+  (model): Sequential(
+    (0): Linear(in_features=2048, out_features=4096, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.2, inplace=False)
+    (3): Linear(in_features=4096, out_features=4096, bias=True)
+    (4): ReLU()
+    (5): Dropout(p=0.2, inplace=False)
+  )
+  (fc): Linear(in_features=4096, out_features=1024, bias=True)
+  (drop): Dropout(p=0.2, inplace=False)
+)
+2025-04-21 10:50:07 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Using L1 reconstruction loss.
+2025-04-21 10:50:07 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Starting SemAlign training loop...
+2025-04-21 10:54:11 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 1/10] Avg Recon Loss: 0.0058
+2025-04-21 10:54:11 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0058
+2025-04-21 10:54:12 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/RN50_llm_generated/best.pth
+2025-04-21 10:58:19 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 2/10] Avg Recon Loss: 0.0021
+2025-04-21 10:58:19 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0021
+2025-04-21 10:58:19 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/RN50_llm_generated/best.pth
+2025-04-21 11:02:26 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 3/10] Avg Recon Loss: 0.0015
+2025-04-21 11:02:26 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0015
+2025-04-21 11:02:26 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/RN50_llm_generated/best.pth
+2025-04-21 11:06:32 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 4/10] Avg Recon Loss: 0.0012
+2025-04-21 11:06:32 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0012
+2025-04-21 11:06:33 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/RN50_llm_generated/best.pth
+2025-04-21 11:10:39 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 5/10] Avg Recon Loss: 0.0011
+2025-04-21 11:10:39 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0011
+2025-04-21 11:10:40 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/RN50_llm_generated/best.pth
+2025-04-21 16:32:23 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 6/10] Avg Recon Loss: 0.0010
+2025-04-21 16:32:23 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0010
+2025-04-21 16:32:24 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/RN50_llm_generated/best.pth
+2025-04-21 16:36:33 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 7/10] Avg Recon Loss: 0.0009
+2025-04-21 16:36:33 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0009
+2025-04-21 16:36:34 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/RN50_llm_generated/best.pth
+2025-04-21 16:40:43 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 8/10] Avg Recon Loss: 0.0008
+2025-04-21 16:40:43 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0008
+2025-04-21 16:40:44 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/RN50_llm_generated/best.pth
+2025-04-21 16:44:53 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 9/10] Avg Recon Loss: 0.0008
+2025-04-21 16:44:53 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0008
+2025-04-21 16:44:54 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/RN50_llm_generated/best.pth
+2025-04-21 16:49:03 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 10/10] Avg Recon Loss: 0.0007
+2025-04-21 16:49:03 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0007
+2025-04-21 16:49:03 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/RN50_llm_generated/best.pth
+2025-04-21 16:49:03 - __logs_semalign_training_stage3_RN50_llm_generated_train_semalign_log_txt - [INFO] - SemAlign Module training finished.

@@ -1,0 +1,301 @@
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Starting SemAlign Module training (Stage 3)...
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/semalign_module/ViT-B-32_llm_generated
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Logs will be saved to: ./logs/semalign_training_stage3/ViT-B-32_llm_generated
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Using device: cuda
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading base dataset...
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Base dataset loaded with 8407 samples.
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_gemini_25_pro.pth
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loaded semantic features for 12 classes. Dim: 512
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading pre-computed base centers (z_V) from: ./checkpoints/base_centers_mean_ViT-B-32_llm_generated.pth
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loaded base centers for 7 classes. Dim: 512
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading VLM Visual Encoder: RemoteCLIP (ViT-B-32)
+2025-04-20 15:05:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 15:05:41 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - VLM Visual Encoder loaded and frozen.
+2025-04-20 15:05:41 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading pre-trained adapter from: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/latest.pth
+2025-04-20 15:05:44 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Pre-trained adapter loaded and frozen (from epoch 50).
+2025-04-20 15:05:44 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Initialized SemAlign Module: SemAlignModule(
+  (model): Sequential(
+    (0): Linear(in_features=1024, out_features=4096, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.2, inplace=False)
+    (3): Linear(in_features=4096, out_features=4096, bias=True)
+    (4): ReLU()
+    (5): Dropout(p=0.2, inplace=False)
+  )
+  (fc): Linear(in_features=4096, out_features=512, bias=True)
+  (drop): Dropout(p=0.2, inplace=False)
+)
+2025-04-20 15:05:44 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Using L1 reconstruction loss.
+2025-04-20 15:05:44 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Starting SemAlign training loop...
+2025-04-20 15:07:05 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 1/50] Avg Recon Loss: 0.0200
+2025-04-20 15:07:05 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0200
+2025-04-20 15:07:06 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:08:28 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 2/50] Avg Recon Loss: 0.0074
+2025-04-20 15:08:28 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0074
+2025-04-20 15:08:29 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:09:51 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 3/50] Avg Recon Loss: 0.0058
+2025-04-20 15:09:51 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0058
+2025-04-20 15:09:52 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:11:15 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 4/50] Avg Recon Loss: 0.0050
+2025-04-20 15:11:15 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0050
+2025-04-20 15:11:15 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:12:38 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 5/50] Avg Recon Loss: 0.0045
+2025-04-20 15:12:38 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0045
+2025-04-20 15:12:38 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:14:01 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 6/50] Avg Recon Loss: 0.0041
+2025-04-20 15:14:01 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0041
+2025-04-20 15:14:01 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:15:24 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 7/50] Avg Recon Loss: 0.0038
+2025-04-20 15:15:24 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0038
+2025-04-20 15:15:24 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:16:47 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 8/50] Avg Recon Loss: 0.0036
+2025-04-20 15:16:47 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0036
+2025-04-20 15:16:47 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:18:10 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 9/50] Avg Recon Loss: 0.0034
+2025-04-20 15:18:10 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0034
+2025-04-20 15:18:10 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:19:33 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 10/50] Avg Recon Loss: 0.0033
+2025-04-20 15:19:33 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0033
+2025-04-20 15:19:33 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:20:56 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 11/50] Avg Recon Loss: 0.0030
+2025-04-20 15:20:56 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0030
+2025-04-20 15:20:56 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:22:19 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 12/50] Avg Recon Loss: 0.0030
+2025-04-20 15:22:19 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0030
+2025-04-20 15:22:19 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:23:41 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 13/50] Avg Recon Loss: 0.0029
+2025-04-20 15:23:41 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0029
+2025-04-20 15:23:42 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:25:04 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 14/50] Avg Recon Loss: 0.0027
+2025-04-20 15:25:04 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0027
+2025-04-20 15:25:05 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:26:27 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 15/50] Avg Recon Loss: 0.0026
+2025-04-20 15:26:27 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0026
+2025-04-20 15:26:28 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:27:50 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 16/50] Avg Recon Loss: 0.0026
+2025-04-20 15:27:50 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0026
+2025-04-20 15:27:50 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:29:13 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 17/50] Avg Recon Loss: 0.0025
+2025-04-20 15:29:13 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0025
+2025-04-20 15:29:14 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:30:36 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 18/50] Avg Recon Loss: 0.0024
+2025-04-20 15:30:36 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0024
+2025-04-20 15:30:37 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:31:59 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 19/50] Avg Recon Loss: 0.0023
+2025-04-20 15:31:59 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0023
+2025-04-20 15:32:00 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:33:22 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 20/50] Avg Recon Loss: 0.0023
+2025-04-20 15:33:22 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0023
+2025-04-20 15:33:23 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:34:45 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 21/50] Avg Recon Loss: 0.0022
+2025-04-20 15:34:45 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0022
+2025-04-20 15:34:45 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:36:08 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 22/50] Avg Recon Loss: 0.0022
+2025-04-20 15:36:08 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0022
+2025-04-20 15:36:08 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:37:31 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 23/50] Avg Recon Loss: 0.0020
+2025-04-20 15:37:31 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0020
+2025-04-20 15:37:31 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:38:54 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 24/50] Avg Recon Loss: 0.0020
+2025-04-20 15:38:54 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0020
+2025-04-20 15:38:54 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:40:17 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 25/50] Avg Recon Loss: 0.0021
+2025-04-20 15:41:39 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 26/50] Avg Recon Loss: 0.0020
+2025-04-20 15:41:39 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0020
+2025-04-20 15:41:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:43:02 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 27/50] Avg Recon Loss: 0.0020
+2025-04-20 15:43:02 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0020
+2025-04-20 15:43:02 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:44:25 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 28/50] Avg Recon Loss: 0.0020
+2025-04-20 15:45:48 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 29/50] Avg Recon Loss: 0.0018
+2025-04-20 15:45:48 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0018
+2025-04-20 15:45:48 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:47:11 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 30/50] Avg Recon Loss: 0.0018
+2025-04-20 15:47:11 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0018
+2025-04-20 15:47:11 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:48:34 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 31/50] Avg Recon Loss: 0.0018
+2025-04-20 15:48:34 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0018
+2025-04-20 15:48:35 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:49:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 32/50] Avg Recon Loss: 0.0018
+2025-04-20 15:49:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0018
+2025-04-20 15:49:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:51:20 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 33/50] Avg Recon Loss: 0.0017
+2025-04-20 15:51:20 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0017
+2025-04-20 15:51:20 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:52:43 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 34/50] Avg Recon Loss: 0.0018
+2025-04-20 15:54:05 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 35/50] Avg Recon Loss: 0.0017
+2025-04-20 15:54:05 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0017
+2025-04-20 15:54:06 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:55:28 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 36/50] Avg Recon Loss: 0.0017
+2025-04-20 15:55:28 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0017
+2025-04-20 15:55:29 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:56:51 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 37/50] Avg Recon Loss: 0.0016
+2025-04-20 15:56:51 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0016
+2025-04-20 15:56:52 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:58:14 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 38/50] Avg Recon Loss: 0.0016
+2025-04-20 15:58:14 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0016
+2025-04-20 15:58:15 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 15:59:37 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 39/50] Avg Recon Loss: 0.0016
+2025-04-20 15:59:37 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0016
+2025-04-20 15:59:38 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:01:00 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 40/50] Avg Recon Loss: 0.0016
+2025-04-20 16:01:00 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0016
+2025-04-20 16:01:01 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:02:23 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 41/50] Avg Recon Loss: 0.0016
+2025-04-20 16:02:23 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0016
+2025-04-20 16:02:24 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:03:46 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 42/50] Avg Recon Loss: 0.0016
+2025-04-20 16:03:46 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0016
+2025-04-20 16:03:47 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:05:09 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 43/50] Avg Recon Loss: 0.0016
+2025-04-20 16:05:09 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0016
+2025-04-20 16:05:10 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:06:32 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 44/50] Avg Recon Loss: 0.0016
+2025-04-20 16:06:32 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0016
+2025-04-20 16:06:33 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:07:55 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 45/50] Avg Recon Loss: 0.0015
+2025-04-20 16:07:55 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0015
+2025-04-20 16:07:56 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:09:18 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 46/50] Avg Recon Loss: 0.0015
+2025-04-20 16:09:18 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0015
+2025-04-20 16:09:18 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:10:41 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 47/50] Avg Recon Loss: 0.0015
+2025-04-20 16:10:41 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0015
+2025-04-20 16:10:42 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:12:04 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 48/50] Avg Recon Loss: 0.0014
+2025-04-20 16:12:04 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0014
+2025-04-20 16:12:05 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:13:27 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 49/50] Avg Recon Loss: 0.0015
+2025-04-20 16:14:49 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 50/50] Avg Recon Loss: 0.0014
+2025-04-20 16:14:49 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0014
+2025-04-20 16:14:50 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:14:50 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - SemAlign Module training finished.
+2025-04-20 16:53:39 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Starting SemAlign Module training (Stage 3)...
+2025-04-20 16:53:39 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 16:53:39 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 16:53:39 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 16:53:39 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/semalign_module/ViT-B-32_llm_generated
+2025-04-20 16:53:39 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Logs will be saved to: ./logs/semalign_training_stage3/ViT-B-32_llm_generated
+2025-04-20 16:53:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Using device: cuda
+2025-04-20 16:53:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading base dataset...
+2025-04-20 16:53:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-20 16:53:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_gpt4.pth
+2025-04-20 16:53:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loaded semantic features for 12 classes. Dim: 512
+2025-04-20 16:53:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading pre-computed base centers (z_V) from: ./checkpoints/base_centers_mean_ViT-B-32_llm_generated.pth
+2025-04-20 16:53:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loaded base centers for 6 classes. Dim: 512
+2025-04-20 16:53:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading VLM Visual Encoder: RemoteCLIP (ViT-B-32)
+2025-04-20 16:53:40 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 16:53:41 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - VLM Visual Encoder loaded and frozen.
+2025-04-20 16:53:41 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading pre-trained adapter from: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/latest.pth
+2025-04-20 16:53:43 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Pre-trained adapter loaded and frozen (from epoch 10).
+2025-04-20 16:53:44 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Initialized SemAlign Module: SemAlignModule(
+  (model): Sequential(
+    (0): Linear(in_features=1024, out_features=4096, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.2, inplace=False)
+    (3): Linear(in_features=4096, out_features=4096, bias=True)
+    (4): ReLU()
+    (5): Dropout(p=0.2, inplace=False)
+  )
+  (fc): Linear(in_features=4096, out_features=512, bias=True)
+  (drop): Dropout(p=0.2, inplace=False)
+)
+2025-04-20 16:53:44 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Using L1 reconstruction loss.
+2025-04-20 16:53:44 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Starting SemAlign training loop...
+2025-04-20 16:54:56 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 1/10] Avg Recon Loss: 0.0126
+2025-04-20 16:54:56 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0126
+2025-04-20 16:54:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:56:10 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 2/10] Avg Recon Loss: 0.0062
+2025-04-20 16:56:10 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0062
+2025-04-20 16:56:11 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:57:24 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 3/10] Avg Recon Loss: 0.0049
+2025-04-20 16:57:24 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0049
+2025-04-20 16:57:24 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:58:38 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 4/10] Avg Recon Loss: 0.0041
+2025-04-20 16:58:38 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0041
+2025-04-20 16:58:38 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 16:59:52 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 5/10] Avg Recon Loss: 0.0033
+2025-04-20 16:59:52 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0033
+2025-04-20 16:59:52 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 17:01:05 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 6/10] Avg Recon Loss: 0.0028
+2025-04-20 17:01:05 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0028
+2025-04-20 17:01:06 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 17:02:19 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 7/10] Avg Recon Loss: 0.0025
+2025-04-20 17:02:19 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0025
+2025-04-20 17:02:20 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 17:03:33 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 8/10] Avg Recon Loss: 0.0023
+2025-04-20 17:03:33 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0023
+2025-04-20 17:03:33 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 17:04:47 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 9/10] Avg Recon Loss: 0.0021
+2025-04-20 17:04:47 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0021
+2025-04-20 17:04:47 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 17:06:01 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 10/10] Avg Recon Loss: 0.0020
+2025-04-20 17:06:01 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0020
+2025-04-20 17:06:01 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 17:06:01 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - SemAlign Module training finished.
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Starting SemAlign Module training (Stage 3)...
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - VLM Variant: ViT-B-32
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Text Type: llm_generated
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Checkpoints will be saved to: ./checkpoints/semalign_module/ViT-B-32_llm_generated
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Logs will be saved to: ./logs/semalign_training_stage3/ViT-B-32_llm_generated
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Using device: cuda
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading base dataset...
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Base dataset loaded with 7206 samples.
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading semantic features from: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_gpt4.pth
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loaded semantic features for 12 classes. Dim: 512
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading pre-computed base centers (z_V) from: ./checkpoints/base_centers_mean_ViT-B-32_llm_generated.pth
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loaded base centers for 6 classes. Dim: 512
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading VLM Visual Encoder: RemoteCLIP (ViT-B-32)
+2025-04-20 20:05:57 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading VLM weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-04-20 20:05:58 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - VLM Visual Encoder loaded and frozen.
+2025-04-20 20:05:58 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Loading pre-trained adapter from: ./checkpoints/hrrp_adapter/ViT-B-32_llm_generated/latest.pth
+2025-04-20 20:06:00 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Pre-trained adapter loaded and frozen (from epoch 10).
+2025-04-20 20:06:00 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Initialized SemAlign Module: SemAlignModule(
+  (model): Sequential(
+    (0): Linear(in_features=1024, out_features=4096, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.2, inplace=False)
+    (3): Linear(in_features=4096, out_features=4096, bias=True)
+    (4): ReLU()
+    (5): Dropout(p=0.2, inplace=False)
+  )
+  (fc): Linear(in_features=4096, out_features=512, bias=True)
+  (drop): Dropout(p=0.2, inplace=False)
+)
+2025-04-20 20:06:00 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Using L1 reconstruction loss.
+2025-04-20 20:06:00 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Starting SemAlign training loop...
+2025-04-20 20:07:12 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 1/10] Avg Recon Loss: 0.0126
+2025-04-20 20:07:12 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0126
+2025-04-20 20:07:12 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:08:24 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 2/10] Avg Recon Loss: 0.0062
+2025-04-20 20:08:24 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0062
+2025-04-20 20:08:25 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:09:37 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 3/10] Avg Recon Loss: 0.0049
+2025-04-20 20:09:37 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0049
+2025-04-20 20:09:37 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:10:49 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 4/10] Avg Recon Loss: 0.0041
+2025-04-20 20:10:49 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0041
+2025-04-20 20:10:50 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:12:01 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 5/10] Avg Recon Loss: 0.0033
+2025-04-20 20:12:01 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0033
+2025-04-20 20:12:02 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:13:14 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 6/10] Avg Recon Loss: 0.0028
+2025-04-20 20:13:14 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0028
+2025-04-20 20:13:14 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:14:26 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 7/10] Avg Recon Loss: 0.0025
+2025-04-20 20:14:26 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0025
+2025-04-20 20:14:27 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:15:39 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 8/10] Avg Recon Loss: 0.0023
+2025-04-20 20:15:39 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0023
+2025-04-20 20:15:39 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:16:51 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 9/10] Avg Recon Loss: 0.0021
+2025-04-20 20:16:51 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0021
+2025-04-20 20:16:52 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:18:03 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - [Epoch 10/10] Avg Recon Loss: 0.0020
+2025-04-20 20:18:03 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - New best reconstruction loss: 0.0020
+2025-04-20 20:18:04 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - Best SemAlign model saved to ./checkpoints/semalign_module/ViT-B-32_llm_generated/best.pth
+2025-04-20 20:18:04 - __logs_semalign_training_stage3_ViT-B-32_llm_generated_train_semalign_log_txt - [INFO] - SemAlign Module training finished.
