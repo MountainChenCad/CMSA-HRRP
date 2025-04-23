@@ -97,8 +97,8 @@ class HRRPDataset(Dataset):
             if 'CoHH' in mat_data: # Simulated data
                 hrrp = mat_data['CoHH'].flatten() # Ensure 1D array
                 return hrrp
-            elif 'data' in mat_data: # Measured data
-                hrrp = mat_data['data'].flatten() # Ensure 1D array
+            elif 'hrrp' in mat_data: # Measured data
+                hrrp = mat_data['hrrp'].flatten() # Ensure 1D array
                 return hrrp
             else:
                 # Try to find any key that might contain the data (less robust)
@@ -108,7 +108,7 @@ class HRRPDataset(Dataset):
                     hrrp = mat_data[possible_keys[0]].flatten()
                     return hrrp
                 else:
-                    logger.warning(f"Could not find 'CoHH' or 'data' variable in {filepath}. Skipping. Keys found: {list(mat_data.keys())}")
+                    logger.warning(f"Could not find 'CoHH' or 'hrrp' variable in {filepath}. Skipping. Keys found: {list(mat_data.keys())}")
                     return None
         except Exception as e:
             logger.error(f"Error loading {filepath}: {e}", exc_info=True)

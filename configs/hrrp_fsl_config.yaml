@@ -5,47 +5,49 @@ data:
   simulated_path: './datasets/simulated_hrrp'
   measured_path: './datasets/measured_hrrp'
   # Base and Novel classes (Ensure names match keys in semantic_descriptions.yaml -> class_mapping)
-  base_classes: # 6 classes
+  base_classes: # 7 classes
     - 'EA-18G'
     - 'EP-3E'
     - 'F2'
     - 'F15'
     - 'F16'
     - 'F18'
-  novel_classes: # 6 classes (3+3)
     - 'F22'
     - 'F35'
     - 'IDF'
     - '捕食者'
     - '幻影2000'
     - '全球鹰'
-#    - 'an26'
-#    - 'yar42'
-#    - 'citation'
+  novel_classes: # 8 classes (3+5)
+    - 'an26'
+    - 'yar42'
+    - 'citation'
   target_length: 1000 # Processed HRRP length
   normalization: 'log_max' # 'max', 'log_max', 'none'
 
 # --- Few-Shot Learning Configuration ---
 fsl:
-  n_way: 3          # N-way classification
-  k_shot: 1         # K-shot learning (support samples per class) - Adjust as needed (e.g., 1 or 5)
+  n_way: 12          # N-way classification
+  k_shot: 5         # K-shot learning (support samples per class) - Adjust as needed (e.g., 1 or 5)
   q_query: 15       # Query samples per class in each episode
   test_episodes: 600 # Number of episodes for testing
-  classifier_temperature: 10.0 # Temperature for cosine classifier
+  classifier_temperature: 10.0 # Temperature for cosine classifier during testing
+  # Optional: Define kappa sweep values for testing fusion module
+  # test_kappa_values: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
 
 # --- Model Configuration ---
 model:
-  # hrrp_encoder: # Configuration for the baseline 1D CNN
+  # baseline_cnn: # Configuration for the baseline 1D CNN (used in train_baseline_cnn.py etc.)
   #   output_dim: 512
   #   layers: [64, 128, 256, 512]
   #   kernel_size: 7
-  adapter_1d_to_2d: # Configuration for the CMSA-HRRP adapter
+  adapter_1d_to_2d: # Configuration for the CMSA-HRRP adapter (HRPPtoPseudoImage)
     intermediate_dim: 2048 # MLP intermediate dimension
-    # Other adapter params like activation could be added if HRPPtoPseudoImage is modified
-  fusion_module:      # h_F (Used by both CMSA-HRRP and baseline 1D-CNN+Semantics)
+    activation: 'relu'     # 'relu' or 'leaky_relu' for MLP intermediate layer
+  fusion_module:      # h_F (Used by CMSA-HRRP and baseline 1D-CNN+Semantics)
     hidden_dim: 4096  # Example hidden dimension
     kappa: 0.5        # Default prototype fusion factor for testing (0: visual only, >0: enable fusion)
-                      # test_fsl.py can override this or sweep values
+                      # test_fsl.py and test_1dcnn_semantics.py can override this or sweep values
   foundation_model:
     name: 'RemoteCLIP' # Currently only RemoteCLIP supported
     variant: 'RN50' # IMPORTANT: Change this for different scale models ('RN50', 'ViT-B-32', 'ViT-L-14')
@@ -56,41 +58,41 @@ model:
 
 # --- Training Configuration ---
 training:
-  # Settings used for Adapter training (train_adapter.py),
-  # SemAlign training (train_semalign_stage3.py),
-  # and Baseline CNN training (train_baseline_cnn.py),
-  # and Baseline Fusion training (train_fusion_1dcnn.py)
-  # Adjust epochs/lr per stage if needed by loading specific sub-configs or adding more sections
+  # Common settings used across training scripts (adapter, semalign, baseline cnn, baseline fusion)
   epochs: 10         # General epoch count, adjust per training script if needed
-  batch_size: 128
+  batch_size: 64
   lr: 0.0001
-  optimizer: 'Adam'
-  loss_type: 'cosine' # Primarily for adapter alignment, others might use different losses (e.g., L1 for SemAlign, CE for baseline CNN)
-  dropout_semalign: 0.2 # Dropout specific to SemAlign module training
+  optimizer: 'Adam'    # 'Adam', 'AdamW'
+  # Specific loss settings per module
+  adapter_loss:
+    alignment_loss_type: 'cosine' # Alignment loss: 'cosine', 'l1', 'mse'
+    # --- NEW: Contrastive Loss Settings for Adapter Training ---
+    use_contrastive: True         # Set to True to enable visual contrastive loss
+    lambda_v2v: 0.5               # Weight for the visual contrastive loss (Lcl_v2v)
+    temperature_v: 0.1            # Temperature (tau_v) for visual contrastive loss
+  semalign_loss:
+    loss_type: 'l1'               # Loss for SemAlign module training ('l1', 'mse')
+    dropout_semalign: 0.2         # Dropout specific to SemAlign module training
+  baseline_cnn_loss:
+    loss_type: 'crossentropy'     # Loss for baseline CNN classification training
 
 # --- Semantics Configuration ---
 semantics:
-  # Path to the YAML file containing descriptions and mappings
-  description_file: 'configs/semantic_descriptions.yaml'
+  description_file: 'configs/semantic_descriptions.yaml' # Path to the semantic descriptions and mapping
   # generation settings control WHICH description to use and track the source LLM
   generation:
-    # Source LLM name - MUST match the prefix used in description_file keys (e.g., 'gemini_2.5_pro'_generated)
-    llm: 'gpt4' # Example: 'gemini_2.5_pro', 'gpt_4', 'manual' etc.
-    # Type of text description to use for encoding
-    text_type: 'llm_generated' # Options: 'name', 'detailed' (uses manual_detailed), 'llm_generated'
-  # feature_path: # REMOVED - Path is now constructed dynamically in generate_semantics.py
+    llm: 'gemini_25_pro' # Source LLM ('GPT-4.1', 'Claude-3.7', etc.) - used if text_type='llm_generated' or for logging
+    text_type: 'llm_generated' # 'name', 'detailed' (uses manual_detailed from yaml), 'llm_generated' (uses llm key from yaml)
 
 # --- Paths Configuration ---
 paths:
-  # Base directories - specific files/subdirs constructed dynamically
-  datasets_base: './datasets' # Contains simulated_path and measured_path subdirs (Corrected key)
+  # Base directories - specific files/subdirs constructed dynamically in utils.get_dynamic_paths
+  datasets_base: './datasets'
   checkpoints: './checkpoints'
   logs: './logs'
-  # Directory to save semantic features (used by generate_semantics.py)
   semantic_features_dir: './semantic_features'
-  # base_centers_path: # REMOVED - Path is now constructed dynamically in compute_centers.py
-  # foundation_model weights are expected in checkpoints/foundation_models/
 
 # --- Other Hyperparameters ---
 num_workers: 4
 seed: 410073
+# baseline_experiment_name: 'default_cnn' # Optional: Name for baseline experiments if running multiple baseline configs

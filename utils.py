@@ -10,7 +10,7 @@ import numpy as np
 import torch
 from sklearn.linear_model import LogisticRegression
 import torch.nn.functional as F
-import yaml # Added for loading config within utils if needed (or pass config dict)
+import yaml
 
 logger = logging.getLogger(__name__)
 EPS = 1e-8
@@ -34,46 +34,50 @@ def set_seed(seed):
 def get_dynamic_paths(config: Dict[str, Any]) -> Dict[str, str]:
     """Constructs paths dynamically based on config settings."""
     paths = {}
-    base_ckpt_dir = config['paths']['checkpoints']
-    base_log_dir = config['paths']['logs']
-    base_semantic_dir = config['paths']['semantic_features_dir']
+    base_ckpt_dir = config.get('paths', {}).get('checkpoints', './checkpoints')
+    base_log_dir = config.get('paths', {}).get('logs', './logs')
+    base_semantic_dir = config.get('paths', {}).get('semantic_features_dir', './semantic_features')
 
     # --- VLM related ---
-    variant = config['model']['foundation_model']['variant']
+    variant = config.get('model', {}).get('foundation_model', {}).get('variant', 'UNKNOWN_VLM')
     variant_safe = variant.replace('/', '-') # For filenames/dirs
-    text_type = config['semantics']['generation']['text_type']
-    llm_name = config['semantics']['generation'].get('llm', 'unknownLLM').lower().replace('.', '')
+    text_type = config.get('semantics', {}).get('generation', {}).get('text_type', 'unknown_text')
+    llm_name = config.get('semantics', {}).get('generation', {}).get('llm', 'unknownLLM')
+    llm_name_safe = llm_name.lower().replace('.', '').replace('-', '') # Sanitize LLM name
 
     # VLM weights path
     paths['vlm_weights'] = os.path.join(base_ckpt_dir, 'foundation_models', f"RemoteCLIP-{variant}.pt")
 
     # Semantic features path
-    semantic_filename = f"hrrp_semantics_{variant_safe}_{text_type}.pth"
-    if text_type == 'llm_generated': # Optionally add LLM name if generated
-         semantic_filename = f"hrrp_semantics_{variant_safe}_{text_type}_{llm_name}.pth"
+    semantic_filename = f"hrrp_semantics_{variant_safe}_{text_type}"
+    if text_type == 'llm_generated':
+         semantic_filename += f"_{llm_name_safe}"
+    semantic_filename += ".pth"
     paths['semantic_features'] = os.path.join(base_semantic_dir, semantic_filename)
 
     # --- CMSA-HRRP (Adapter Version) Paths ---
-    adapter_exp_name = f"{variant_safe}_{text_type}" # Experiment name based on VLM and semantics used for training
+    # Experiment name based on VLM and semantics used for training adapter
+    adapter_exp_name = f"{variant_safe}_{text_type}"
+    if text_type == 'llm_generated': adapter_exp_name += f"_{llm_name_safe}"
+
     paths['adapter_checkpoint_dir'] = os.path.join(base_ckpt_dir, 'hrrp_adapter', adapter_exp_name)
     paths['adapter_best_ckpt'] = os.path.join(paths['adapter_checkpoint_dir'], 'best.pth')
     paths['adapter_latest_ckpt'] = os.path.join(paths['adapter_checkpoint_dir'], 'latest.pth')
 
-    paths['base_centers_path'] = os.path.join(base_ckpt_dir, f'base_centers_mean_{adapter_exp_name}.pth') # Centers depend on adapter+VLM used
+    paths['base_centers_path'] = os.path.join(base_ckpt_dir, f'base_centers_mean_{adapter_exp_name}.pth') # Centers depend on adapter+VLM
 
     paths['semalign_checkpoint_dir'] = os.path.join(base_ckpt_dir, 'semalign_module', adapter_exp_name) # SemAlign trained based on adapter+VLM
     paths['semalign_best_ckpt'] = os.path.join(paths['semalign_checkpoint_dir'], 'best.pth')
     paths['semalign_latest_ckpt'] = os.path.join(paths['semalign_checkpoint_dir'], 'latest.pth')
 
-    # Log paths (example structure, adjust as needed)
+    # Log paths
     paths['adapter_log_dir'] = os.path.join(base_log_dir, 'adapter_training', adapter_exp_name)
     paths['semalign_log_dir'] = os.path.join(base_log_dir, 'semalign_training_stage3', adapter_exp_name)
     paths['centers_log_dir'] = os.path.join(base_log_dir, 'compute_centers', adapter_exp_name)
     paths['fsl_test_log_dir'] = os.path.join(base_log_dir, 'fsl_testing_adapter', adapter_exp_name) # Base dir for test logs
 
-    # --- Baseline Paths (Construct dynamically) ---
-    # Baseline paths might be independent of VLM variant/text_type, or configurable
-    baseline_exp_name = config.get('baseline_experiment_name', 'default_cnn')  # Add baseline name to config?
+    # --- Baseline Paths ---
+    baseline_exp_name = config.get('baseline_experiment_name', 'default_cnn')
 
     paths['baseline_cnn_checkpoint_dir'] = os.path.join(base_ckpt_dir, 'hrrp_encoder_baseline', baseline_exp_name)
     paths['baseline_cnn_best_ckpt'] = os.path.join(paths['baseline_cnn_checkpoint_dir'], 'best.pth')
@@ -81,9 +85,10 @@ def get_dynamic_paths(config: Dict[str, Any]) -> Dict[str, str]:
 
     paths['baseline_centers_1dcnn_path'] = os.path.join(base_ckpt_dir, f'base_centers_1dcnn_{baseline_exp_name}.pth')
 
-    # Fusion module for baseline depends on baseline CNN and semantics used
-    # Let's tie its name to baseline cnn name and the text_type used for fusion
+    # Fusion module for baseline depends on baseline CNN and the semantics it's trained with
     fusion_1dcnn_exp_name = f"{baseline_exp_name}_{text_type}"
+    if text_type == 'llm_generated': fusion_1dcnn_exp_name += f"_{llm_name_safe}"
+
     paths['baseline_fusion_checkpoint_dir'] = os.path.join(base_ckpt_dir, 'fusion_module_1dcnn', fusion_1dcnn_exp_name)
     paths['baseline_fusion_best_ckpt'] = os.path.join(paths['baseline_fusion_checkpoint_dir'], 'best.pth')
     paths['baseline_fusion_latest_ckpt'] = os.path.join(paths['baseline_fusion_checkpoint_dir'], 'latest.pth')
@@ -92,10 +97,13 @@ def get_dynamic_paths(config: Dict[str, Any]) -> Dict[str, str]:
     paths['baseline_cnn_log_dir'] = os.path.join(base_log_dir, 'baseline_cnn_training', baseline_exp_name)
     paths['baseline_centers_1dcnn_log_dir'] = os.path.join(base_log_dir, 'compute_centers_1dcnn', baseline_exp_name)
     paths['baseline_fusion_log_dir'] = os.path.join(base_log_dir, 'fusion_1dcnn_training', fusion_1dcnn_exp_name)
-    paths['protonet_test_log_dir'] = os.path.join(base_log_dir, 'fsl_testing_protonet',
-                                                  baseline_exp_name)  # Base dir for test logs
-    paths['1dcnn_semantics_test_log_dir'] = os.path.join(base_log_dir, 'fsl_testing_1dcnn_semantics',
-                                                         fusion_1dcnn_exp_name)  # Base dir for test logs
+    paths['protonet_test_log_dir'] = os.path.join(base_log_dir, 'fsl_testing_protonet', baseline_exp_name)
+    paths['1dcnn_semantics_test_log_dir'] = os.path.join(base_log_dir, 'fsl_testing_1dcnn_semantics', fusion_1dcnn_exp_name)
+
+    # Create directories if they don't exist (optional, scripts can also do this)
+    # for path_key, path_val in paths.items():
+    #     if 'dir' in path_key:
+    #         os.makedirs(path_val, exist_ok=True)
 
     return paths
 
@@ -117,8 +125,8 @@ def Cosine_classifier(prototypes: torch.Tensor, query_x: torch.Tensor, temperatu
     # prototypes: (N_way, FeatureDim)
     # query_x: (N_query, FeatureDim)
     # Normalize features and prototypes INTERNALLY
-    proto_normalized = F.normalize(prototypes, p=2, dim=-1) # (N_way, FeatureDim)
-    query_normalized = F.normalize(query_x, p=2, dim=-1) # (N_query, FeatureDim)
+    proto_normalized = normalize(prototypes) # (N_way, FeatureDim)
+    query_normalized = normalize(query_x) # (N_query, FeatureDim)
     # Calculate cosine similarity (dot product of normalized vectors)
     logits = torch.mm(query_normalized, proto_normalized.t()) / temperature # (N_query, N_way)
     predict = torch.argmax(logits, dim=1)
@@ -149,6 +157,77 @@ def LR(support: torch.Tensor, support_y: torch.Tensor, query: torch.Tensor) -> t
 def normalize(x: torch.Tensor, epsilon: float = EPS) -> torch.Tensor:
     """L2 normalizes a tensor along the last dimension."""
     return x / (x.norm(p=2, dim=-1, keepdim=True) + epsilon)
+
+
+# --- Contrastive Loss ---
+def calculate_infonce_loss(features: torch.Tensor,
+                           labels: torch.Tensor,
+                           temperature: float = 0.1,
+                           epsilon: float = EPS) -> torch.Tensor:
+    """
+    Calculates the supervised instance-based InfoNCE loss within a batch.
+
+    Args:
+        features (torch.Tensor): Normalized features (B, D).
+        labels (torch.Tensor): Ground truth labels (B).
+        temperature (float): Temperature scaling factor.
+        epsilon (float): Small value for numerical stability.
+
+    Returns:
+        torch.Tensor: Scalar InfoNCE loss.
+    """
+    device = features.device
+    batch_size = features.shape[0]
+
+    # Create masks for positive and negative pairs
+    labels = labels.contiguous().view(-1, 1)
+    # Mask for positive pairs (same label, different instance)
+    mask_pos = torch.eq(labels, labels.T).float().to(device)
+    # Mask for diagonal elements (self-comparison)
+    mask_diag = torch.eye(batch_size, dtype=torch.float32, device=device)
+    # Positive mask excludes self-comparison
+    mask_pos = mask_pos - mask_diag
+
+    # Mask for negative pairs (different label)
+    mask_neg = 1.0 - mask_pos - mask_diag
+
+    # Calculate cosine similarity matrix
+    # features are assumed to be normalized already
+    sim_matrix = torch.matmul(features, features.T) # (B, B)
+
+    # Apply temperature scaling
+    sim_matrix = sim_matrix / temperature
+
+    # --- Numerator: Sum of positive similarities ---
+    # For each anchor, sum similarities with its positive pairs
+    # Use exp(sim) for the sum
+    exp_sim = torch.exp(sim_matrix)
+    pos_sum = torch.sum(exp_sim * mask_pos, dim=1) # (B,)
+
+    # --- Denominator: Sum of positive and negative similarities ---
+    # For each anchor, sum similarities with all *other* samples (pos + neg)
+    # We exclude self-similarity from the denominator sum
+    all_other_mask = 1.0 - mask_diag
+    all_other_sum = torch.sum(exp_sim * all_other_mask, dim=1) # (B,)
+
+    # --- Calculate Loss ---
+    # Loss for each anchor: -log(pos_sum / all_other_sum)
+    # Handle cases where pos_sum might be zero (no other positive samples in batch)
+    # Add epsilon to denominator for stability
+    loss_per_anchor = -torch.log(pos_sum / (all_other_sum + epsilon) + epsilon)
+
+    # Average loss over anchors that HAVE positive pairs
+    # Count how many positive pairs each anchor has
+    num_pos_pairs = torch.sum(mask_pos, dim=1) # (B,)
+    # Only compute loss for anchors with at least one positive pair
+    valid_anchors_mask = (num_pos_pairs > 0).float()
+    # Average loss only over valid anchors
+    loss = torch.sum(loss_per_anchor * valid_anchors_mask) / (torch.sum(valid_anchors_mask) + epsilon)
+
+    # Alternative: Average over all anchors, assigning 0 loss if no pos pairs?
+    # loss = loss_per_anchor.mean() # Simpler, but might dilute signal if many anchors lack pos pairs
+
+    return loss
 
 
 # --- Averaging and Timing ---
@@ -189,7 +268,7 @@ def count_95acc(accuracies: np.ndarray) -> Tuple[float, float]:
     acc_ci95 = 1.96 * np.std(accuracies) / np.sqrt(len(accuracies))
     return acc_avg, acc_ci95
 
-# --- Config Loading Helper (Optional, scripts can load directly too) ---
+# --- Config Loading Helper ---
 def load_config(config_path: str) -> Dict[str, Any]:
     """Loads YAML config file."""
     if not os.path.exists(config_path):
