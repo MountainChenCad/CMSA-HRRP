@@ -30,7 +30,8 @@ def set_seed(seed):
     os.environ['PYTHONHASHSEED'] = str(seed)
     logger.info(f"Set random seed to {seed}")
 
-# --- Dynamic Path Generation ---
+# Inside the get_dynamic_paths function in utils.py
+
 def get_dynamic_paths(config: Dict[str, Any]) -> Dict[str, str]:
     """Constructs paths dynamically based on config settings."""
     paths = {}
@@ -39,16 +40,35 @@ def get_dynamic_paths(config: Dict[str, Any]) -> Dict[str, str]:
     base_semantic_dir = config.get('paths', {}).get('semantic_features_dir', './semantic_features')
 
     # --- VLM related ---
-    variant = config.get('model', {}).get('foundation_model', {}).get('variant', 'UNKNOWN_VLM')
+    fm_config = config.get('model', {}).get('foundation_model', {})
+    model_name = fm_config.get('name', 'RemoteCLIP') # Default to RemoteCLIP if not specified
+    variant = fm_config.get('variant', 'UNKNOWN_VLM')
     variant_safe = variant.replace('/', '-') # For filenames/dirs
     text_type = config.get('semantics', {}).get('generation', {}).get('text_type', 'unknown_text')
     llm_name = config.get('semantics', {}).get('generation', {}).get('llm', 'unknownLLM')
     llm_name_safe = llm_name.lower().replace('.', '').replace('-', '') # Sanitize LLM name
 
-    # VLM weights path
-    paths['vlm_weights'] = os.path.join(base_ckpt_dir, 'foundation_models', f"RemoteCLIP-{variant}.pt")
+    # --- MODIFIED: VLM weights path construction ---
+    foundation_model_dir = os.path.join(base_ckpt_dir, 'foundation_models')
+    if model_name.upper() == 'REMOTECLIP':
+        # Assume RemoteCLIP weights follow RemoteCLIP-{variant}.pt convention
+        weights_filename = f"RemoteCLIP-{variant}.pt"
+        paths['vlm_weights'] = os.path.join(foundation_model_dir, weights_filename)
+        logger.debug(f"Constructed RemoteCLIP weights path: {paths['vlm_weights']}")
+    elif model_name.upper() == 'CLIP':
+        # Assume standard CLIP weights follow CLIP-{variant}.pt convention
+        # IMPORTANT: Ensure your downloaded file matches this (e.g., CLIP-ViT-B-32.pt)
+        weights_filename = f"CLIP-{variant}.pt"
+        paths['vlm_weights'] = os.path.join(foundation_model_dir, weights_filename)
+        logger.debug(f"Constructed CLIP weights path: {paths['vlm_weights']}")
+    else:
+        logger.warning(f"Unknown foundation model name '{model_name}'. Defaulting weights path structure.")
+        # Provide a default or raise an error if preferred
+        weights_filename = f"{model_name}-{variant}.pt" # Generic guess
+        paths['vlm_weights'] = os.path.join(foundation_model_dir, weights_filename)
+    # --- END MODIFICATION ---
 
-    # Semantic features path
+    # Semantic features path (depends on variant and text generation settings)
     semantic_filename = f"hrrp_semantics_{variant_safe}_{text_type}"
     if text_type == 'llm_generated':
          semantic_filename += f"_{llm_name_safe}"
@@ -56,8 +76,9 @@ def get_dynamic_paths(config: Dict[str, Any]) -> Dict[str, str]:
     paths['semantic_features'] = os.path.join(base_semantic_dir, semantic_filename)
 
     # --- CMSA-HRRP (Adapter Version) Paths ---
-    # Experiment name based on VLM and semantics used for training adapter
-    adapter_exp_name = f"{variant_safe}_{text_type}"
+    # Experiment name based on VLM variant and semantics used for training adapter/semalign
+    # Now include model_name in the experiment name to differentiate CLIP/RemoteCLIP runs
+    adapter_exp_name = f"{model_name.upper()}_{variant_safe}_{text_type}"
     if text_type == 'llm_generated': adapter_exp_name += f"_{llm_name_safe}"
 
     paths['adapter_checkpoint_dir'] = os.path.join(base_ckpt_dir, 'hrrp_adapter', adapter_exp_name)
@@ -70,14 +91,16 @@ def get_dynamic_paths(config: Dict[str, Any]) -> Dict[str, str]:
     paths['semalign_best_ckpt'] = os.path.join(paths['semalign_checkpoint_dir'], 'best.pth')
     paths['semalign_latest_ckpt'] = os.path.join(paths['semalign_checkpoint_dir'], 'latest.pth')
 
-    # Log paths
+    # Log paths (also include model_name)
     paths['adapter_log_dir'] = os.path.join(base_log_dir, 'adapter_training', adapter_exp_name)
     paths['semalign_log_dir'] = os.path.join(base_log_dir, 'semalign_training_stage3', adapter_exp_name)
     paths['centers_log_dir'] = os.path.join(base_log_dir, 'compute_centers', adapter_exp_name)
     paths['fsl_test_log_dir'] = os.path.join(base_log_dir, 'fsl_testing_adapter', adapter_exp_name) # Base dir for test logs
 
-    # --- Baseline Paths ---
+    # --- Baseline Paths (Unaffected by foundation model choice, assuming baseline uses its own CNN) ---
     baseline_exp_name = config.get('baseline_experiment_name', 'default_cnn')
+    # ... (rest of baseline path generation remains the same) ...
+    # (Make sure baseline paths don't accidentally depend on the adapter_exp_name)
 
     paths['baseline_cnn_checkpoint_dir'] = os.path.join(base_ckpt_dir, 'hrrp_encoder_baseline', baseline_exp_name)
     paths['baseline_cnn_best_ckpt'] = os.path.join(paths['baseline_cnn_checkpoint_dir'], 'best.pth')

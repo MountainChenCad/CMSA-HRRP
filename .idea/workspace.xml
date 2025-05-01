@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="9bcacd04-839a-4f98-9e1b-c60cb2b72fe4" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/run_ablation.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sample_mat_files.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/CMSA-HRRP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/CMSA-HRRP.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/hrrp_fsl_config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/hrrp_fsl_config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/prompt.txt" beforeDir="false" afterPath="$PROJECT_DIR$/configs/prompt.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/semantic_descriptions.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/configs/semantic_descriptions.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/hrrp_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/hrrp_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/samplers.py" beforeDir="false" afterPath="$PROJECT_DIR$/data/samplers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/logger.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/adapter_training/generate_semantics_RN50_llm_generated" beforeDir="false" afterPath="$PROJECT_DIR$/logs/adapter_training/generate_semantics_RN50_llm_generated" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/adapter_training/generate_semantics_ViT-B-32_llm_generated" beforeDir="false" afterPath="$PROJECT_DIR$/logs/adapter_training/generate_semantics_ViT-B-32_llm_generated" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/method/alignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/method/alignment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/method/test_fsl.py" beforeDir="false" afterPath="$PROJECT_DIR$/method/test_fsl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/method/train_adapter.py" beforeDir="false" afterPath="$PROJECT_DIR$/method/train_adapter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/method/train_semalign_stage3.py" beforeDir="false" afterPath="$PROJECT_DIR$/method/train_semalign_stage3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/hrrp_adapter_1d_to_2d.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/hrrp_adapter_1d_to_2d.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/model/hrrp_encoder.py" beforeDir="false" afterPath="$PROJECT_DIR$/model/hrrp_encoder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/compute_centers.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/compute_centers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/compute_centers_1dcnn.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/compute_centers_1dcnn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/generate_semantics.py" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/generate_semantics.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2wDM5roX9XjW0FKpuM9AtnHsVVq" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="\\wsl$\Unbuntu-20.04\home\mount\CMSA-HRRP\checkpoints\foundation_models" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9bcacd04-839a-4f98-9e1b-c60cb2b72fe4" name="Changes" comment="" />
+      <created>1745571515795</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1745571515795</updated>
+      <workItem from="1745571518824" duration="20939000" />
+      <workItem from="1745681356633" duration="6288000" />
+      <workItem from="1745738197821" duration="13007000" />
+      <workItem from="1745834070816" duration="674000" />
+      <workItem from="1745837268729" duration="1916000" />
+      <workItem from="1745888471060" duration="5260000" />
+      <workItem from="1746006082676" duration="10774000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

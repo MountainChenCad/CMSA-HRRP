@@ -9,6 +9,9 @@ data:
     - 全球鹰
     - IDF
   novel_classes:
+#    - an26
+#    - yar42
+#    - citation
     - F2
     - F15
     - F16

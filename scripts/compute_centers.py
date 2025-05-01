@@ -16,6 +16,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
 
 from data.hrrp_dataset import HRRPDataset
+# Assuming you renamed HRRPGAFCNNAdapter to HRPPtoPseudoImage in the file
 from model.hrrp_adapter_1d_to_2d import HRPPtoPseudoImage
 from logger import loggers
 from utils import set_seed, normalize, load_config, get_dynamic_paths # Import helpers
@@ -98,17 +99,39 @@ def main(config_path: str):
             log.error(f"Adapter checkpoint file not found at {adapter_checkpoint_path}. Run adapter training first for this config.")
             sys.exit(1)
 
-        adapter_config = config['model'].get('adapter_1d_to_2d', {})
+        # ***** MODIFIED SECTION *****
+        # Read GAF+CNN adapter config from the YAML file
+        adapter_gaf_config = config['model'].get('adapter_gaf_cnn')
+        if adapter_gaf_config is None:
+            raise ValueError("Config section 'model.adapter_gaf_cnn' is missing in the YAML file.")
+
+        # Instantiate HRPPtoPseudoImage (containing HRRPGAFCNNAdapter code)
         adapter = HRPPtoPseudoImage(
             hrrp_length=config['data']['target_length'],
-            input_channels=1, output_channels=3, output_size=expected_img_size,
-            intermediate_dim=adapter_config.get('intermediate_dim', 2048),
-            activation=adapter_config.get('activation', 'relu')
+            input_channels=1, # Assuming magnitude input
+            gaf_size=adapter_gaf_config.get('gaf_size', 64),
+            cnn_channels=adapter_gaf_config.get('cnn_channels', [16, 32, 64]),
+            output_channels=3, # Target for CLIP visual encoder
+            output_size=expected_img_size, # Target for CLIP visual encoder
+            kernel_size=adapter_gaf_config.get('cnn_kernel_size', 3),
+            activation=adapter_gaf_config.get('cnn_activation', 'relu'),
+            use_batchnorm=adapter_gaf_config.get('cnn_use_batchnorm', True)
         ).to(device)
+        # ***** END MODIFIED SECTION *****
+
         adapter_checkpoint_data = torch.load(adapter_checkpoint_path, map_location=device)
         adapter.load_state_dict(adapter_checkpoint_data['adapter_state_dict'])
-        adapter.eval()
+        adapter.eval() # Set to evaluation mode
+        for param in adapter.parameters(): # Ensure adapter is frozen
+            param.requires_grad = False
         log.info(f"Pre-trained adapter loaded and frozen (from epoch {adapter_checkpoint_data.get('epoch', 'N/A')}).")
+
+    except KeyError as e:
+        log.error(f"Missing key when loading/instantiating adapter or its config: {e}. Please check your YAML file and checkpoint.")
+        sys.exit(1)
+    except ValueError as e:
+        log.error(f"Configuration error: {e}")
+        sys.exit(1)
     except Exception as e:
         log.error(f"Error loading adapter checkpoint: {e}", exc_info=True)
         sys.exit(1)
@@ -124,12 +147,17 @@ def main(config_path: str):
             try:
                 pseudo_images = adapter(hrrp_samples)
                 if pseudo_images.shape[-2:] != (expected_img_size, expected_img_size):
+                     log.warning(f"Adapter output size {pseudo_images.shape[-2:]} does not match VLM expected size {expected_img_size}. Resizing.")
                      pseudo_images = F.interpolate(pseudo_images, size=(expected_img_size, expected_img_size), mode='bilinear', align_corners=False)
 
                 visual_features = visual_encoder(pseudo_images) # z_V
                 if isinstance(visual_features, tuple): visual_features = visual_features[0]
+                # Handle potential CLS token or feature map output from VLM
                 if visual_features.dim() == 3 and visual_features.shape[1] > 1:
-                     visual_features = visual_features[:, 0] # CLS token
+                     visual_features = visual_features[:, 0] # Assume CLS token is first
+                elif visual_features.dim() != 2:
+                     visual_features = visual_features.view(visual_features.size(0), -1) # Flatten if needed
+
 
                 # Verify dimension
                 if visual_features.shape[-1] != visual_dim:

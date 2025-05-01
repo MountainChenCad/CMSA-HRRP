@@ -95,3 +95,179 @@
 2025-04-23 16:58:21 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([1024])
 2025-04-23 16:58:21 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_RN50_llm_generated_gemini_25_pro.pth
 2025-04-23 16:58:21 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic feature generation finished.
+2025-04-26 23:34:10 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Starting semantic feature generation...
+2025-04-26 23:34:10 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-26 23:34:10 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using VLM variant: RN50
+2025-04-26 23:34:10 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using text type: llm_generated
+2025-04-26 23:34:10 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_RN50_llm_generated_gemini_25_pro.pth
+2025-04-26 23:34:10 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using device: cuda
+2025-04-26 23:34:10 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loading VLM: RemoteCLIP (RN50)
+2025-04-26 23:34:10 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-RN50.pt
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Processing 15 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', 'an26', 'citation', 'yar42', '全球鹰', '幻影2000', '捕食者']
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'an26'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'citation'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'yar42'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([1024])
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_RN50_llm_generated_gemini_25_pro.pth
+2025-04-26 23:34:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic feature generation finished.
+2025-04-27 07:44:44 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Starting semantic feature generation...
+2025-04-27 07:44:44 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-27 07:44:44 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using VLM variant: RN50
+2025-04-27 07:44:44 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using text type: llm_generated
+2025-04-27 07:44:44 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_RN50_llm_generated_claude_37.pth
+2025-04-27 07:44:44 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using device: cuda
+2025-04-27 07:44:44 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loading VLM: RemoteCLIP (RN50)
+2025-04-27 07:44:44 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-RN50.pt
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Processing 15 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', 'an26', 'citation', 'yar42', '全球鹰', '幻影2000', '捕食者']
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'an26'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'citation'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'yar42'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([1024])
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_RN50_llm_generated_claude_37.pth
+2025-04-27 07:44:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic feature generation finished.
+2025-04-27 10:30:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Starting semantic feature generation...
+2025-04-27 10:30:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-27 10:30:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using VLM variant: RN50
+2025-04-27 10:30:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using text type: llm_generated
+2025-04-27 10:30:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_RN50_llm_generated_claude_37.pth
+2025-04-27 10:30:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using device: cuda
+2025-04-27 10:30:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loading VLM: RemoteCLIP (RN50)
+2025-04-27 10:30:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-RN50.pt
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Processing 15 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', 'an26', 'citation', 'yar42', '全球鹰', '幻影2000', '捕食者']
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'an26'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'citation'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'yar42'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([1024])
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_RN50_llm_generated_claude_37.pth
+2025-04-27 10:30:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic feature generation finished.
+2025-04-27 12:22:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Starting semantic feature generation...
+2025-04-27 12:22:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-27 12:22:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using VLM variant: RN50
+2025-04-27 12:22:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using text type: llm_generated
+2025-04-27 12:22:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_RN50_llm_generated_claude_37.pth
+2025-04-27 12:22:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using device: cuda
+2025-04-27 12:22:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loading VLM: RemoteCLIP (RN50)
+2025-04-27 12:22:46 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-RN50.pt
+2025-04-27 12:22:47 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-04-27 12:22:47 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Processing 15 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', 'an26', 'citation', 'yar42', '全球鹰', '幻影2000', '捕食者']
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'an26'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'citation'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'yar42'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([1024])
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_RN50_llm_generated_claude_37.pth
+2025-04-27 12:22:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic feature generation finished.
+2025-04-27 15:17:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Starting semantic feature generation...
+2025-04-27 15:17:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-27 15:17:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using VLM variant: RN50
+2025-04-27 15:17:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using text type: llm_generated
+2025-04-27 15:17:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_RN50_llm_generated_claude_37.pth
+2025-04-27 15:17:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using device: cuda
+2025-04-27 15:17:12 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [ERROR] - Failed to load descriptions or class_mapping from YAML. Exiting.
+2025-04-27 15:17:22 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Starting semantic feature generation...
+2025-04-27 15:17:22 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-27 15:17:22 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using VLM variant: RN50
+2025-04-27 15:17:22 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using text type: llm_generated
+2025-04-27 15:17:22 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_RN50_llm_generated_claude_37.pth
+2025-04-27 15:17:22 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using device: cuda
+2025-04-27 15:17:22 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [ERROR] - Failed to load descriptions or class_mapping from YAML. Exiting.
+2025-04-27 15:17:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Starting semantic feature generation...
+2025-04-27 15:17:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-27 15:17:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using VLM variant: RN50
+2025-04-27 15:17:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using text type: llm_generated
+2025-04-27 15:17:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_RN50_llm_generated_claude_37.pth
+2025-04-27 15:17:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using device: cuda
+2025-04-27 15:17:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loading VLM: RemoteCLIP (RN50)
+2025-04-27 15:17:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-RN50.pt
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Processing 15 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', 'an26', 'citation', 'yar42', '全球鹰', '幻影2000', '捕食者']
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'an26'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'citation'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'yar42'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([1024])
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_RN50_llm_generated_claude_37.pth
+2025-04-27 15:17:52 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic feature generation finished.
+2025-04-27 17:10:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Starting semantic feature generation...
+2025-04-27 17:10:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-04-27 17:10:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using VLM variant: RN50
+2025-04-27 17:10:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using text type: llm_generated
+2025-04-27 17:10:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_RN50_llm_generated_claude_37.pth
+2025-04-27 17:10:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Using device: cuda
+2025-04-27 17:10:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loading VLM: RemoteCLIP (RN50)
+2025-04-27 17:10:48 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-RN50.pt
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Processing 15 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', 'an26', 'citation', 'yar42', '全球鹰', '幻影2000', '捕食者']
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'an26'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'citation'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded 'yar42'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([1024])
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_RN50_llm_generated_claude_37.pth
+2025-04-27 17:10:50 - __logs_adapter_training_generate_semantics_RN50_llm_generated - [INFO] - Semantic feature generation finished.

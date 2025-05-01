@@ -18,6 +18,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
 
 from data.hrrp_dataset import HRRPDataset
+# Assuming you renamed HRRPGAFCNNAdapter to HRPPtoPseudoImage in the file
 from model.hrrp_adapter_1d_to_2d import HRPPtoPseudoImage
 from method.alignment import SemAlignModule # Use the renamed module
 from logger import loggers
@@ -137,16 +138,39 @@ def main(config_path: str):
     log.info(f"Loading pre-trained adapter from: {adapter_checkpoint_path}")
     try:
         if not os.path.exists(adapter_checkpoint_path): log.error(f"Adapter checkpoint not found: {adapter_checkpoint_path}"); sys.exit(1)
-        adapter_config = config['model'].get('adapter_1d_to_2d', {})
+
+        # ***** MODIFIED SECTION *****
+        # Read GAF+CNN adapter config from the YAML file
+        adapter_gaf_config = config['model'].get('adapter_gaf_cnn')
+        if adapter_gaf_config is None:
+            raise ValueError("Config section 'model.adapter_gaf_cnn' is missing in the YAML file.")
+
+        # Instantiate HRPPtoPseudoImage (containing HRRPGAFCNNAdapter code)
         adapter = HRPPtoPseudoImage(
-            hrrp_length=config['data']['target_length'], input_channels=1, output_channels=3, output_size=expected_img_size,
-            intermediate_dim=adapter_config.get('intermediate_dim', 2048)
+            hrrp_length=config['data']['target_length'],
+            input_channels=1, # Assuming magnitude input
+            gaf_size=adapter_gaf_config.get('gaf_size', 64),
+            cnn_channels=adapter_gaf_config.get('cnn_channels', [16, 32, 64]),
+            output_channels=3, # Target for CLIP visual encoder
+            output_size=expected_img_size, # Target for CLIP visual encoder
+            kernel_size=adapter_gaf_config.get('cnn_kernel_size', 3),
+            activation=adapter_gaf_config.get('cnn_activation', 'relu'),
+            use_batchnorm=adapter_gaf_config.get('cnn_use_batchnorm', True)
         ).to(device)
+        # ***** END MODIFIED SECTION *****
+
         adapter_checkpoint_data = torch.load(adapter_checkpoint_path, map_location=device)
         adapter.load_state_dict(adapter_checkpoint_data['adapter_state_dict'])
         adapter.eval()
         for param in adapter.parameters(): param.requires_grad = False # Freeze adapter
         log.info(f"Pre-trained adapter loaded and frozen (from epoch {adapter_checkpoint_data.get('epoch', 'N/A')}).")
+
+    except KeyError as e:
+        log.error(f"Missing key when loading/instantiating adapter or its config: {e}. Please check your YAML file and checkpoint.")
+        sys.exit(1)
+    except ValueError as e:
+        log.error(f"Configuration error: {e}")
+        sys.exit(1)
     except Exception as e: log.error(f"Error loading adapter: {e}", exc_info=True); sys.exit(1)
 
     # --- Initialize SemAlign Module (Trainable) ---
@@ -155,7 +179,7 @@ def main(config_path: str):
         semantic_dim=semantic_dim, # Use inferred/validated dim
         hidden_dim=config['model']['fusion_module']['hidden_dim'],
         output_dim=visual_dim, # Output matches visual center dim
-        drop=config['training'].get('dropout_semalign', 0.2)
+        drop=config['training'].get('semalign_loss', {}).get('dropout_semalign', 0.2) # Read dropout from correct config section
     ).to(device)
     log.info(f"Initialized SemAlign Module: {semalign_module}")
 
@@ -170,9 +194,18 @@ def main(config_path: str):
         log.warning(f"Unsupported optimizer: {opt_name}. Using Adam.")
         optimizer = optim.Adam(params_to_optimize, lr=config['training']['lr'])
 
-    # --- Loss function: L1 distance ---
-    recon_loss_fn = nn.L1Loss()
-    log.info("Using L1 reconstruction loss.")
+    # --- Loss function: L1 or MSE distance ---
+    recon_loss_type = config['training'].get('semalign_loss', {}).get('loss_type', 'l1').lower()
+    if recon_loss_type == 'l1':
+        recon_loss_fn = nn.L1Loss()
+        log.info("Using L1 reconstruction loss.")
+    elif recon_loss_type == 'mse':
+        recon_loss_fn = nn.MSELoss()
+        log.info("Using MSE reconstruction loss.")
+    else:
+        log.warning(f"Unsupported semalign_loss type: {recon_loss_type}. Using L1.")
+        recon_loss_fn = nn.L1Loss()
+
 
     # --- LR scheduler (optional) ---
     scheduler = None # Add scheduler setup if needed
@@ -209,10 +242,17 @@ def main(config_path: str):
                 try:
                     pseudo_images = adapter(hrrp_samples)
                     if pseudo_images.shape[-2:] != (expected_img_size, expected_img_size):
+                         log.warning(f"Adapter output size {pseudo_images.shape[-2:]} does not match VLM expected size {expected_img_size}. Resizing.")
                          pseudo_images = F.interpolate(pseudo_images, size=(expected_img_size, expected_img_size), mode='bilinear', align_corners=False)
+
                     visual_features = visual_encoder(pseudo_images) # z_V
                     if isinstance(visual_features, tuple): visual_features = visual_features[0]
-                    if visual_features.dim() == 3 and visual_features.shape[1] > 1: visual_features = visual_features[:, 0]
+                    # Handle potential CLS token or feature map output from VLM
+                    if visual_features.dim() == 3 and visual_features.shape[1] > 1:
+                         visual_features = visual_features[:, 0] # Assume CLS token is first
+                    elif visual_features.dim() != 2:
+                         visual_features = visual_features.view(visual_features.size(0), -1) # Flatten if needed
+
                     # Input to SemAlign (visual_features) should NOT be normalized here (matching SemFew)
                 except Exception as e:
                      log.error(f"Error during adapter/VLM forward pass: {e}. Skipping batch {step}.", exc_info=True)
@@ -237,7 +277,7 @@ def main(config_path: str):
                       log.error(f"Reconstructed center shape {reconstructed_centers.shape} != Target center shape {target_centers.shape}. Skipping loss.")
                       continue
 
-                 loss = recon_loss_fn(reconstructed_centers, target_centers) # L1 distance
+                 loss = recon_loss_fn(reconstructed_centers, target_centers) # L1 or MSE distance
 
                  # Backward pass and optimization (only updates SemAlign module)
                  loss.backward()

@@ -17,6 +17,7 @@ sys.path.insert(0, BASE_DIR)
 
 from data.hrrp_dataset import HRRPDataset
 from data.samplers import CategoriesSampler
+# Assuming you renamed HRRPGAFCNNAdapter to HRPPtoPseudoImage in the file
 from model.hrrp_adapter_1d_to_2d import HRPPtoPseudoImage
 from method.alignment import SemAlignModule
 from logger import loggers
@@ -162,7 +163,9 @@ def main(config_path: str, args_override: argparse.Namespace):
         # Features should already be normalized from generation script
         semantic_dim = config['model']['foundation_model']['text_encoder_dim']
         loaded_dim = list(semantic_features_dict.values())[0].shape[-1]
-        if loaded_dim != semantic_dim: semantic_dim = loaded_dim # Adjust if needed
+        if loaded_dim != semantic_dim:
+            log.warning(f"Loaded semantic dim {loaded_dim} != config dim {semantic_dim}")
+            semantic_dim = loaded_dim # Adjust if needed
         log.info(f"Loaded semantic features for {len(semantic_features_dict)} classes. Dim: {semantic_dim}")
     except Exception as e:
         log.error(f"Error loading semantic features: {e}", exc_info=True); sys.exit(1)
@@ -188,17 +191,39 @@ def main(config_path: str, args_override: argparse.Namespace):
     log.info(f"Loading pre-trained adapter from: {adapter_checkpoint_path}")
     try:
         if not os.path.exists(adapter_checkpoint_path): log.error(f"Adapter checkpoint not found: {adapter_checkpoint_path}"); sys.exit(1)
-        adapter_config = config['model'].get('adapter_1d_to_2d', {})
+
+        # ***** MODIFIED SECTION *****
+        # Read GAF+CNN adapter config from the YAML file
+        adapter_gaf_config = config['model'].get('adapter_gaf_cnn')
+        if adapter_gaf_config is None:
+            raise ValueError("Config section 'model.adapter_gaf_cnn' is missing in the YAML file.")
+
+        # Instantiate HRPPtoPseudoImage (containing HRRPGAFCNNAdapter code)
         adapter = HRPPtoPseudoImage(
-            hrrp_length=config['data']['target_length'], input_channels=1, output_channels=3, output_size=expected_img_size,
-            intermediate_dim=adapter_config.get('intermediate_dim', 2048),
-            activation=adapter_config.get('activation', 'relu')
+            hrrp_length=config['data']['target_length'],
+            input_channels=1, # Assuming magnitude input
+            gaf_size=adapter_gaf_config.get('gaf_size', 64),
+            cnn_channels=adapter_gaf_config.get('cnn_channels', [16, 32, 64]),
+            output_channels=3, # Target for CLIP visual encoder
+            output_size=expected_img_size, # Target for CLIP visual encoder
+            kernel_size=adapter_gaf_config.get('cnn_kernel_size', 3),
+            activation=adapter_gaf_config.get('cnn_activation', 'relu'),
+            use_batchnorm=adapter_gaf_config.get('cnn_use_batchnorm', True)
         ).to(device)
+        # ***** END MODIFIED SECTION *****
+
         adapter_checkpoint_data = torch.load(adapter_checkpoint_path, map_location=device)
         adapter.load_state_dict(adapter_checkpoint_data['adapter_state_dict'])
         adapter.eval()
         for param in adapter.parameters(): param.requires_grad = False
         log.info(f"Pre-trained adapter loaded and frozen (from epoch {adapter_checkpoint_data.get('epoch', 'N/A')}).")
+
+    except KeyError as e:
+        log.error(f"Missing key when loading/instantiating adapter or its config: {e}. Please check your YAML file and checkpoint.")
+        sys.exit(1)
+    except ValueError as e:
+        log.error(f"Configuration error: {e}")
+        sys.exit(1)
     except Exception as e: log.error(f"Error loading adapter checkpoint: {e}", exc_info=True); sys.exit(1)
 
     # --- Load Pre-trained SemAlign Module (Frozen, Optional) ---
@@ -206,11 +231,29 @@ def main(config_path: str, args_override: argparse.Namespace):
     if any(k > 0 for k in kappas_to_test):
         log.info(f"Loading pre-trained SemAlign module from: {semalign_checkpoint_path}")
         try:
-            if not os.path.exists(semalign_checkpoint_path): log.warning(f"SemAlign checkpoint not found: {semalign_checkpoint_path}. Fusion with kappa>0 will fail."); raise FileNotFoundError
+            if not os.path.exists(semalign_checkpoint_path):
+                log.warning(f"SemAlign checkpoint not found: {semalign_checkpoint_path}. Fusion with kappa>0 will fail.");
+                raise FileNotFoundError("SemAlign checkpoint missing")
+
+            # Determine visual_dim again just before loading SemAlign
+            actual_visual_dim = fm_config['visual_encoder_dim'] # Use config value directly
+            # Or potentially re-infer if needed:
+            # with torch.no_grad():
+            #     dummy_hrrp = torch.randn(1, 1, config['data']['target_length']).to(device)
+            #     dummy_img = adapter(dummy_hrrp)
+            #     if dummy_img.shape[-2:] != (expected_img_size, expected_img_size):
+            #          dummy_img = F.interpolate(dummy_img, size=(expected_img_size, expected_img_size), mode='bilinear', align_corners=False)
+            #     dummy_vis_feat = visual_encoder(dummy_img)
+            #     if isinstance(dummy_vis_feat, tuple): dummy_vis_feat = dummy_vis_feat[0]
+            #     if dummy_vis_feat.dim() == 3 and dummy_vis_feat.shape[1] > 1: dummy_vis_feat = dummy_vis_feat[:, 0]
+            #     actual_visual_dim = dummy_vis_feat.shape[-1]
+
             semalign_module = SemAlignModule(
-                visual_dim=visual_dim, semantic_dim=semantic_dim,
+                visual_dim=actual_visual_dim, # Use actual/expected visual dim
+                semantic_dim=semantic_dim,
                 hidden_dim=config['model']['fusion_module']['hidden_dim'],
-                output_dim=visual_dim, drop=0.0
+                output_dim=actual_visual_dim, # Output dim must match visual dim
+                drop=0.0 # No dropout during inference
             ).to(device)
             semalign_checkpoint_data = torch.load(semalign_checkpoint_path, map_location=device)
             semalign_module.load_state_dict(semalign_checkpoint_data['semalign_state_dict'])
@@ -220,7 +263,11 @@ def main(config_path: str, args_override: argparse.Namespace):
         except FileNotFoundError:
             semalign_module = None
             log.warning("Proceeding without SemAlign module. Kappa values > 0 will be ineffective.")
-            kappas_to_test = [0.0] if 0.0 not in kappas_to_test else kappas_to_test
+            kappas_to_test = [k for k in kappas_to_test if k == 0.0] # Only test kappa=0 if module missing
+            if not kappas_to_test: # Add kappa=0 if it wasn't there initially
+                 kappas_to_test = [0.0]
+                 log.info("Added kappa=0.0 to tests as SemAlign module is missing.")
+
         except Exception as e: log.error(f"Error loading SemAlign module checkpoint: {e}", exc_info=True); sys.exit(1)
 
     # --- Testing Loop ---
@@ -310,8 +357,8 @@ def main(config_path: str, args_override: argparse.Namespace):
                     all_kappa_accuracies[current_kappa].append(acc)
 
             # Find best kappa and accuracy for this episode for logging postfix
-            best_acc_this_episode = max(episode_accuracies.values())
-            best_kappa_this_episode = kappas_to_test[np.argmax(list(episode_accuracies.values()))]
+            best_acc_this_episode = max(episode_accuracies.values()) if episode_accuracies else -1.0
+            best_kappa_this_episode = kappas_to_test[np.argmax(list(episode_accuracies.values()))] if episode_accuracies else -1.0
             pbar.set_postfix({'Vis Acc(k=0)': f"{episode_accuracies.get(0.0, -1):.4f}", 'Best Fused': f"{best_acc_this_episode:.4f}", 'Best k': f"{best_kappa_this_episode:.2f}"})
 
 
@@ -321,7 +368,8 @@ def main(config_path: str, args_override: argparse.Namespace):
             log.error(f"Error processing episode {episode_idx}: {e}", exc_info=True); continue
 
     # --- Aggregate and Report Results ---
-    log.info(f"--- Testing Complete ({len(list(all_kappa_accuracies.values())[0])} episodes processed) ---")
+    num_processed = len(list(all_kappa_accuracies.values())[0]) if all_kappa_accuracies and all_kappa_accuracies.values() else 0
+    log.info(f"--- Testing Complete ({num_processed} episodes processed) ---")
     log.info(f"{n_way}-way {k_shot}-shot Results:")
 
     best_mean_acc = -1.0
@@ -344,7 +392,8 @@ def main(config_path: str, args_override: argparse.Namespace):
         log.warning("Kappa=0.0 was not tested.")
 
     # Report results for other kappas and find overall best
-    log.info(f"  Fused Prototypes (Kappa > 0):")
+    if any(k > 0 for k in kappas_to_test): # Only print header if fusion was tested
+        log.info(f"  Fused Prototypes (Kappa > 0):")
     for k in kappas_to_test:
         if k == 0.0: continue # Skip kappa=0 as it's reported above
         accuracies_np = np.array(all_kappa_accuracies[k])
@@ -373,7 +422,7 @@ def main(config_path: str, args_override: argparse.Namespace):
                 'vlm_variant': config['model']['foundation_model']['variant'],
                 'text_type': config['semantics']['generation']['text_type'],
                 'fsl_setting': f"{n_way}w{k_shot}s",
-                'num_episodes': len(list(all_kappa_accuracies.values())[0]),
+                'num_episodes': num_processed,
                 'results_per_kappa': results_summary,
                 'best_result': {'kappa': best_kappa, 'mean_acc': best_mean_acc, 'ci95': best_ci95}
             }, f, default_flow_style=False)

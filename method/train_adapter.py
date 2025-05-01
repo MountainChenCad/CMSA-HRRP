@@ -19,6 +19,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
 
 from data.hrrp_dataset import HRRPDataset
+# Assuming you renamed HRRPGAFCNNAdapter to HRPPtoPseudoImage in the file
 from model.hrrp_adapter_1d_to_2d import HRPPtoPseudoImage
 from logger import loggers
 from utils import set_seed, normalize, load_config, get_dynamic_paths, calculate_infonce_loss # Import helpers
@@ -27,7 +28,7 @@ logging.basicConfig(level=logging.INFO) # Basic config for early messages
 logger = logging.getLogger(__name__)
 
 def main(config_path: str):
-    """Main training function for HRRP 1D-to-2D Adapter."""
+    """Main training function for HRRP GAF+CNN Adapter.""" # Updated docstring
     config = load_config(config_path)
     dynamic_paths = get_dynamic_paths(config)
 
@@ -38,7 +39,7 @@ def main(config_path: str):
     os.makedirs(ckpt_dir, exist_ok=True)
 
     log = loggers(os.path.join(log_dir, 'train_adapter_log.txt'))
-    log.info("Starting HRRP Adapter training...")
+    log.info("Starting HRRP GAF+CNN Adapter training...") # Updated message
     log.info(f"Loaded configuration from: {config_path}")
     log.info(f"VLM Variant: {config['model']['foundation_model']['variant']}")
     log.info(f"Text Type: {config['semantics']['generation']['text_type']}")
@@ -118,14 +119,35 @@ def main(config_path: str):
     except Exception as e: log.error(f"Failed to load VLM: {e}", exc_info=True); sys.exit(1)
 
     # --- Adapter Initialization ---
-    adapter_config = config['model'].get('adapter_1d_to_2d', {})
-    hrrp_adapter = HRPPtoPseudoImage(
-        hrrp_length=config['data']['target_length'], input_channels=1, output_channels=3,
-        output_size=expected_img_size,
-        intermediate_dim=adapter_config.get('intermediate_dim', 2048),
-        activation=adapter_config.get('activation', 'relu')
-    ).to(device)
-    log.info(f"Initialized HRRP Adapter: {hrrp_adapter}")
+    # ***** MODIFIED SECTION *****
+    try:
+        # Read GAF+CNN adapter config from the YAML file
+        adapter_gaf_config = config['model'].get('adapter_gaf_cnn')
+        if adapter_gaf_config is None:
+            raise ValueError("Config section 'model.adapter_gaf_cnn' is missing in the YAML file.")
+
+        # Instantiate HRPPtoPseudoImage (containing HRRPGAFCNNAdapter code)
+        hrrp_adapter = HRPPtoPseudoImage(
+            hrrp_length=config['data']['target_length'],
+            input_channels=1, # Assuming magnitude input
+            gaf_size=adapter_gaf_config.get('gaf_size', 64),
+            cnn_channels=adapter_gaf_config.get('cnn_channels', [16, 32, 64]),
+            output_channels=3, # Target for CLIP visual encoder
+            output_size=expected_img_size, # Target for CLIP visual encoder
+            kernel_size=adapter_gaf_config.get('cnn_kernel_size', 3),
+            activation=adapter_gaf_config.get('cnn_activation', 'relu'),
+            use_batchnorm=adapter_gaf_config.get('cnn_use_batchnorm', True)
+        ).to(device)
+        log.info(f"Initialized HRRP GAF+CNN Adapter.") # Updated message
+        log.info(f"Adapter Details: {hrrp_adapter}") # Log structure details
+
+    except KeyError as e:
+        log.error(f"Missing key in 'adapter_gaf_cnn' config: {e}. Please check your YAML file.")
+        sys.exit(1)
+    except Exception as e:
+        log.error(f"Error initializing adapter: {e}", exc_info=True)
+        sys.exit(1)
+    # ***** END MODIFIED SECTION *****
 
     # --- Optimizer ---
     params_to_optimize = list(hrrp_adapter.parameters())
@@ -171,12 +193,18 @@ def main(config_path: str):
             optimizer.zero_grad()
             try:
                 pseudo_images = hrrp_adapter(hrrp_samples) # (B, 3, H, W)
+                # VLM expects specific size, adapter should handle this now, but double check just in case
                 if pseudo_images.shape[-2:] != (expected_img_size, expected_img_size):
+                     log.warning(f"Adapter output size {pseudo_images.shape[-2:]} does not match VLM expected size {expected_img_size}. Resizing.")
                      pseudo_images = F.interpolate(pseudo_images, size=(expected_img_size, expected_img_size), mode='bilinear', align_corners=False)
+
                 visual_features = visual_encoder(pseudo_images) # z_V
                 if isinstance(visual_features, tuple): visual_features = visual_features[0]
-                if visual_features.dim() == 3 and visual_features.shape[1] > 1: visual_features = visual_features[:, 0]
-                elif visual_features.dim() != 2: visual_features = visual_features.view(visual_features.size(0), -1)
+                # Handle potential CLS token or feature map output from VLM
+                if visual_features.dim() == 3 and visual_features.shape[1] > 1:
+                     visual_features = visual_features[:, 0] # Assume CLS token is first
+                elif visual_features.dim() != 2:
+                     visual_features = visual_features.view(visual_features.size(0), -1) # Flatten if needed
 
                 expected_vis_dim = config['model']['foundation_model']['visual_encoder_dim']
                 if visual_features.shape[-1] != expected_vis_dim: log.warning(f"VLM output visual dim {visual_features.shape[-1]} != config dim {expected_vis_dim}."); # Continue, loss check below
@@ -242,7 +270,7 @@ def main(config_path: str):
             'epoch': epoch + 1, 'adapter_state_dict': hrrp_adapter.state_dict(),
             'optimizer_state_dict': optimizer.state_dict(), 'loss': avg_combined_loss,
             'align_loss': avg_align_loss, 'contrast_loss': avg_contrast_loss,
-            'config': config
+            'config': config # Include config used for this training run
         }
         torch.save(save_dict, latest_ckpt_path)
 
@@ -254,11 +282,11 @@ def main(config_path: str):
 
 
     writer.close()
-    log.info("HRRP Adapter training finished.")
+    log.info("HRRP GAF+CNN Adapter training finished.") # Updated message
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Train HRRP 1D-to-2D Adapter")
+    parser = argparse.ArgumentParser(description="Train HRRP GAF+CNN Adapter") # Updated description
     parser.add_argument('--config', type=str, default='configs/hrrp_fsl_config.yaml', help='Path to the main configuration file')
     args = parser.parse_args()
     main(args.config)
