@@ -15,7 +15,7 @@ K_SHOTS_TO_TEST=(1 5 10 20)      # Test k-shot scenarios defined here within tes
 declare -A ABLATION_SETTINGS
 ABLATION_SETTINGS=(
     ["contrastive_true"]="yq -i -y '.training.adapter_loss.use_contrastive = true' $CONFIG_FILE"
-    ["contrastive_false"]="yq -i -y '.training.adapter_loss.use_contrastive = false' $CONFIG_FILE"
+#    ["contrastive_false"]="yq -i -y '.training.adapter_loss.use_contrastive = false' $CONFIG_FILE"
     # Add more ablation settings here if needed, e.g., for different text types:
     # ["text_type_name"]="yq -i -y '.semantics.generation.text_type = \"name\"' $CONFIG_FILE"
     # ["text_type_detailed"]="yq -i -y '.semantics.generation.text_type = \"detailed\"' $CONFIG_FILE"

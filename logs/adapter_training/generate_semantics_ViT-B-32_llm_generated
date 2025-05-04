@@ -925,3 +925,803 @@
 2025-05-01 14:29:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
 2025-05-01 14:29:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
 2025-05-01 14:29:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-01 14:51:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-01 14:51:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-01 14:51:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-01 14:51:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-01 14:51:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-01 14:51:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-01 14:51:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-01 14:51:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-01 14:51:05 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-01 15:11:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-01 15:11:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-01 15:11:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-01 15:11:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-01 15:11:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-01 15:11:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-01 15:11:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-01 15:11:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-01 15:11:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-01 15:55:01 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-01 15:55:01 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-01 15:55:01 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-01 15:55:01 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-01 15:55:01 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-01 15:55:01 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-01 15:55:01 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-01 15:55:01 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-01 15:55:03 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-01 17:36:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-01 17:36:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-01 17:36:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-01 17:36:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-01 17:36:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-01 17:36:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-01 17:36:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-01 17:36:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-01 17:36:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-01 20:26:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-01 20:26:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-01 20:26:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-01 20:26:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-01 20:26:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-01 20:26:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-01 20:26:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-01 20:26:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-01 20:26:52 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-01 20:26:52 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-01 20:26:52 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-01 20:26:52 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-01 20:26:52 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-01 20:26:52 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-01 20:26:52 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-01 20:26:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-01 20:26:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-01 20:26:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-01 20:26:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-01 20:26:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-01 20:26:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-01 20:26:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-01 20:26:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-01 20:26:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-02 08:33:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-02 08:33:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-02 08:33:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-02 08:33:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-02 08:33:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 08:33:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-02 08:33:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-02 08:33:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-02 08:33:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-02 08:33:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 08:33:19 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-02 12:10:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-02 12:10:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-02 12:10:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-02 12:10:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-02 12:10:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 12:10:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-02 12:10:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-02 12:10:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 12:10:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-02 13:50:27 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-02 13:50:27 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-02 13:50:27 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-02 13:50:27 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-02 13:50:27 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 13:50:27 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-02 13:50:28 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-02 13:50:28 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-02 13:50:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-02 13:50:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 13:50:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-02 13:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-02 13:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-02 13:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-02 13:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-02 13:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 13:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-02 13:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-02 13:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 13:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-02 13:51:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-02 13:51:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-02 13:51:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-02 13:51:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-02 13:51:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 13:51:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-02 13:51:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-02 13:51:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 13:51:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-02 16:00:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-02 16:00:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-02 16:00:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-02 16:00:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-02 16:00:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 16:00:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-02 16:00:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-02 16:00:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-02 16:00:34 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-02 16:00:34 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 16:00:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-02 18:28:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-02 18:28:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-02 18:28:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-02 18:28:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-02 18:28:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 18:28:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-02 18:28:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-02 18:28:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 18:28:53 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-02 19:53:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-02 19:53:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-02 19:53:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-02 19:53:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-02 19:53:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 19:53:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-02 19:53:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-02 19:53:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-02 19:53:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-03 09:04:39 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-03 09:04:39 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-03 09:04:39 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-03 09:04:39 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-03 09:04:39 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-03 09:04:39 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-03 09:04:39 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-03 09:04:39 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-03 09:04:41 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-03 12:29:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-03 12:29:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-03 12:29:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-03 12:29:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-03 12:29:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-03 12:29:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-03 12:29:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-03 12:29:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-03 12:29:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 08:36:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 08:36:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 08:36:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 08:36:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 08:36:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:36:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 08:36:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-04 08:36:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:36:11 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 08:37:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 08:37:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 08:37:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 08:37:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 08:37:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:37:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 08:37:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-04 08:37:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:37:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 08:41:58 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 08:41:58 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 08:41:58 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 08:41:58 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 08:41:58 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:41:58 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 08:41:58 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-04 08:41:58 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:42:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 08:42:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 08:42:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 08:42:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 08:42:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 08:42:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:42:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 08:42:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-04 08:42:29 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:42:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 08:47:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 08:47:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 08:47:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 08:47:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 08:47:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:47:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 08:47:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-04 08:47:00 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:47:02 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 08:48:49 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 08:48:49 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 08:48:49 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 08:48:49 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 08:48:49 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:48:49 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 08:48:49 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-04 08:48:49 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:48:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 08:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 08:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 08:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 08:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 08:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 08:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-04 08:50:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 08:52:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 08:52:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 08:52:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 08:52:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 08:52:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:52:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 08:52:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-04 08:52:16 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:52:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 08:52:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 08:52:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 08:52:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 08:52:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 08:52:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:52:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 08:52:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-04 08:52:35 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:52:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 08:53:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 08:53:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 08:53:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 08:53:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 08:53:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:53:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 08:53:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-04 08:53:30 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-04 08:53:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 08:53:31 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 08:53:32 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 12:07:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 12:07:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 12:07:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 12:07:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 12:07:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 12:07:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 12:07:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: RemoteCLIP (ViT-B-32)
+2025-05-04 12:07:55 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/RemoteCLIP-ViT-B-32.pt
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 12:07:57 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 15:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 15:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 15:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 15:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 15:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 15:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 15:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: CLIP (ViT-B-32)
+2025-05-04 15:50:44 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/CLIP-ViT-B-32.pt
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 15:50:47 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 15:51:06 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 15:51:06 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 15:51:06 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 15:51:06 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 15:51:06 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 15:51:06 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 15:51:06 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: CLIP (ViT-B-32)
+2025-05-04 15:51:06 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/CLIP-ViT-B-32.pt
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 15:51:09 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 15:51:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 15:51:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 15:51:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 15:51:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 15:51:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 15:51:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 15:51:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: CLIP (ViT-B-32)
+2025-05-04 15:51:22 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/CLIP-ViT-B-32.pt
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 15:51:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 17:32:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 17:32:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 17:32:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 17:32:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 17:32:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 17:32:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 17:32:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: CLIP (ViT-B-32)
+2025-05-04 17:32:37 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/CLIP-ViT-B-32.pt
+2025-05-04 17:32:48 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 17:32:48 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 17:32:48 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 17:32:48 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 17:32:48 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 17:32:48 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 17:32:48 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: CLIP (ViT-B-32)
+2025-05-04 17:32:48 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/CLIP-ViT-B-32.pt
+2025-05-04 17:32:50 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 17:32:50 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 17:32:51 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 18:23:23 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 18:23:23 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 18:23:23 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 18:23:23 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 18:23:23 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 18:23:23 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 18:23:23 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: CLIP (ViT-B-32)
+2025-05-04 18:23:23 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/CLIP-ViT-B-32.pt
+2025-05-04 18:23:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 18:23:25 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 18:23:26 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 18:30:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 18:30:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 18:30:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 18:30:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 18:30:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 18:30:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 18:30:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: CLIP (ViT-B-32)
+2025-05-04 18:30:42 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/CLIP-ViT-B-32.pt
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 18:30:45 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.
+2025-05-04 18:34:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Starting semantic feature generation...
+2025-05-04 18:34:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loaded configuration from: configs/hrrp_fsl_config.yaml
+2025-05-04 18:34:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using VLM variant: ViT-B-32
+2025-05-04 18:34:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using text type: llm_generated
+2025-05-04 18:34:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features will be saved to: ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 18:34:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Using device: cuda
+2025-05-04 18:34:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading VLM: CLIP (ViT-B-32)
+2025-05-04 18:34:18 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Loading weights from: ./checkpoints/foundation_models/CLIP-ViT-B-32.pt
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Foundation model text encoder loaded and frozen.
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Processing 12 classes from config: ['EA-18G', 'EP-3E', 'F15', 'F16', 'F18', 'F2', 'F22', 'F35', 'IDF', '全球鹰', '幻影2000', '捕食者']
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EA-18G'. Feature shape: torch.Size([512])
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'EP-3E'. Feature shape: torch.Size([512])
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F15'. Feature shape: torch.Size([512])
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F16'. Feature shape: torch.Size([512])
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F18'. Feature shape: torch.Size([512])
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F2'. Feature shape: torch.Size([512])
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F22'. Feature shape: torch.Size([512])
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'F35'. Feature shape: torch.Size([512])
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded 'IDF'. Feature shape: torch.Size([512])
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '全球鹰'. Feature shape: torch.Size([512])
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '幻影2000'. Feature shape: torch.Size([512])
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Encoded '捕食者'. Feature shape: torch.Size([512])
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic features saved successfully to ./semantic_features/hrrp_semantics_ViT-B-32_llm_generated_claude_37.pth
+2025-05-04 18:34:20 - __logs_adapter_training_generate_semantics_ViT-B-32_llm_generated - [INFO] - Semantic feature generation finished.

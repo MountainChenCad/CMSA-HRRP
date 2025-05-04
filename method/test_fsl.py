@@ -11,6 +11,13 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 import open_clip
 
+# --- Added for t-SNE Visualization ---
+import matplotlib
+matplotlib.use('Agg') # Use Agg backend for non-interactive plotting
+import matplotlib.pyplot as plt
+from sklearn.manifold import TSNE
+# -------------------------------------
+
 # Ensure project root is in path
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, BASE_DIR)
@@ -43,14 +50,16 @@ def sample_one_episode(dataset, sampler, n_way, k_shot, q_query):
 
         for internal_cls_idx in episode_internal_class_indices:
             # Map internal sampler class index back to original dataset class index/name
-            original_class_label_value = sorted(list(set(dataset.labels)))[internal_cls_idx]
+            # Ensure labels are sorted correctly if they are not contiguous 0, 1, 2...
+            unique_dataset_labels = sorted(list(set(dataset.labels)))
+            original_class_label_value = unique_dataset_labels[internal_cls_idx]
             class_name = dataset.idx_to_class[original_class_label_value] # Map label value to name
             episode_class_names.append(class_name)
 
             all_indices_for_class = sampler.m_ind[internal_cls_idx] # Use sampler's internal index
             if len(all_indices_for_class) < k_shot + q_query:
                 # Handle insufficient samples - matching previous logic if needed
-                logger.warning(f"Class {class_name} has only {len(all_indices_for_class)} samples, needing {k_shot+q_query}. Skipping episode for safety.")
+                logger.warning(f"Class {class_name} (Label {original_class_label_value}) has only {len(all_indices_for_class)} samples, needing {k_shot+q_query}. Skipping episode for safety.")
                 # If replacement logic was intended, it should be implemented here. Sticking to skipping.
                 return None, None, None
             else:
@@ -109,7 +118,7 @@ def main(config_path: str, args_override: argparse.Namespace):
     log.info(f"Kappa values to test: {kappas_to_test}")
     log.info(f"Using Adapter checkpoint: {adapter_checkpoint_path}")
     log.info(f"Using SemAlign checkpoint: {semalign_checkpoint_path}")
-    log.info(f"Logs will be saved to: {log_dir}")
+    log.info(f"Logs and plots will be saved to: {log_dir}") # Updated log message
 
     set_seed(config.get('seed', 42))
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -237,16 +246,6 @@ def main(config_path: str, args_override: argparse.Namespace):
 
             # Determine visual_dim again just before loading SemAlign
             actual_visual_dim = fm_config['visual_encoder_dim'] # Use config value directly
-            # Or potentially re-infer if needed:
-            # with torch.no_grad():
-            #     dummy_hrrp = torch.randn(1, 1, config['data']['target_length']).to(device)
-            #     dummy_img = adapter(dummy_hrrp)
-            #     if dummy_img.shape[-2:] != (expected_img_size, expected_img_size):
-            #          dummy_img = F.interpolate(dummy_img, size=(expected_img_size, expected_img_size), mode='bilinear', align_corners=False)
-            #     dummy_vis_feat = visual_encoder(dummy_img)
-            #     if isinstance(dummy_vis_feat, tuple): dummy_vis_feat = dummy_vis_feat[0]
-            #     if dummy_vis_feat.dim() == 3 and dummy_vis_feat.shape[1] > 1: dummy_vis_feat = dummy_vis_feat[:, 0]
-            #     actual_visual_dim = dummy_vis_feat.shape[-1]
 
             semalign_module = SemAlignModule(
                 visual_dim=actual_visual_dim, # Use actual/expected visual dim
@@ -275,6 +274,7 @@ def main(config_path: str, args_override: argparse.Namespace):
     all_kappa_accuracies = {k: [] for k in kappas_to_test}
     pbar = tqdm(range(n_batch), desc="Testing Episodes")
     episode_indices_generator = iter(novel_sampler)
+    tsne_plot_done = False # Flag to plot only the first episode
 
     for episode_idx in pbar:
         try:
@@ -332,6 +332,87 @@ def main(config_path: str, args_override: argparse.Namespace):
                     r_t = reconstructed_features_reshaped.mean(dim=1) # (N, D_vis) - UNNORMALIZED mean
                     r_t_norm = normalize(r_t) # NORMALIZE the mean reconstructed prototype
 
+
+            # --- [START] t-SNE Visualization (for the first episode) ---
+            if not tsne_plot_done:
+                log.info(f"Generating t-SNE plot for episode {episode_idx}...")
+                try:
+                    # Prepare data for t-SNE
+                    support_labels_episode = torch.arange(n_way, device=device).repeat_interleave(k_shot) # Create support labels
+                    all_features_episode = torch.cat((z_v_support, z_v_query), dim=0)
+                    all_labels_episode = torch.cat((support_labels_episode, query_labels_episode), dim=0)
+                    is_query_indicator = torch.cat((torch.zeros(len(support_labels_episode)), torch.ones(len(query_labels_episode))), dim=0)
+
+                    num_total_samples = all_features_episode.shape[0]
+                    if num_total_samples < 3: # t-SNE needs at least 3 samples
+                         log.warning(f"Skipping t-SNE for episode {episode_idx}: Not enough samples ({num_total_samples}).")
+                    else:
+                        # Ensure perplexity is valid
+                        perplexity_value = min(30.0, num_total_samples - 1.0)
+
+                        tsne = TSNE(n_components=2,
+                                    random_state=config.get('seed', 42),
+                                    perplexity=perplexity_value,
+                                    learning_rate='auto',
+                                    init='pca',
+                                    n_iter=1000)
+
+                        features_np = all_features_episode.detach().cpu().numpy()
+                        labels_np = all_labels_episode.detach().cpu().numpy()
+                        is_query_np = is_query_indicator.detach().cpu().numpy()
+
+                        tsne_results = tsne.fit_transform(features_np)
+
+                        # Plotting
+                        fig, ax = plt.subplots(figsize=(12, 10))
+                        cmap = plt.cm.get_cmap("tab10", n_way) # Colormap for N classes
+
+                        for i in range(n_way):
+                            # Support samples for class i
+                            support_mask = (labels_np == i) & (is_query_np == 0)
+                            ax.scatter(tsne_results[support_mask, 0], tsne_results[support_mask, 1],
+                                       color=cmap(i), marker='o', s=60, alpha=0.9,
+                                       label=episode_class_names[i] if episode_idx == 0 else "") # Label only once
+
+                            # Query samples for class i
+                            query_mask = (labels_np == i) & (is_query_np == 1)
+                            ax.scatter(tsne_results[query_mask, 0], tsne_results[query_mask, 1],
+                                       marker='o', s=60, alpha=0.9,
+                                       facecolors='none', edgecolors=cmap(i), linewidths=1.5)
+                                       # label=f"{episode_class_names[i]} (Query)") # Avoid double labeling legend
+
+                        # Create custom legend handles for Support/Query distinction
+                        from matplotlib.lines import Line2D
+                        legend_elements = [
+                            Line2D([0], [0], marker='o', color='gray', label='Support', linestyle='None', markersize=8),
+                            Line2D([0], [0], marker='o', color='gray', label='Query', linestyle='None', markersize=8, markerfacecolor='none', markeredgewidth=1.5)
+                        ]
+                        # Add class name handles
+                        for i in range(n_way):
+                            legend_elements.append(Line2D([0], [0], color=cmap(i), lw=4, label=episode_class_names[i]))
+
+
+                        ax.legend(handles=legend_elements, loc='center left', bbox_to_anchor=(1, 0.5))
+                        ax.set_title(f"t-SNE Visualisation of Visual Features (Episode {episode_idx}, {n_way}-way {k_shot}-shot)")
+                        ax.set_xlabel("t-SNE Component 1")
+                        ax.set_ylabel("t-SNE Component 2")
+                        plt.tight_layout(rect=[0, 0, 0.85, 1]) # Adjust layout to make space for legend
+
+                        tsne_save_path = os.path.join(log_dir, f'tsne_episode_{episode_idx}.pdf')
+                        plt.savefig(tsne_save_path, bbox_inches='tight')
+                        plt.close(fig)
+                        log.info(f"t-SNE plot saved to {tsne_save_path}")
+                        tsne_plot_done = True # Ensure plot is done only once
+
+                except Exception as plot_err:
+                    log.error(f"Failed to generate or save t-SNE plot for episode {episode_idx}: {plot_err}", exc_info=True)
+                    # Don't set tsne_plot_done = True, maybe try next episode if this one failed?
+                    # Or just accept it failed for this run. Let's accept failure and move on.
+                    tsne_plot_done = True # Mark as 'attempted' to avoid repeated errors
+
+            # --- [END] t-SNE Visualization ---
+
+
             # --- Classification for each Kappa ---
             episode_accuracies = {}
             for current_kappa in kappas_to_test:
@@ -368,7 +449,11 @@ def main(config_path: str, args_override: argparse.Namespace):
             log.error(f"Error processing episode {episode_idx}: {e}", exc_info=True); continue
 
     # --- Aggregate and Report Results ---
-    num_processed = len(list(all_kappa_accuracies.values())[0]) if all_kappa_accuracies and all_kappa_accuracies.values() else 0
+    num_processed = len(list(all_kappa_accuracies.values())[0]) if all_kappa_accuracies and all_kappa_accuracies.values() and len(list(all_kappa_accuracies.values())[0]) > 0 else 0
+    if num_processed == 0:
+         log.error("No episodes were successfully processed. Cannot calculate results.")
+         sys.exit(1) # Exit if no results
+
     log.info(f"--- Testing Complete ({num_processed} episodes processed) ---")
     log.info(f"{n_way}-way {k_shot}-shot Results:")
 
@@ -416,6 +501,10 @@ def main(config_path: str, args_override: argparse.Namespace):
     # Save results summary
     results_path = os.path.join(log_dir, 'results_summary.yaml')
     try:
+        # Convert float kappas to strings for YAML keys if necessary, although float keys often work
+        results_summary_yaml = {str(k): v for k, v in results_summary.items()}
+        best_result_yaml = {'kappa': float(best_kappa), 'mean_acc': float(best_mean_acc), 'ci95': float(best_ci95)} # Ensure best results are standard floats
+
         with open(results_path, 'w') as f:
             yaml.dump({
                 'config_path': config_path,
@@ -423,9 +512,9 @@ def main(config_path: str, args_override: argparse.Namespace):
                 'text_type': config['semantics']['generation']['text_type'],
                 'fsl_setting': f"{n_way}w{k_shot}s",
                 'num_episodes': num_processed,
-                'results_per_kappa': results_summary,
-                'best_result': {'kappa': best_kappa, 'mean_acc': best_mean_acc, 'ci95': best_ci95}
-            }, f, default_flow_style=False)
+                'results_per_kappa': results_summary_yaml, # Use YAML-safe keys
+                'best_result': best_result_yaml
+            }, f, default_flow_style=False, sort_keys=False) # Keep order if possible
         log.info(f"Results summary saved to: {results_path}")
     except Exception as e:
         log.error(f"Failed to save results summary: {e}")

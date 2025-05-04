@@ -8,8 +8,8 @@ data:
     - 幻影2000
     - 全球鹰
     - IDF
-  novel_classes:
     - F2
+  novel_classes:
     - F15
     - F16
     - F18
@@ -20,12 +20,12 @@ data:
 fsl:
   n_way: 5
   k_shot: 10
-  q_query: 15
+  q_query: 30
   test_episodes: 600
   classifier_temperature: 10
 model:
   adapter_gaf_cnn:
-    gaf_size: 64
+    gaf_size: 128
     cnn_channels:
       - 16
       - 32
@@ -37,14 +37,14 @@ model:
     hidden_dim: 4096
     kappa: 0.5
   foundation_model:
-    name: RemoteCLIP
+    name: CLIP
     variant: ViT-B-32
     visual_encoder_dim: 512
     text_encoder_dim: 512
 training:
-  epochs: 5
-  lr: 0.001
-  batch_size: 64
+  epochs: 10
+  lr: 0.005
+  batch_size: 128
   optimizer: AdamW
   adapter_loss:
     alignment_loss_type: cosine
